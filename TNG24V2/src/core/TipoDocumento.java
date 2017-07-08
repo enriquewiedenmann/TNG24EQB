@@ -18,7 +18,26 @@ public class TipoDocumento {
 	}
 
 	public Boolean cumplo(String cod, String desc) {
-		return null;
+		
+		boolean band =true;
+		if(cod!=null){
+			if(this.getCodTipoDoc().toUpperCase().equals(cod.toUpperCase())){
+				
+				band = true;
+			}else{
+				band= false;
+			}
+			
+		}
+		if(desc!=null){
+			if(desc.toUpperCase().equals(this.getDescTipoDoc().toUpperCase())){
+				band = true;
+			}else{
+				band= false;
+			}
+			
+		}
+		return band;
 	
 	}
 	

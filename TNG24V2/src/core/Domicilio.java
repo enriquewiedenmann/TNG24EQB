@@ -60,11 +60,27 @@ public class Domicilio {
 	return vdom;
 	}
 	
-	public boolean cumplo(int id, String calle , String nro, String piso, String dpto, String tel, String prov, String cdad, String cp, String desc) {
+	public boolean cumplo(int id) {
+		
+		
+		
+		
+		
+		return id==this.getIdDomicilio();
+	
+	}
+
+public boolean cumplo(String calle , String nro, String piso, String dpto, String tel, String prov, String cdad, String cp, String desc) {
+		
+		
+		
+		
+		
 		return false;
 	
 	}
 
+	
 
 
 	public int getIdDomicilio() {

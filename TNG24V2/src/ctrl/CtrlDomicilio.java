@@ -101,6 +101,14 @@ public  class CtrlDomicilio {
 	}
 	
 	public Domicilio buscarDomicilio(int id, String calle, String nro, String piso, String dpto, String tel, String prov, String cdad, String cp, String desc) {
+		for(Domicilio d: domicilios){
+			
+			if(d.cumplo(id)){
+				
+				return d;
+			}
+		}
+		
 		return null;
 	}
 	

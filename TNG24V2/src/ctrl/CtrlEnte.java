@@ -22,6 +22,7 @@ public class CtrlEnte {
 	
 	
 	
+	
 	public CtrlEnte() {
 		
 		this.rolles = null;
@@ -111,6 +112,13 @@ public class CtrlEnte {
 	}
 	
 	public TipoDocumento buscarTipoDoc(String cod, String desc) {
+		for(TipoDocumento td:tipodocumentos){
+			if(td.cumplo(cod, desc)){
+				
+				return td;
+				
+			}
+		}
 		return null;
 	}
 	
@@ -118,7 +126,24 @@ public class CtrlEnte {
 		return null;
 	}
 	
-	public Cliente buscarCliente(int id, String nombre, String apellido, String documento, char e) {
+	public Cliente buscarCliente(int id, String nombre, String apellido, String documento) {
+		
+		for(Cliente c : clientes){
+			if(c.cumplo(id, nombre, apellido, documento)){
+				return c;
+			}
+		}
+		return null;
+	}
+	
+	
+public Cliente buscarCliente(String nombre, String apellido, String documento) {
+		
+		for(Cliente c : clientes){
+			if(c.cumplo(nombre, apellido, documento)){
+				return c;
+			}
+		}
 		return null;
 	}
 	
@@ -127,7 +152,36 @@ public class CtrlEnte {
 	}
 	
 	public boolean editarCliente(int id, String apellido, String nombre, String documento, String codDoc, String tel, String mail, int dom) {
-		return true;
+		
+		Cliente c= null;
+		
+		c= this.buscarCliente(id, null, null, null);
+		
+		if(c!=null){
+			TipoDocumento td = null;
+			td = this.buscarTipoDoc(codDoc, null);
+			if(td!=null){
+				
+				Domicilio d=null;
+				CtrlDomicilio cd = CtrlDomicilio.getInstance();
+				d = cd.buscarDomicilio(dom, null, null, null, null, null, null, null, null, null);
+				
+				if(cd.buscarDomicilio(dom, null, null, null, null, null, null, null, null, null)!=null){
+					
+				
+					
+					if(!this.buscarCliente(null, null, documento).getNroDoc().equals(id)){
+					c.editate(apellido, nombre, documento, td, tel, mail, cd.buscarDomicilio(dom, null, null, null, null, null, null, null, null, null));	
+					return true;
+					}
+				}
+			}
+			
+			
+		}
+		
+		
+		return false;
 	}
 	
 	public boolean bajaCliente(int id) {

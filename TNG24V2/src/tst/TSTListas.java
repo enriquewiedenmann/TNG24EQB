@@ -48,7 +48,11 @@ public class TSTListas {
 		
 		System.out.println("Cliente: "+ e.mostrarCliente(5).getApellido());
 		
+		System.out.println("Cliente: "+ e.mostrarCliente(3).vistaLinea());
+		System.out.println(e.mostrarCliente(3).getTipoDoc().getCodTipoDoc());
+		e.editarCliente(3, "Zanette", "olgaaaaa", "6553781", "DN ", "4783-4151", "Olga.Zanette@marsh.com" , 2001);
 		
+		System.out.println("Cliente: "+ e.mostrarCliente(3).vistaLinea());
 	}
 
 }

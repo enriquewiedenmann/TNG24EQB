@@ -81,8 +81,18 @@ public class Cliente extends Ente {
 	
 	}
 	
-	public void editate(String apellido, String nombre, String documento, String codDoc, String tel, String mail, int dom) {
-	
+	public void editate(String apellido, String nombre, String documento, TipoDocumento codDoc, String tel, String mail, Domicilio dom) {
+		
+		
+		this.setApellido(apellido);
+		this.setNombre(nombre);
+		this.setNroDoc(documento);
+		this.setTipoDoc(codDoc);
+		this.telefono = tel;
+		this.mail = mail;
+		this.domicilio = dom;
+		this.setEstado('M');
+		
 	}
 	
 	public void bajate() {
