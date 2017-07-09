@@ -53,6 +53,38 @@ public class TSTListas {
 		e.editarCliente(3, "Zanette", "olgaaaaa", "6553781", "DN ", "4783-4151", "Olga.Zanette@marsh.com" , 2001);
 		
 		System.out.println("Cliente: "+ e.mostrarCliente(3).vistaLinea());
+		
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("PRUEBA DE BAJA");
+		System.out.println("ANTES: ");
+		System.out.println(e.mostrarCliente(3).getEstado());
+		if(e.bajaCliente(3)){
+		System.out.println("ok");
+	}else{
+		System.out.println("fail");
+	}
+		System.out.println("DESPUES: ");
+		System.out.println(e.mostrarCliente(3).vistaLinea());
+		System.out.println(e.mostrarCliente(3).getEstado());
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("PRUEBA DE Alta:");
+		System.out.println("nuevo cliente: "+ e.nuevoCliente("Wiedenmann", "Enrique", "33914089", "DN ", "4320-5844", "enrique.wiedenmann@gamil.com",1204));
+		
+		
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("PRUEBA DE rreahbilitar");
+		System.out.println("ANTES: ");
+		System.out.println(e.mostrarCliente(3).getEstado());
+		if(e.rehabilitarCliente(3)){
+		System.out.println("ok");
+	}else{
+		System.out.println("fail");
+	}
+		System.out.println("DESPUES: ");
+		System.out.println(e.mostrarCliente(3).vistaLinea());
+		System.out.println(e.mostrarCliente(3).getEstado());
+		System.out.println("----------------------------------------------------------------");
+		
 	}
 
 }

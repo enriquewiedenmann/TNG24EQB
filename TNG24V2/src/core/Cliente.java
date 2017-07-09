@@ -2,6 +2,7 @@ package core;
 
 import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 
+import persistencia.DAOCliente;
 import view.ViewCliente;
 
 public class Cliente extends Ente {
@@ -10,6 +11,21 @@ public class Cliente extends Ente {
 	private String mail;
 	private Domicilio domicilio;
 	
+	public Cliente( String nombre, String apellido,String nroDoc ,
+			TipoDocumento tipoDoc, String telefono,
+			String mail, Domicilio domicilio) {
+		
+		
+		super( nombre, apellido, tipoDoc, nroDoc);
+		this.telefono = telefono;
+		this.mail = mail;
+		this.domicilio = domicilio;
+		
+		DAOCliente c =DAOCliente.getInstancia();
+		
+		this.setIdEnte(c.insert(nombre, apellido, tipoDoc.getCodTipoDoc(), nroDoc, telefono, mail, domicilio.getIdDomicilio()));
+		
+	}
 	
 	
 	public Cliente(int idEnte, String nombre, String apellido,
@@ -92,15 +108,21 @@ public class Cliente extends Ente {
 		this.mail = mail;
 		this.domicilio = dom;
 		this.setEstado('M');
-		
+		DAOCliente c = DAOCliente.getInstancia();
+		c.update(this);
+		c.updateEnte(this);
 	}
 	
 	public void bajate() {
-	
+	this.setEstado('B');
+	DAOCliente dao = DAOCliente.getInstancia();
+	dao.baja(this);
 	}
 	
 	public void rehabilitate() {
-	
+		this.setEstado('M');
+		DAOCliente dao = DAOCliente.getInstancia();
+		dao.rehabilitar(this);
 	}
 	
 	public boolean sosCliente(int id) {

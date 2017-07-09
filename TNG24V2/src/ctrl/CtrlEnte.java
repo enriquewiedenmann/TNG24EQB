@@ -1,5 +1,6 @@
 package ctrl;
 
+
 import java.util.ArrayList;
 
 import persistencia.DAOCliente;
@@ -148,6 +149,25 @@ public Cliente buscarCliente(String nombre, String apellido, String documento) {
 	}
 	
 	public int nuevoCliente(String apellido, String nombre, String documento, String codDoc, String tel, String mail, int dom) {
+		TipoDocumento td= null;
+		
+		td=this.buscarTipoDoc(codDoc,null);
+		if(td!=null){
+			Domicilio oDom = null;
+			oDom= CtrlDomicilio.getInstance().buscarDomicilio(dom, null, null, null, null, null, null, null, null, null);
+			if(oDom!=null){
+				Cliente c = null;
+				c=this.buscarCliente(null, null, documento);
+				if(c==null){
+					Cliente nc = new Cliente(apellido, nombre, documento, td, tel, mail, oDom);
+					this.clientes.add(nc);
+					
+					return nc.getIdEnte();
+				}
+			}
+		}
+	
+		
 		return 0;
 	}
 	
@@ -185,11 +205,24 @@ public Cliente buscarCliente(String nombre, String apellido, String documento) {
 	}
 	
 	public boolean bajaCliente(int id) {
-		return true;
+		try{
+			this.buscarCliente(id, null, null, null).bajate();
+			return true;
+		}catch(Exception e){
+			System.out.println("no se pudo ejecutar la baja : " + e.getMessage());
+			return false;
+		}
+	
 	}
 	
 	public boolean rehabilitarCliente(int id) {
-	return true;
+		try{
+			this.buscarCliente(id, null, null, null).rehabilitate();
+			return true;
+		}catch(Exception e){
+			System.out.println("no se pudo ejecutar la rehabilitacion : " + e.getMessage());
+			return false;
+		}
 	}
 	
 	public void add() {
