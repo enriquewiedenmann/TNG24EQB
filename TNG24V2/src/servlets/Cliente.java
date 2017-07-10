@@ -37,6 +37,8 @@ public class Cliente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("EN EL SERVLET");
+		
+		String accion = request.getParameter("accion");
 		String nombre=request.getParameter("nombreCliente");
 		String apellido=request.getParameter("apellidoCliente");
 		String tipoDoc=request.getParameter("tipoDocumento");
@@ -46,8 +48,25 @@ public class Cliente extends HttpServlet {
 		String dom = request.getParameter("domicilio");
 		CtrlEnte sys = CtrlEnte.getInstance();
 		
-		
+		if(accion.equals("nuevoCliente")){
 		System.out.println("id: " +sys.nuevoCliente(apellido, nombre, nroDoc, "DN ", telefono, mail, Integer.parseInt(dom)));
+		}
+		if(accion.equals("editarCliente")){
+			System.out.println("editar");
+			String id = request.getParameter("idCliente");
+			sys.editarCliente(Integer.parseInt(id),apellido, nombre, nroDoc, "DN ", telefono, mail, Integer.parseInt(dom));
+			}
+		if(accion.equals("bajaCliente")){
+			System.out.println("baja");
+			String id = request.getParameter("idCliente");
+			sys.bajaCliente(Integer.parseInt(id));
+			}
+		if(accion.equals("rehabilitarCliente")){
+			System.out.println("reahbilitar");
+			String id = request.getParameter("idCliente");
+			sys.rehabilitarCliente(Integer.parseInt(id));
+			}
+		
 	}
 
 }

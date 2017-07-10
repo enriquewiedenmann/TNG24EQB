@@ -145,7 +145,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                         <div class="form-group">
                                         
                                             <label>Id:</label>
-                                            <input enable="false" id="nombreCliente" class="form-control" />
+                                            <input enable="false" id="idCliente"  name="idCliente" class="form-control" disabled/>
                                             </div>
                                         
                                         
@@ -196,7 +196,15 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                             </span>
                                             
                                         </div>
-										  <button type="submit" class="btn btn-danger">Aceptar</button>
+										  <div class="form-group">
+                                            <label>Estado: </label>
+                                            <input id="estado"  name="estado" class="form-control" disabled/>
+                                            </div>
+										  <button type="button" class="btn btn-danger" id="btnAceptar" onClick="nuevoCliente()">Aceptar</button>
+										   <button type="button" class="btn btn-danger" id="btnEditar" >Editar</button>
+										    <button type="button" class="btn btn-danger" id="btnGuardar" onClick="editarCliente()">Guardar</button>
+											 <button type="button" class="btn btn-danger" id="btnEstado" onClick="setEstadoCliente()">Baja</button>
+											 <input type="hidden" id="accion" name="accion"/>
              			             </form>
                                         
 							<div class="panel-body" id="tdom"  style="display: none">
@@ -292,16 +300,68 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
    function setModalCliente(tipo){
 	  
 	   if(tipo=='alta'){
-		   document.getElementById("VistaClientesTitulo").innerHTML ="Nuevo Cliente";
-		   document.getElementById("domicilio").value = "";
+		document.getElementById("VistaClientesTitulo").innerHTML ="Nuevo Cliente";
+		document.getElementById("domicilio").value = "";
+		document.getElementById("fCliente").setAttribute("style","display: block");
+		document.getElementById("idCliente").value="";
+		document.getElementById("nombreCliente").value="";
+		document.getElementById("apellidoCliente").value="";
+		document.getElementById("nroDocmento").value="";
+		document.getElementById("telefono").value="";
+		document.getElementById("mail").value="";
+		document.getElementById("domicilio").value="";
+		document.getElementById("estado").value="";
+		document.getElementById("tdom").setAttribute("style","display: none");
+		document.getElementById("btnEditar").style.visibility = "hidden"; 
+		document.getElementById("btnGuardar").style.visibility = "hidden";
+		document.getElementById("btnEstado").style.visibility = "hidden";
 	   }
 	   }
+   
+   function nuevoCliente(){
+	   
+	   document.getElementById("accion").value="nuevoCliente";
+	 
+	   document.getElementById("fCliente").submit();
+	   
+	   
+   }
+   
+function editarCliente(){
+	   
+	   document.getElementById("accion").value="editarCliente";
+	  
+	   document.getElementById("fCliente").submit();
+	   
+	   
+   }
+   
+function setEstadoCliente(){
+	  
+	   if(document.getElementById("estado").value=="B"){
+		   
+		   document.getElementById("accion").value="rehabilitarCliente";
+		   
+	   }else{
+		  document.getElementById("accion").value="bajaCliente";
+		 
+	   }
+	  
+	   
+	   document.getElementById("fCliente").submit();
+	   
+	   
+}  
+
+   
 	 function verDomicilios(){
 			
 			document.getElementById("fCliente").setAttribute("style","display: none");
 			document.getElementById("tdom").setAttribute("style","display: block");
+			
 	 }
-	  
+	
+	 
    
    </script> 
    
