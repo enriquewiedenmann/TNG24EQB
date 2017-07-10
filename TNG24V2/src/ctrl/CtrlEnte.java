@@ -24,7 +24,7 @@ public class CtrlEnte {
 	
 	
 	
-	public CtrlEnte() {
+	private CtrlEnte() {
 		
 		this.rolles = null;
 		this.tipodocumentos = this.cargarTipoDocumentos() ;

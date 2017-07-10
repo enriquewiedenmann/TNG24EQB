@@ -90,6 +90,7 @@ public class DAOCliente extends AdministradorPersistencia
 
 	@Override
 	public void delete(Object d)
+	
 	{
 		try
 		{

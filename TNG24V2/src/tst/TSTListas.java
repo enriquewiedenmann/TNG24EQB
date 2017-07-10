@@ -84,7 +84,9 @@ public class TSTListas {
 		System.out.println(e.mostrarCliente(3).vistaLinea());
 		System.out.println(e.mostrarCliente(3).getEstado());
 		System.out.println("----------------------------------------------------------------");
+		System.out.println();
 		
 	}
+	
 
 }

@@ -21,6 +21,9 @@ public class ViewTipoDocumento {
 		return "cod: "+this.getCodTipoDoc()+", desc: "+this.getDescTipoDoc()+", estado: "+this.getEstado();
 	}
 	
+	public String vistaOption(){
+		return "<option value="+this.getCodTipoDoc()+">"+this.descTipoDoc+"</option>";
+	}
 	
 	public String getCodTipoDoc() {
 		return codTipoDoc;
