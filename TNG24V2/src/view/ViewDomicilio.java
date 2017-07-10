@@ -52,6 +52,18 @@ public class ViewDomicilio {
 	}
 	
 	
+	public String vistaTabla(){
+		return  "<tr class=\"body\" ><th id=\"id\" >"+this.getIdDomicilio()+"</th><th>"+
+        this.getProvincia().getDescProvincia()+"</th><th>"+
+        this.getCiudad().getDescCiudad()+"</th><th>"+
+        this.getCodigoPostal().getCodigoPostal()+"</th><th>"+
+        this.getCalle()+"</th><th>"+
+        this.getNumero()+"</th><th>"+
+        this.getPiso()+"</th><th>"+
+        this.getDpto()+"</th></tr>";
+	}
+	
+	
 	public int getIdDomicilio() {
 		return idDomicilio;
 	}

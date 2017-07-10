@@ -29,8 +29,8 @@ public class TSTListas {
 		
 		for(ViewDomicilio dom : d.listarDomicilios()){
 			
-			//System.out.println(dom.vistaLinea());
-			
+			System.out.println(dom.vistaTabla());
+			System.out.println(dom.vistaLinea());
 			
 		}
 		

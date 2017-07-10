@@ -22,7 +22,7 @@ public class ViewTipoDocumento {
 	}
 	
 	public String vistaOption(){
-		return "<option value="+this.getCodTipoDoc()+">"+this.descTipoDoc+"</option>";
+		return "<option value=\""+this.getCodTipoDoc()+"\">"+this.descTipoDoc+"</option>";
 	}
 	
 	public String getCodTipoDoc() {

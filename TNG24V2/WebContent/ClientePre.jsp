@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"
+    pageEncoding="ISO-8859-1"   
 
-    import core.*;
-import view.*;
     %>
+<%@ page 
+	import = "ctrl.CtrlEnte" 
+	import = "ctrl.CtrlDomicilio" 
+	import ="view.*"	
+		%>    
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -19,6 +22,11 @@ import view.*;
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
+ <style>
+    #mdialTamanio{
+      width: 80% !important;
+    }
+  </style>s
 <body id="body">
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
@@ -125,8 +133,8 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
         
         <!--Modales en este div se aljan los modales necesarios para el funcionamiento de esta pantalla  en este -->
         <div name="modales">
-           <div class="modal fade" id="VistaClientes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
+           <div class="modal fade" id="VistaClientes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"   >
+                                <div class="modal-dialog" id="mdialTamanio">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -154,13 +162,14 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                              <div class="form-group">
                                                 <label for="tipoDocumento">Tipo Docmento:</label>
                                                 <select id="tipoDocumento" name="tipoDocumento"  class="form-control">
-                                                  <%
-                                                  CtrlEnte sys = CtrlEnte.getInstance();
-                                          		for(ViewTipoDocumento v: sys.listarTipoDocs()){
+                                        			  <%
+                                                 		CtrlEnte sys = CtrlEnte.getInstance();
+                                          				for(ViewTipoDocumento v: sys.listarTipoDocs()){
                                           			
-                                          			System.out.println(v.vistaOption());
-                                          		}
-                                                  %>
+                                          			out.println(v.vistaOption());
+                                          				}
+                                                 		 %>
+                                        	
                                                 </select>
                                             </div>
                                              <div class="form-group">
@@ -195,31 +204,27 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                 <table class="table table-striped table-bordered table-hover" id="tablaDomicilio">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>ID</th>
+                                            <th>Provincia</th>
+                                            <th>Ciudad</th>
+                                            <th>Codigo Postal</th>
+                                            <th>Calle</th>
+                                            <th>Numero</th>
+                                            <th>Piso</th>
+                                            <th>Dpto</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="body" >
-                                            <td id="id">1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr class="body" >
-                                            <td id="id">2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr class="body" >
-                                            <td id="id">3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+									<%
+                                       CtrlDomicilio sysDom = CtrlDomicilio.getInstance();
+                                       for(ViewDomicilio v: sysDom.listarDomicilios()){
+                                       		out.println(v.vistaTabla());
+                                          				}
+                                                 		 %>                                    
+                                    
+                                    
+                                     
                                     </tbody>
                                 </table>
                             </div>
