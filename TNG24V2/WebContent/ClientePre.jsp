@@ -6,6 +6,7 @@
 	import = "ctrl.CtrlEnte" 
 	import = "ctrl.CtrlDomicilio" 
 	import ="view.*"	
+	import = "java.util.*"
 		%>    
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -28,6 +29,7 @@
     }
   </style>s
 <body id="body">
+
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -120,9 +122,59 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                 </div>
                  <!-- /. ROW  -->
                  <hr />
+				<button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#buscadorCliente">
+                            Buscar Clientes
+                            </button> 
                <button class="btn btn-danger btn-lg" data-toggle="modal" onClick="setModalCliente('alta')" data-target="#VistaClientes">
                              Nuevo Cliente
                             </button>
+			<hr />				
+		 <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="tablaCliente">
+                                    <thead>
+                                        <tr>
+                                            <th>ID:</th>
+                                            <th>Apellido y Nombre</th>
+                                            <th>Tipo Documento</th>
+                                            <th>Documento</th>
+											<th>Telefono</th>
+                                            <th>Mail</th>
+											<th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									
+									
+                                       	<%
+                                       	ArrayList<ViewCliente> lista = (ArrayList<ViewCliente>) request.getAttribute("listaCliente");
+                                       if(lista!=null){
+                                       	for(ViewCliente vc: lista){
+                                       		out.println(vc.vistaTabla());
+                                          				}
+                                       	}
+                                                 		 %>  
+										<!--  <tr class="odd gradeX">
+                                            <td>Trident</td>
+                                            <td>Internet Explorer 4.0</td>
+                                            <td>Win 95+</td>
+                                            <td class="center">4</td>
+                                            <td class="center">X</td>
+											<td class="center">X</td>
+											<td class="center">X</td>
+                                        </tr>
+                                        <tr class="even gradeC">
+                                            <td>Trident</td>
+                                            <td>Internet Explorer 5.0</td>
+                                            <td>Win 95+</td>
+                                            <td class="center">5</td>
+                                            <td class="center">C</td>
+											<td class="center">X</td>
+											<td class="center">X</td>
+                                        </tr>
+                                     -->
+                                    </tbody>
+                                </table>
+                            </div>					
                           
     </div>
              <!-- /. PAGE INNER  -->
@@ -199,12 +251,14 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
 										  <div class="form-group">
                                             <label>Estado: </label>
                                             <input id="estado"  name="estado" class="form-control" disabled/>
+											
                                             </div>
+											 <input type="hidden" id="accion" name="accion"/>  
 										  <button type="button" class="btn btn-danger" id="btnAceptar" onClick="nuevoCliente()">Aceptar</button>
 										   <button type="button" class="btn btn-danger" id="btnEditar" >Editar</button>
 										    <button type="button" class="btn btn-danger" id="btnGuardar" onClick="editarCliente()">Guardar</button>
 											 <button type="button" class="btn btn-danger" id="btnEstado" onClick="setEstadoCliente()">Baja</button>
-											 <input type="hidden" id="accion" name="accion"/>
+											 
              			             </form>
                                         
 							<div class="panel-body" id="tdom"  style="display: none">
@@ -244,6 +298,43 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                     </div>
                                 </div>
                             </div>
+							
+							
+							
+							
+				<div class="modal fade" id="buscadorCliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Buscar</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                           <form form="role" id="fbuscarCliente" method="POST" action="Cliente">	
+										   <div class="form-group">
+                                        
+                                            <label>Nombre:</label>
+                                            <input id="bnombreCliente" name="bnombreCliente" class="form-control" />
+                                            </div>
+                                         <div class="form-group">
+                                            <label>Apellido:</label>
+                                            <input id="bapellidoCliente" name="bapellidoCliente" class="form-control" />
+                                            </div>
+                                                                                     
+                                             <div class="form-group">
+                                            <label>Nro. Documento:</label>
+                                            <input id="bnroDocmento" name="bnroDocmento" class="form-control" />
+                                            </div>
+										   
+										   
+											<input type="hidden" id="accion1" name="accion"/>  
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-danger" onClick="buscarCliente()">Buscar</button>
+											</form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                                   
                             
@@ -255,7 +346,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
         
         </div>
         
-        
+     
         
         
      <!-- /. WRAPPER  -->
@@ -272,7 +363,8 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
 	<script>
-		
+
+	$(document).ready(function () {$('#tablaCliente').dataTable();});
 	$(document).ready(function () {$('#tablaDomicilio').dataTable();});			
 	
 	
@@ -317,6 +409,16 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
 		document.getElementById("btnEstado").style.visibility = "hidden";
 	   }
 	   }
+   
+    function buscarCliente(){
+	   
+	   document.getElementById("accion1").value="buscarCliente";
+	 
+	   document.getElementById("fbuscarCliente").submit();
+	   
+	   
+   }
+   
    
    function nuevoCliente(){
 	   
