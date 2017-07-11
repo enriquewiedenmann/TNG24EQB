@@ -25,6 +25,10 @@ public class ViewTipoDocumento {
 		return "<option value=\""+this.getCodTipoDoc()+"\">"+this.descTipoDoc+"</option>";
 	}
 	
+	public String  vistaOptionSelect(){
+		return "<option selected value=\""+this.getCodTipoDoc()+"\">"+this.descTipoDoc+"</option>";
+	}
+	
 	public String getCodTipoDoc() {
 		return codTipoDoc;
 	}

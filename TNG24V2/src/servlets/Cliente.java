@@ -44,18 +44,9 @@ public class Cliente extends HttpServlet {
 		String accion = request.getParameter("accion");
 		
 		if(accion.equals("mostrarCliente")){
-			int idCliente = Integer.parseInt(request.getParameter("idCliente"));
-			request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(idCliente));
-			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
-			
-			
-		}
-		if(accion.equals("buscarCliente")){
 			String nombre=request.getParameter("bnombreCliente");
 			String apellido=request.getParameter("bapellidoCliente");
 			String nroDoc=request.getParameter("bnroDocmento");
-			
-			
 			if(nombre.length()==0){
 				nombre=null;
 			}
@@ -65,12 +56,30 @@ public class Cliente extends HttpServlet {
 			if(nroDoc.length()==0){
 				nroDoc=null;
 			}
-			
-
-			
-			
-			
 			request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombre,apellido,nroDoc));
+				
+			int idCliente =Integer.parseInt(request.getParameter("idm"));
+			request.setAttribute("setModal", "mostarCliente");
+			request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(idCliente));
+			
+			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+			
+			
+		}
+		if(accion.equals("buscarCliente")){
+			String nombre=request.getParameter("bnombreCliente");
+			String apellido=request.getParameter("bapellidoCliente");
+			String nroDoc=request.getParameter("bnroDocmento");
+			if(nombre.length()==0){
+				nombre=null;
+			}
+			if(apellido.length()==0){
+				apellido=null;
+			}
+			if(nroDoc.length()==0){
+				nroDoc=null;
+			}
+						request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombre,apellido,nroDoc));
 			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);
 		}
 		
@@ -87,7 +96,34 @@ public class Cliente extends HttpServlet {
 			String mail = request.getParameter("mail");
 			String dom = request.getParameter("domicilio");	
 			
-		System.out.println("id: " +sys.nuevoCliente(apellido, nombre, nroDoc,tipoDoc, telefono, mail, Integer.parseInt(dom)));
+			String nombreb=request.getParameter("bnombreCliente");
+			String apellidob=request.getParameter("bapellidoCliente");
+			String nroDocb=request.getParameter("bnroDocmento");
+			if(nombre.length()==0){
+				nombre=null;
+			}
+			if(apellido.length()==0){
+				apellido=null;
+			}
+			if(nroDoc.length()==0){
+				nroDoc=null;
+			}
+			
+			request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombreb,apellidob,nroDocb));
+			
+			
+		int nuevo =	sys.nuevoCliente(apellido, nombre, nroDoc,tipoDoc, telefono, mail, Integer.parseInt(dom));
+		if(nuevo!=0){
+		request.setAttribute("setModal", "mostarCliente");
+		request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(nuevo));
+		}else{
+		request.setAttribute("setModal", "msgError");
+		request.setAttribute("msgError", "El cliente no pudo ser Generado");
+		
+		}
+		request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+		
+		
 		}
 		if(accion.equals("editarCliente")){
 			
@@ -100,17 +136,118 @@ public class Cliente extends HttpServlet {
 			String mail = request.getParameter("mail");
 			String dom = request.getParameter("domicilio");
 			String id = request.getParameter("idCliente");
-			sys.editarCliente(Integer.parseInt(id),apellido, nombre, nroDoc, tipoDoc, telefono, mail, Integer.parseInt(dom));
-			}
-		if(accion.equals("bajaCliente")){
 			
+			String nombreb=request.getParameter("bnombreCliente");
+			String apellidob=request.getParameter("bapellidoCliente");
+			String nroDocb=request.getParameter("bnroDocmento");
+			if(nombreb.length()==0){
+				nombreb=null;
+			}
+			if(apellidob.length()==0){
+				apellidob=null;
+			}
+			if(nroDocb.length()==0){
+				nroDocb=null;
+			}
+			
+			request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombreb,apellidob,nroDocb));
+			
+			
+			
+			boolean band = false;
+			band=sys.editarCliente(Integer.parseInt(id),apellido, nombre, nroDoc, tipoDoc, telefono, mail, Integer.parseInt(dom));
+			if(band){
+				request.setAttribute("setModal", "mostarCliente");
+				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
+			}else{
+				request.setAttribute("setModal", "msgError");
+				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
+				request.setAttribute("msgError", "El cliente no pudo ser Editado");
+				
+				}
+				request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+		
+		}
+		
+		
+		
+		if(accion.equals("bajaCliente")){
 			String id = request.getParameter("idCliente");
-			sys.bajaCliente(Integer.parseInt(id));
+			boolean band = false;
+			
+			
+			String nombreb=request.getParameter("bnombreCliente");
+			String apellidob=request.getParameter("bapellidoCliente");
+			String nroDocb=request.getParameter("bnroDocmento");
+			if(nombreb.length()==0){
+				nombreb=null;
+			}
+			if(apellidob.length()==0){
+				apellidob=null;
+			}
+			if(nroDocb.length()==0){
+				nroDocb=null;
+			}
+			
+			request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombreb,apellidob,nroDocb));
+			
+			
+			
+			
+			
+			
+			band=sys.bajaCliente(Integer.parseInt(id));
+			
+			
+			
+			
+			
+			if(band){
+				request.setAttribute("setModal", "mostarCliente");
+				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
+			}else{
+				request.setAttribute("setModal", "msgError");
+				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
+				request.setAttribute("msgError", "El cliente no pudo ser Dado de BAja");
+				
+				}
+				request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+			
 			}
 		if(accion.equals("rehabilitarCliente")){
 			
 			String id = request.getParameter("idCliente");
-			sys.rehabilitarCliente(Integer.parseInt(id));
+			
+			boolean band = false;
+			band=sys.rehabilitarCliente(Integer.parseInt(id));
+			
+			
+			String nombreb=request.getParameter("bnombreCliente");
+			String apellidob=request.getParameter("bapellidoCliente");
+			String nroDocb=request.getParameter("bnroDocmento");
+			if(nombreb.length()==0){
+				nombreb=null;
+			}
+			if(apellidob.length()==0){
+				apellidob=null;
+			}
+			if(nroDocb.length()==0){
+				nroDocb=null;
+			}
+			
+			request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombreb,apellidob,nroDocb));
+			
+			
+			if(band){
+				request.setAttribute("setModal", "mostarCliente");
+				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
+			}else{
+				request.setAttribute("setModal", "msgError");
+				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
+				request.setAttribute("msgError", "El cliente no pudo ser Dado de BAja");
+				
+				}
+				request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
 			}
 		
 	}

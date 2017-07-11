@@ -52,6 +52,19 @@ public class ViewDomicilio {
 	}
 	
 	
+	public String resumen(){
+		String l= null; 
+		l= 		
+				"Calle: "+this.getCalle()+
+				", Nro: "+this.getNumero()+
+				", Piso: "+this.getPiso()+
+				", Dpto: "+this.getDpto()+
+				", CP: "+this.getCodigoPostal().mostrate().getCodigoPostal()+
+				", Localidad: "+this.getDescLocalidad();
+				return l;
+	}
+	
+	
 	public String vistaTabla(){
 		return  "<tr class=\"bodyTableDom\" ><th id=\"id\" >"+this.getIdDomicilio()+"</th><th>"+
         this.getProvincia().getDescProvincia()+"</th><th>"+
@@ -67,7 +80,9 @@ public class ViewDomicilio {
 	public int getIdDomicilio() {
 		return idDomicilio;
 	}
-
+	public String getIdDomicilioString() {
+		return Integer.toString(idDomicilio);
+	}
 
 	public void setIdDomicilio(int idDomicilio) {
 		this.idDomicilio = idDomicilio;

@@ -171,7 +171,7 @@ public Cliente buscarCliente(String nombre, String apellido, String documento) {
 		return 0;
 	}
 	
-	public boolean editarCliente(int id, String apellido, String nombre, String documento, String codDoc, String tel, String mail, int dom) {
+	public boolean editarCliente(int id, String nombre, String apellido, String documento, String codDoc, String tel, String mail, int dom) {
 		
 		Cliente c= null;
 		

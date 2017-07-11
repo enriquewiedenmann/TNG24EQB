@@ -116,8 +116,36 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                 <div class="row">
                     <div class="col-md-12">
                      <h2>Clientes</h2>   
+                     	 <%ViewCliente vcp = (ViewCliente)request.getAttribute("viewCliente") ;
+                     	 String nombre=null;
+                     	
+            			String apellido=null;
+            			String tipoDoc=null;
+            			String nroDoc=null;
+            			String telefono =null;
+            			String mail = null;
+            			String dom = null;
+            			String id = null;
+            			String descDom = null;
+            			String e = null;
+            			
+                     	 if(vcp!=null){
+                     		nombre = vcp.getNombre();
+                     		apellido=vcp.getApellido();
+                			tipoDoc=vcp.getTipoDoc().getCodTipoDoc();
+                			nroDoc=vcp.getNroDoc();
+                			telefono =vcp.getTelefono();
+                			mail = vcp.getMail();
+                			dom = vcp.getDomicilio().mostrate().getIdDomicilioString();
+                			descDom = vcp.getDomicilio().mostrate().resumen();
+                			id = vcp.getIdEnteString();
+                			e = vcp.getEstado();
+                			
+                     	 }
+                     	 
+                     	 
+                     	 %>	
                         
-                       
                     </div>
                 </div>
                  <!-- /. ROW  -->
@@ -179,29 +207,38 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                         <div class="form-group">
                                         
                                             <label>Id:</label>
-                                            <input id="idCliente"  name="idCliente" class="form-control" disabled/>
+                                            <input value=<%=id%> id="idCliente"  name="idCliente" class="form-control" disabled/>
                                             </div>
                                         
                                         
                                         <div class="form-group">
                                         
                                             <label>Nombre:</label>
-                                            <input id="nombreCliente" name="nombreCliente" class="form-control" />
+                                            <input value=<%=nombre%> id="nombreCliente" name="nombreCliente" class="form-control" />
                                             </div>
                                          <div class="form-group">
                                             <label>Apellido:</label>
                                             
-                                            <input id="apellidoCliente" name="apellidoCliente" class="form-control"  />
+                                            <input value=<%=apellido%> id="apellidoCliente" name="apellidoCliente" class="form-control"  />
                                             </div>
                                             
                                              <div class="form-group">
                                                 <label for="tipoDocumento">Tipo Docmento:</label>
                                                 <select id="tipoDocumento" name="tipoDocumento"  class="form-control">
                                         			  <%
+                                        			  
                                                  		CtrlEnte sys = CtrlEnte.getInstance();
                                           				for(ViewTipoDocumento v: sys.listarTipoDocs()){
-                                          			
-                                          			out.println(v.vistaOption());
+                                          					if(tipoDoc!=null){
+                                          						if(v.getCodTipoDoc().equals(tipoDoc)){
+                                          							
+                                          							out.println(v.vistaOptionSelect());
+                                          						}else{
+                                          							out.println(v.vistaOption());
+                                          						}
+                                          					}else{
+                                          						out.println(v.vistaOption());
+                                          					}
                                           				}
                                                  		 %>
                                         	
@@ -209,36 +246,45 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                             </div>
                                              <div class="form-group">
                                             <label>Nro. Documento:</label>
-                                            <input id="nroDocmento" name="nroDocmento" class="form-control" />
+                                            <input value=<%=nroDoc%> id="nroDocmento" name="nroDocmento" class="form-control" />
                                             </div>
                                             
                                             
                                               <div class="form-group">
                                             <label>Telefono: </label>
-                                            <input id="telefono"  name="telefono" class="form-control" />
+                                            <input  value=<%=telefono%> id="telefono"  name="telefono" class="form-control" />
                                             </div>
                                             
                                              <div class="form-group">
                                             <label>Mail: </label>
-                                            <input id="mail" name="mail" class="form-control" />
+                                            <input value=<%=mail%> id="mail" name="mail" class="form-control" />
                                             </div>
+                                            <div>
                                              <label>Domicilio</label>
                                             <div class="form-group input-group">
-                                            <input id="domicilio" name="domicilio" type="text" class="form-control">
+                                            <input value=<%=dom%> id="domicilio" name="domicilio" type="text" class="form-control">
                                             <span class="input-group-btn" onclick="verDomicilios()">
                                                 <button class="btn btn-default" type="button" ><i class="fa fa-search"></i>
                                                 </button>
                                             </span>
-                                            
+                                                                                   
                                         </div>
+                                       <label  id="domicilioDesc" name="domicilioDesc"><%out.println(descDom);%></label> 
+                                       </div>
+                                       <br>
 										  <div class="form-group">
                                             <label>Estado: </label>
-                                            <input id="estado"  name="estado" class="form-control" disabled/>
+                                            <input  value=<%=e%> id="estado"  name="estado" class="form-control" disabled/>
 											
                                             </div>
-											 <input type="hidden" id="accion" name="accion"/>  
+											 <input type="hidden" value=<%=request.getAttribute("setModal")%> id="accion" name="accion" />
+											  <input type="hidden" id="idm" name="idm"/>   
+											  <input type="hidden" id="bnombreCliente" name="bnombreCliente" />
+											  <input  type="hidden" id="bapellidoCliente" name="bapellidoCliente" />
+											  <input type="hidden" id="bnroDocmento" name="bnroDocmento" />
+											  
 										  <button type="button" class="btn btn-danger" id="btnAceptar" onClick="nuevoCliente()">Aceptar</button>
-										   <button type="button" class="btn btn-danger" id="btnEditar" >Editar</button>
+										   <button type="button" class="btn btn-danger" id="btnEditar" onClick="setOpcionEditar()">Editar</button>
 										    <button type="button" class="btn btn-danger" id="btnGuardar" onClick="editarCliente()">Guardar</button>
 											 <button type="button" class="btn btn-danger" id="btnEstado" onClick="setEstadoCliente()">Baja</button>
 											 
@@ -290,7 +336,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel">Buscar</h4>
+                                            <h4 class="modal-title" id="myModalLabelB">Buscar</h4>
                                         </div>
                                         <div class="modal-body">
                                            <form form="role" id="fbuscarCliente" method="POST" action="Cliente">	
@@ -310,8 +356,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                             </div>
 										   
 										   
-											<input type="hidden" id="accion1" name="accion"/>  
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+											<input type="hidden" id="accion1" name="accion" />  
                                             <button type="button" class="btn btn-danger" onClick="buscarCliente()">Buscar</button>
 											</form>
                                         </div>
@@ -357,7 +402,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
 		var celda = $(this).children("#id").text();
 		
 		domicilio.value =celda;
-		
+		document.getElementById("domicilioDesc").innerHTML ="";
 		document.getElementById("fCliente").setAttribute("style","display: block");
 		document.getElementById("tdom").setAttribute("style","display: none");
 		
@@ -367,12 +412,50 @@ $(document).on("click", "tr.bodyTableCliente" , function(){
 		
 		var celda = $(this).children("#id").text();
 		
-		idCliente.value=celda;
-		accion.value="mostrarCliente"
+		idm.value=celda;
+		accion.value="mostrarCliente";
+		alert(idm.value);
 		fCliente.submit();
 		
 	});
 
+	$(document).ready(function () {
+		if(accion.value=="mostarCliente"){
+				accion.value==""
+					document.getElementById("VistaClientesTitulo").innerHTML ="Cliente";
+					
+				   document.getElementById("nombreCliente").disabled = true;
+				   document.getElementById("apellidoCliente").disabled = true;
+				   document.getElementById("domicilio").disabled = true;
+				   document.getElementById("tipoDocumento").disabled = true;
+				   document.getElementById("nroDocmento").disabled = true;
+				   document.getElementById("telefono").disabled = true;
+				   document.getElementById("mail").disabled = true;
+				   document.getElementById("estado").disabled = true;				   
+				   document.getElementById("domicilio").disabled = true;
+				 
+				   
+				   document.getElementById("btnAceptar").style.visibility = "hidden"; 
+				   document.getElementById("btnGuardar").style.visibility = "hidden";
+				   if(document.getElementById("estado").value=="B"){
+					   document.getElementById("btnEstado").style.visibility = "visible";
+					   document.getElementById("btnEstado").innerHTML="Rehabilitar";
+					   document.getElementById("btnEditar").style.visibility = "hidden"; 
+				   }else{
+					   document.getElementById("btnEstado").style.visibility = "hiden";
+					   document.getElementById("btnEstado").innerHTML="Baja";
+					   document.getElementById("btnEditar").style.visibility = "visible"; 
+				   }
+				    		
+				
+				
+			 	$('#VistaClientes').modal('show');
+		} 
+		
+	
+	
+	 });
+	
 	
 	
 		</script>
@@ -382,12 +465,28 @@ $(document).on("click", "tr.bodyTableCliente" , function(){
     
    <script type="text/javascript">
   
+   function setOpcionEditar(){
+	    document.getElementById("nombreCliente").disabled = false;
+		document.getElementById("apellidoCliente").disabled = false;
+		document.getElementById("domicilio").disabled = false;
+		document.getElementById("tipoDocumento").disabled = false;
+		document.getElementById("nroDocmento").disabled = false;
+		document.getElementById("telefono").disabled = false;
+		document.getElementById("mail").disabled = false;
+		document.getElementById("estado").disabled = true;
+		document.getElementById("domicilio").disabled = false; 
+		 document.getElementById("btnEditar").style.visibility = "hidden"; 
+			document.getElementById("btnGuardar").style.visibility = "visible";
+			document.getElementById("btnEstado").style.visibility = "hidden";
+	   
+   }
+   
    function setModalBuscador(){
    
    document.getElementById('bnombreCliente').value="";
    document.getElementById('bapellidoCliente').value="";
    document.getElementById('bnroDocmento').value="";
-   
+  
    }
    
    
@@ -404,18 +503,34 @@ $(document).on("click", "tr.bodyTableCliente" , function(){
 		document.getElementById("telefono").value="";
 		document.getElementById("mail").value="";
 		document.getElementById("domicilio").value="";
+		document.getElementById("domicilioDesc").innerHTML ="";
 		document.getElementById("estado").value="";
+		document.getElementById("nombreCliente").disabled = false;
+		document.getElementById("apellidoCliente").disabled = false;
+		document.getElementById("domicilio").disabled = false;
+		document.getElementById("tipoDocumento").disabled = false;
+		document.getElementById("nroDocmento").disabled = false;
+		document.getElementById("telefono").disabled = false;
+		document.getElementById("mail").disabled = false;
+		document.getElementById("estado").disabled = true;				   
+		document.getElementById("domicilio").disabled = false;
 		document.getElementById("tdom").setAttribute("style","display: none");
+		document.getElementById("btnAceptar").style.visibility = "visible"; 
 		document.getElementById("btnEditar").style.visibility = "hidden"; 
 		document.getElementById("btnGuardar").style.visibility = "hidden";
 		document.getElementById("btnEstado").style.visibility = "hidden";
+		
+		
+		
+		
 	   }
 	   }
    
     function buscarCliente(){
 	   
 	   document.getElementById("accion1").value="buscarCliente";
-	 
+
+	   
 	   document.getElementById("fbuscarCliente").submit();
 	   
 	   
@@ -432,7 +547,7 @@ $(document).on("click", "tr.bodyTableCliente" , function(){
    }
    
 function editarCliente(){
-	   
+		document.getElementById("idCliente").disabled = false;
 	   document.getElementById("accion").value="editarCliente";
 	  
 	   document.getElementById("fCliente").submit();
@@ -441,7 +556,7 @@ function editarCliente(){
    }
    
 function setEstadoCliente(){
-	  
+	document.getElementById("idCliente").disabled = false;
 	   if(document.getElementById("estado").value=="B"){
 		   
 		   document.getElementById("accion").value="rehabilitarCliente";

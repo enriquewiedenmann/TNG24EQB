@@ -60,6 +60,10 @@ public class ViewCliente {
 	public int getIdEnte() {
 		return idEnte;
 	}
+	
+	public String getIdEnteString() {
+		return Integer.toString(idEnte);
+	}
 
 	public void setIdEnte(int idEnte) {
 		this.idEnte = idEnte;
@@ -97,8 +101,10 @@ public class ViewCliente {
 		this.nroDoc = nroDoc;
 	}
 
-	public char getEstado() {
-		return estado;
+	public String getEstado() {
+		
+		
+		return String.valueOf(this.estado);
 	}
 
 	public void setEstado(char estado) {
