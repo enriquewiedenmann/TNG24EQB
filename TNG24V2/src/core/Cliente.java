@@ -50,7 +50,8 @@ public class Cliente extends Ente {
 		
 		boolean band = true;
 		if(nombre!=null){
-		if(this.getNombre().toUpperCase().equals(nombre.toUpperCase())){
+		
+		if(this.getNombre().toUpperCase().startsWith(nombre.toUpperCase())){
 			band = true;
 		}else{
 			band = false;
@@ -59,7 +60,7 @@ public class Cliente extends Ente {
 		
 		}
 		if(apellido!=null){
-			if(getApellido().toUpperCase().equals(apellido.toUpperCase())){
+			if(getApellido().toUpperCase().startsWith(apellido.toUpperCase())){
 				band = true;
 			}else{
 				band = false;
@@ -68,7 +69,7 @@ public class Cliente extends Ente {
 			}
 		
 		if(documento!=null){
-			if(this.getNroDoc().toUpperCase().equals(documento.toUpperCase())){
+			if(this.getNroDoc().toUpperCase().startsWith(documento.toUpperCase())){
 				band = true;
 			}else{
 				band = false;

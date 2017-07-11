@@ -27,8 +27,8 @@
     #mdialTamanio{
       width: 80% !important;
     }
-  </style>s
-<body id="body">
+  </style>
+<body id="body" >
 
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
@@ -122,7 +122,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                 </div>
                  <!-- /. ROW  -->
                  <hr />
-				<button class="btn btn-danger btn-lg" data-toggle="modal" data-target="#buscadorCliente">
+				<button class="btn btn-danger btn-lg" data-toggle="modal" onClick="setModalBuscador()" data-target="#buscadorCliente">
                             Buscar Clientes
                             </button> 
                <button class="btn btn-danger btn-lg" data-toggle="modal" onClick="setModalCliente('alta')" data-target="#VistaClientes">
@@ -153,25 +153,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                           				}
                                        	}
                                                  		 %>  
-										<!--  <tr class="odd gradeX">
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 4.0</td>
-                                            <td>Win 95+</td>
-                                            <td class="center">4</td>
-                                            <td class="center">X</td>
-											<td class="center">X</td>
-											<td class="center">X</td>
-                                        </tr>
-                                        <tr class="even gradeC">
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 5.0</td>
-                                            <td>Win 95+</td>
-                                            <td class="center">5</td>
-                                            <td class="center">C</td>
-											<td class="center">X</td>
-											<td class="center">X</td>
-                                        </tr>
-                                     -->
+										
                                     </tbody>
                                 </table>
                             </div>					
@@ -197,7 +179,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                         <div class="form-group">
                                         
                                             <label>Id:</label>
-                                            <input enable="false" id="idCliente"  name="idCliente" class="form-control" disabled/>
+                                            <input id="idCliente"  name="idCliente" class="form-control" disabled/>
                                             </div>
                                         
                                         
@@ -208,7 +190,8 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                             </div>
                                          <div class="form-group">
                                             <label>Apellido:</label>
-                                            <input id="apellidoCliente" name="apellidoCliente" class="form-control" />
+                                            
+                                            <input id="apellidoCliente" name="apellidoCliente" class="form-control"  />
                                             </div>
                                             
                                              <div class="form-group">
@@ -369,7 +352,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
 	
 	
 	
-	$(document).on("click", "tr.body" , function(){
+	$(document).on("click", "tr.bodyTableDom" , function(){
 		
 		var celda = $(this).children("#id").text();
 		
@@ -380,6 +363,17 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
 		
 	});
 	
+$(document).on("click", "tr.bodyTableCliente" , function(){
+		
+		var celda = $(this).children("#id").text();
+		
+		idCliente.value=celda;
+		accion.value="mostrarCliente"
+		fCliente.submit();
+		
+	});
+
+	
 	
 		</script>
    
@@ -387,6 +381,14 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
     <script src="assets/js/custom.js"></script>
     
    <script type="text/javascript">
+  
+   function setModalBuscador(){
+   
+   document.getElementById('bnombreCliente').value="";
+   document.getElementById('bapellidoCliente').value="";
+   document.getElementById('bnroDocmento').value="";
+   
+   }
    
    
    function setModalCliente(tipo){

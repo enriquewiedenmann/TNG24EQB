@@ -29,8 +29,8 @@ public class TSTListas {
 		
 		for(ViewDomicilio dom : d.listarDomicilios()){
 			
-			System.out.println(dom.vistaTabla());
-			System.out.println(dom.vistaLinea());
+			//System.out.println(dom.vistaTabla());
+			//System.out.println(dom.vistaLinea());
 			
 		}
 		
@@ -42,7 +42,7 @@ public class TSTListas {
 		}
 		
 		for(ViewCliente c : e.listarClientes(null,"zanette",null)){
-			System.out.println(c.vistaLinea());
+			System.out.println(c.vistaTabla());
 		}
 		
 		

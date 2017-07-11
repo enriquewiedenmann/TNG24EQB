@@ -39,16 +39,38 @@ public class Cliente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("EN EL SERVLET");
+		
 		CtrlEnte sys = CtrlEnte.getInstance();
 		String accion = request.getParameter("accion");
 		
-		
+		if(accion.equals("mostrarCliente")){
+			int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+			request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(idCliente));
+			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+			
+			
+		}
 		if(accion.equals("buscarCliente")){
 			String nombre=request.getParameter("bnombreCliente");
 			String apellido=request.getParameter("bapellidoCliente");
 			String nroDoc=request.getParameter("bnroDocmento");
-			request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombre, apellido, nroDoc));
+			
+			
+			if(nombre.length()==0){
+				nombre=null;
+			}
+			if(apellido.length()==0){
+				apellido=null;
+			}
+			if(nroDoc.length()==0){
+				nroDoc=null;
+			}
+			
+
+			
+			
+			
+			request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombre,apellido,nroDoc));
 			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);
 		}
 		
@@ -69,7 +91,7 @@ public class Cliente extends HttpServlet {
 		}
 		if(accion.equals("editarCliente")){
 			
-			System.out.println("editar");
+			
 			String nombre=request.getParameter("nombreCliente");
 			String apellido=request.getParameter("apellidoCliente");
 			String tipoDoc=request.getParameter("tipoDocumento");
@@ -81,12 +103,12 @@ public class Cliente extends HttpServlet {
 			sys.editarCliente(Integer.parseInt(id),apellido, nombre, nroDoc, tipoDoc, telefono, mail, Integer.parseInt(dom));
 			}
 		if(accion.equals("bajaCliente")){
-			System.out.println("baja");
+			
 			String id = request.getParameter("idCliente");
 			sys.bajaCliente(Integer.parseInt(id));
 			}
 		if(accion.equals("rehabilitarCliente")){
-			System.out.println("reahbilitar");
+			
 			String id = request.getParameter("idCliente");
 			sys.rehabilitarCliente(Integer.parseInt(id));
 			}

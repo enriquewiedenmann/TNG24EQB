@@ -46,6 +46,17 @@ public class ViewCliente {
 	}
 	
 	
+	public String vistaTabla(){
+		return  "<tr class=\"bodyTableCliente\" ><th id=\"id\" >"+this.getIdEnte()+"</th><th>"+
+		       this.getApellido()+", "+this.getNombre()+"</th><th>"+
+		        this.getTipoDoc().getDescTipoDoc()+"</th><th>"+
+		        this.getNroDoc()+"</th><th>"+
+		        this.getTelefono()+"</th><th>"+
+		        this.getMail()+"</th><th>"+
+		        this.getEstado()+"</th></tr>";
+			
+	}
+	
 	public int getIdEnte() {
 		return idEnte;
 	}
