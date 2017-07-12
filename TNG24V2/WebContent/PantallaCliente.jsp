@@ -267,8 +267,8 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
                                              <label>Domicilio</label>
                                             <div class="form-group input-group">
                                             <input  value=<%=dom%> id="domicilio" name="domicilio" type="text" class="form-control">
-                                            <span class="input-group-btn" onclick="verDomicilios()">
-                                                <button class="btn btn-default" type="button" ><i class="fa fa-search"></i>
+                                            <span class="input-group-btn" >
+                                                <button id="btnBuscarDomicilio" class="btn btn-default" type="button" onclick="verDomicilios()"><i class="fa fa-search"></i>
                                                 </button>
                                             </span>
                                                                                    
@@ -434,7 +434,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
 				   document.getElementById("mail").disabled = true;
 				   document.getElementById("estado").disabled = true;				   
 				   document.getElementById("domicilio").disabled = true;
-				 
+				   document.getElementById("btnBuscarDomicilio").disabled = true;
 				   
 				   document.getElementById("btnAceptar").style.visibility = "hidden"; 
 				   document.getElementById("btnGuardar").style.visibility = "hidden";
@@ -476,6 +476,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
 			document.getElementById("mail").disabled = false;
 			document.getElementById("estado").disabled = true;				   
 			document.getElementById("domicilio").disabled = false;
+			document.getElementById("btnBuscarDomicilio").disabled = false;
 			document.getElementById("tdom").setAttribute("style","display: none");
 			document.getElementById("btnAceptar").style.visibility = "visible"; 
 			document.getElementById("btnEditar").style.visibility = "hidden"; 
@@ -499,7 +500,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
 			   document.getElementById("mail").disabled = true;
 			   document.getElementById("estado").disabled = true;				   
 			   document.getElementById("domicilio").disabled = true;
-			 
+			   document.getElementById("btnBuscarDomicilio").disabled = false;
 			   
 			   document.getElementById("btnAceptar").style.visibility = "hidden"; 
 			   document.getElementById("btnGuardar").style.visibility = "hidden";
@@ -530,7 +531,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
 			   document.getElementById("mail").disabled = true;
 			   document.getElementById("estado").disabled = true;				   
 			   document.getElementById("domicilio").disabled = true;
-			 
+			   document.getElementById("btnBuscarDomicilio").disabled = true;
 			   
 			   document.getElementById("btnAceptar").style.visibility = "hidden"; 
 			   document.getElementById("btnGuardar").style.visibility = "hidden";
@@ -565,7 +566,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
 			   document.getElementById("mail").disabled = true;
 			   document.getElementById("estado").disabled = true;				   
 			   document.getElementById("domicilio").disabled = true;
-			 
+			   document.getElementById("btnBuscarDomicilio").disabled = true;
 			   
 			   document.getElementById("btnAceptar").style.visibility = "hidden"; 
 			   document.getElementById("btnGuardar").style.visibility = "hidden";
@@ -607,6 +608,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
 		document.getElementById("mail").disabled = false;
 		document.getElementById("estado").disabled = true;
 		document.getElementById("domicilio").disabled = false; 
+		document.getElementById("btnBuscarDomicilio").disabled = false;
 		document.getElementById("btnEditar").style.visibility = "hidden"; 
 		document.getElementById("btnGuardar").style.visibility = "visible";
 		document.getElementById("btnEstado").style.visibility = "hidden";
@@ -646,6 +648,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
 		document.getElementById("mail").disabled = false;
 		document.getElementById("estado").disabled = true;				   
 		document.getElementById("domicilio").disabled = false;
+		document.getElementById("btnBuscarDomicilio").disabled = true;
 		document.getElementById("tdom").setAttribute("style","display: none");
 		document.getElementById("btnAceptar").style.visibility = "visible"; 
 		document.getElementById("btnEditar").style.visibility = "hidden"; 

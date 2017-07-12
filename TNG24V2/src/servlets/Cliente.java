@@ -91,6 +91,7 @@ public class Cliente extends HttpServlet {
 			int nuevo =	sys.nuevoCliente(nombre, apellido, nroDoc,tipoDoc, telefono, mail, Integer.parseInt(dom));
 			if(nuevo!=0){
 				request.setAttribute("setModal", "mostarCliente");
+				refrescarLista(request.getSession(true));
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(nuevo));
 			}else{
 				request.setAttribute("setModal", "1");
@@ -121,7 +122,9 @@ public class Cliente extends HttpServlet {
 			band=sys.editarCliente(Integer.parseInt(id),nombre, apellido, nroDoc, tipoDoc, telefono, mail, Integer.parseInt(dom));
 			if(band){
 				request.setAttribute("setModal", "mostarCliente");
+				
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
+				refrescarLista(request.getSession(true));
 				refrescarLista(request.getSession());
 			}else{
 				request.setAttribute("setModal", "2");
@@ -142,6 +145,7 @@ public class Cliente extends HttpServlet {
 			
 			if(band){
 				request.setAttribute("setModal", "mostarCliente");
+				refrescarLista(request.getSession(true));
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
 			}else{
 				request.setAttribute("setModal", "3");
@@ -162,6 +166,7 @@ public class Cliente extends HttpServlet {
 			
 			if(band){
 				request.setAttribute("setModal", "mostarCliente");
+				refrescarLista(request.getSession(true));
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
 			}else{
 				request.setAttribute("setModal", "4");
