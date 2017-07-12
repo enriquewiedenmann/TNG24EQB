@@ -49,7 +49,7 @@ public class Cliente extends HttpServlet {
 			int idCliente =Integer.parseInt(request.getParameter("idm"));
 			request.setAttribute("setModal", "mostarCliente");
 			request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(idCliente));
-			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+			request.getRequestDispatcher("PantallaCliente.jsp").forward(request,response);	
 			}
 		
 		
@@ -71,7 +71,7 @@ public class Cliente extends HttpServlet {
 			
 			HttpSession session = request.getSession(true);
 			session.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombre,apellido,nroDoc));
-			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);
+			request.getRequestDispatcher("PantallaCliente.jsp").forward(request,response);
 		}
 		
 		
@@ -97,7 +97,7 @@ public class Cliente extends HttpServlet {
 				
 			}
 			
-			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+			request.getRequestDispatcher("PantallaCliente.jsp").forward(request,response);	
 		
 		
 		}
@@ -129,7 +129,7 @@ public class Cliente extends HttpServlet {
 				
 				
 				}
-				request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+				request.getRequestDispatcher("PantallaCliente.jsp").forward(request,response);	
 		
 		}
 		
@@ -150,7 +150,7 @@ public class Cliente extends HttpServlet {
 				
 			}
 			
-			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+			request.getRequestDispatcher("PantallaCliente.jsp").forward(request,response);	
 			
 			
 			}
@@ -169,7 +169,7 @@ public class Cliente extends HttpServlet {
 				
 				
 			}
-				request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+				request.getRequestDispatcher("PantallaCliente.jsp").forward(request,response);	
 			}
 		
 	}
