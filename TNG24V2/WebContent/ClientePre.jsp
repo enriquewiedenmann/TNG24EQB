@@ -218,12 +218,12 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                         <div class="form-group">
                                         
                                             <label>Nombre:</label>
-                                            <input type="text" value=<%=nombre%> id="nombreCliente" name="nombreCliente" class="form-control" />
+                                            <input type="text" value="<%=nombre%>" id="nombreCliente" name="nombreCliente" class="form-control" />
                                             </div>
                                          <div class="form-group">
                                             <label>Apellido:</label>
                                             
-                                            <input type="text" value=<%=apellido%> id="apellidoCliente" name="apellidoCliente" class="form-control"  />
+                                            <input type="text" value="<%=apellido%>" id="apellidoCliente" name="apellidoCliente" class="form-control"  />
                                             </div>
                                             
                                              <div class="form-group">
@@ -256,12 +256,12 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                             
                                               <div class="form-group">
                                             <label>Telefono: </label>
-                                            <input type="tel" value=<%=telefono%> id="telefono"  name="telefono" class="form-control" />
+                                            <input type="tel" value="<%=telefono%>" id="telefono"  name="telefono" class="form-control" />
                                             </div>
                                             
                                              <div class="form-group">
                                             <label>Mail: </label>
-                                            <input type="email" value=<%=mail%> id="mail" name="mail" class="form-control" />
+                                            <input type="email" value="<%=mail%>" id="mail" name="mail" class="form-control" />
                                             </div>
                                             <div>
                                              <label>Domicilio</label>
