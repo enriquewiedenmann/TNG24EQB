@@ -122,10 +122,9 @@ public class Cliente extends HttpServlet {
 			band=sys.editarCliente(Integer.parseInt(id),nombre, apellido, nroDoc, tipoDoc, telefono, mail, Integer.parseInt(dom));
 			if(band){
 				request.setAttribute("setModal", "mostarCliente");
-				
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
 				refrescarLista(request.getSession(true));
-				refrescarLista(request.getSession());
+				
 			}else{
 				request.setAttribute("setModal", "2");
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));

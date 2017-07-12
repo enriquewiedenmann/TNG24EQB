@@ -187,10 +187,10 @@ public Cliente buscarCliente(String nombre, String apellido, String documento) {
 				d = cd.buscarDomicilio(dom, null, null, null, null, null, null, null, null, null);
 				
 				if(cd.buscarDomicilio(dom, null, null, null, null, null, null, null, null, null)!=null){
+					int encontrado = -1;		
+					encontrado = this.buscarCliente(null, null, documento).getIdEnte();
 					
-				
-					
-					if(this.buscarCliente(null, null, documento).getNroDoc().equals(id)){
+					if(encontrado == id){
 					c.editate(apellido, nombre, documento, td, tel, mail, cd.buscarDomicilio(dom, null, null, null, null, null, null, null, null, null));	
 					return true;
 					}
