@@ -44,7 +44,7 @@
   <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</a> </div>
+font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="btn btn-danger square-btn-adjust">?</a>  <a href="#" class="btn btn-danger square-btn-adjust">Salir</a> </div>
         </nav>   
            <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">
