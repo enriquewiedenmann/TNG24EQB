@@ -218,12 +218,12 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                         <div class="form-group">
                                         
                                             <label>Nombre:</label>
-                                            <input value=<%=nombre%> id="nombreCliente" name="nombreCliente" class="form-control" />
+                                            <input type="text" value=<%=nombre%> id="nombreCliente" name="nombreCliente" class="form-control" />
                                             </div>
                                          <div class="form-group">
                                             <label>Apellido:</label>
                                             
-                                            <input value=<%=apellido%> id="apellidoCliente" name="apellidoCliente" class="form-control"  />
+                                            <input type="text" value=<%=apellido%> id="apellidoCliente" name="apellidoCliente" class="form-control"  />
                                             </div>
                                             
                                              <div class="form-group">
@@ -250,23 +250,23 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                             </div>
                                              <div class="form-group">
                                             <label>Nro. Documento:</label>
-                                            <input value=<%=nroDoc%> id="nroDocmento" name="nroDocmento" class="form-control" />
+                                            <input  value=<%=nroDoc%> id="nroDocmento" name="nroDocmento" class="form-control" />
                                             </div>
                                             
                                             
                                               <div class="form-group">
                                             <label>Telefono: </label>
-                                            <input  value=<%=telefono%> id="telefono"  name="telefono" class="form-control" />
+                                            <input type="tel" value=<%=telefono%> id="telefono"  name="telefono" class="form-control" />
                                             </div>
                                             
                                              <div class="form-group">
                                             <label>Mail: </label>
-                                            <input value=<%=mail%> id="mail" name="mail" class="form-control" />
+                                            <input type="email" value=<%=mail%> id="mail" name="mail" class="form-control" />
                                             </div>
                                             <div>
                                              <label>Domicilio</label>
                                             <div class="form-group input-group">
-                                            <input value=<%=dom%> id="domicilio" name="domicilio" type="text" class="form-control">
+                                            <input  value=<%=dom%> id="domicilio" name="domicilio" type="text" class="form-control">
                                             <span class="input-group-btn" onclick="verDomicilios()">
                                                 <button class="btn btn-default" type="button" ><i class="fa fa-search"></i>
                                                 </button>
@@ -283,7 +283,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                                             </div>
 											 <input type="hidden" value=<%=request.getAttribute("setModal")%> id="accion" name="accion" />
 											  <input  type="hidden" id="idm" name="idm"/>   
-											 <input type="hidden" value=<%=request.getAttribute("msgError")%> id="msgError" name="msgError" />
+											
 										  <button type="button" class="btn btn-danger" id="btnAceptar" onClick="nuevoCliente()">Aceptar</button>
 										   <button type="button" class="btn btn-danger" id="btnEditar" onClick="setOpcionEditar()">Editar</button>
 										    <button type="button" class="btn btn-danger" id="btnGuardar" onClick="editarCliente()">Guardar</button>
@@ -452,9 +452,137 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
 				
 			 	$('#VistaClientes').modal('show');
 		} 
-		if(accion.value=="msgError"){
-			alert(msgError.value);
+		if(accion.value=="1"){
+			accion.value==""
+			alert("El cliente no pudo ser Generado");
+			document.getElementById("VistaClientesTitulo").innerHTML ="Nuevo Cliente";
+			document.getElementById("domicilio").value = "";
+			document.getElementById("fCliente").setAttribute("style","display: block");
+			document.getElementById("idCliente").value="";
+			document.getElementById("nombreCliente").value="";
+			document.getElementById("apellidoCliente").value="";
+			document.getElementById("nroDocmento").value="";
+			document.getElementById("telefono").value="";
+			document.getElementById("mail").value="";
+			document.getElementById("domicilio").value="";
+			document.getElementById("domicilioDesc").innerHTML ="";
+			document.getElementById("estado").value="";
+			document.getElementById("nombreCliente").disabled = false;
+			document.getElementById("apellidoCliente").disabled = false;
+			document.getElementById("domicilio").disabled = false;
+			document.getElementById("tipoDocumento").disabled = false;
+			document.getElementById("nroDocmento").disabled = false;
+			document.getElementById("telefono").disabled = false;
+			document.getElementById("mail").disabled = false;
+			document.getElementById("estado").disabled = true;				   
+			document.getElementById("domicilio").disabled = false;
+			document.getElementById("tdom").setAttribute("style","display: none");
+			document.getElementById("btnAceptar").style.visibility = "visible"; 
+			document.getElementById("btnEditar").style.visibility = "hidden"; 
+			document.getElementById("btnGuardar").style.visibility = "hidden";
+			document.getElementById("btnEstado").style.visibility = "hidden";
 			$('#VistaClientes').modal('show');
+		}
+		
+		
+		if(accion.value=="2"){
+			accion.value==""
+			alert("El cliente no pudo ser Editado");
+			document.getElementById("VistaClientesTitulo").innerHTML ="Cliente";
+			
+			   document.getElementById("nombreCliente").disabled = true;
+			   document.getElementById("apellidoCliente").disabled = true;
+			   document.getElementById("domicilio").disabled = true;
+			   document.getElementById("tipoDocumento").disabled = true;
+			   document.getElementById("nroDocmento").disabled = true;
+			   document.getElementById("telefono").disabled = true;
+			   document.getElementById("mail").disabled = true;
+			   document.getElementById("estado").disabled = true;				   
+			   document.getElementById("domicilio").disabled = true;
+			 
+			   
+			   document.getElementById("btnAceptar").style.visibility = "hidden"; 
+			   document.getElementById("btnGuardar").style.visibility = "hidden";
+			   if(document.getElementById("estado").value=="B"){
+				   document.getElementById("btnEstado").style.visibility = "visible";
+				   document.getElementById("btnEstado").innerHTML="Rehabilitar";
+				   document.getElementById("btnEditar").style.visibility = "hidden"; 
+			   }else{
+				   document.getElementById("btnEstado").style.visibility = "hiden";
+				   document.getElementById("btnEstado").innerHTML="Baja";
+				   document.getElementById("btnEditar").style.visibility = "visible"; 
+			   }
+				$('#VistaClientes').modal('show');
+			
+		}
+		
+		if(accion.value=="3"){
+			accion.value==""
+			alert("El cliente no pudo ser dado de baja");
+			document.getElementById("VistaClientesTitulo").innerHTML ="Cliente";
+			
+			   document.getElementById("nombreCliente").disabled = true;
+			   document.getElementById("apellidoCliente").disabled = true;
+			   document.getElementById("domicilio").disabled = true;
+			   document.getElementById("tipoDocumento").disabled = true;
+			   document.getElementById("nroDocmento").disabled = true;
+			   document.getElementById("telefono").disabled = true;
+			   document.getElementById("mail").disabled = true;
+			   document.getElementById("estado").disabled = true;				   
+			   document.getElementById("domicilio").disabled = true;
+			 
+			   
+			   document.getElementById("btnAceptar").style.visibility = "hidden"; 
+			   document.getElementById("btnGuardar").style.visibility = "hidden";
+			   if(document.getElementById("estado").value=="B"){
+				   document.getElementById("btnEstado").style.visibility = "visible";
+				   document.getElementById("btnEstado").innerHTML="Rehabilitar";
+				   document.getElementById("btnEditar").style.visibility = "hidden"; 
+			   }else{
+				   document.getElementById("btnEstado").style.visibility = "hiden";
+				   document.getElementById("btnEstado").innerHTML="Baja";
+				   document.getElementById("btnEditar").style.visibility = "visible"; 
+			   }
+			    		
+			
+			
+		 	$('#VistaClientes').modal('show');
+			
+		}
+		
+		
+		if(accion.value=="4"){
+			accion.value==""
+			alert("El cliente no pudo ser rehabilitado");
+			document.getElementById("VistaClientesTitulo").innerHTML ="Cliente";
+			
+			   document.getElementById("nombreCliente").disabled = true;
+			   document.getElementById("apellidoCliente").disabled = true;
+			   document.getElementById("domicilio").disabled = true;
+			   document.getElementById("tipoDocumento").disabled = true;
+			   document.getElementById("nroDocmento").disabled = true;
+			   document.getElementById("telefono").disabled = true;
+			   document.getElementById("mail").disabled = true;
+			   document.getElementById("estado").disabled = true;				   
+			   document.getElementById("domicilio").disabled = true;
+			 
+			   
+			   document.getElementById("btnAceptar").style.visibility = "hidden"; 
+			   document.getElementById("btnGuardar").style.visibility = "hidden";
+			   if(document.getElementById("estado").value=="B"){
+				   document.getElementById("btnEstado").style.visibility = "visible";
+				   document.getElementById("btnEstado").innerHTML="Rehabilitar";
+				   document.getElementById("btnEditar").style.visibility = "hidden"; 
+			   }else{
+				   document.getElementById("btnEstado").style.visibility = "hiden";
+				   document.getElementById("btnEstado").innerHTML="Baja";
+				   document.getElementById("btnEditar").style.visibility = "visible"; 
+			   }
+			    		
+			
+			
+		 	$('#VistaClientes').modal('show');
+			
 		}
 	
 	
@@ -584,6 +712,8 @@ function setEstadoCliente(){
 			
 	 }
 	
+	 
+	 
 	 
    
    </script> 

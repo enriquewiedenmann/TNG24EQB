@@ -93,8 +93,8 @@ public class Cliente extends HttpServlet {
 				request.setAttribute("setModal", "mostarCliente");
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(nuevo));
 			}else{
-				request.setAttribute("setModal", "msgError");
-				request.setAttribute("msgError", "El cliente no pudo ser Generado");
+				request.setAttribute("setModal", "1");
+				
 			}
 			
 			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
@@ -124,9 +124,9 @@ public class Cliente extends HttpServlet {
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
 				refrescarLista(request.getSession());
 			}else{
-				request.setAttribute("setModal", "msgError");
+				request.setAttribute("setModal", "2");
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
-				request.setAttribute("msgError", "El cliente no pudo ser Editado");
+				
 				
 				}
 				request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
@@ -144,9 +144,9 @@ public class Cliente extends HttpServlet {
 				request.setAttribute("setModal", "mostarCliente");
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
 			}else{
-				request.setAttribute("setModal", "msgError");
+				request.setAttribute("setModal", "3");
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
-				request.setAttribute("msgError", "El cliente no pudo ser Dado de BAja");
+				
 				
 			}
 			
@@ -164,9 +164,9 @@ public class Cliente extends HttpServlet {
 				request.setAttribute("setModal", "mostarCliente");
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
 			}else{
-				request.setAttribute("setModal", "msgError");
+				request.setAttribute("setModal", "4");
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
-				request.setAttribute("msgError", "El cliente no pudo ser Dado de BAja");
+				
 				
 			}
 				request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
