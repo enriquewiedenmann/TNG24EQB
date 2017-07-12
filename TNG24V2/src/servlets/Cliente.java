@@ -8,7 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 import view.ViewCliente;
 import view.ViewTipoDocumento;
 import ctrl.CtrlEnte;
@@ -18,7 +20,7 @@ import ctrl.CtrlEnte;
  */
 public class Cliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,28 +46,15 @@ public class Cliente extends HttpServlet {
 		String accion = request.getParameter("accion");
 		
 		if(accion.equals("mostrarCliente")){
-			String nombre=request.getParameter("bnombreCliente");
-			String apellido=request.getParameter("bapellidoCliente");
-			String nroDoc=request.getParameter("bnroDocmento");
-			if(nombre.length()==0){
-				nombre=null;
-			}
-			if(apellido.length()==0){
-				apellido=null;
-			}
-			if(nroDoc.length()==0){
-				nroDoc=null;
-			}
-			request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombre,apellido,nroDoc));
-				
 			int idCliente =Integer.parseInt(request.getParameter("idm"));
 			request.setAttribute("setModal", "mostarCliente");
 			request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(idCliente));
-			
 			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
-			
-			
-		}
+			}
+		
+		
+		
+		
 		if(accion.equals("buscarCliente")){
 			String nombre=request.getParameter("bnombreCliente");
 			String apellido=request.getParameter("bapellidoCliente");
@@ -79,7 +68,9 @@ public class Cliente extends HttpServlet {
 			if(nroDoc.length()==0){
 				nroDoc=null;
 			}
-						request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombre,apellido,nroDoc));
+			
+			HttpSession session = request.getSession(true);
+			session.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombre,apellido,nroDoc));
 			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);
 		}
 		
@@ -96,35 +87,22 @@ public class Cliente extends HttpServlet {
 			String mail = request.getParameter("mail");
 			String dom = request.getParameter("domicilio");	
 			
-			String nombreb=request.getParameter("bnombreCliente");
-			String apellidob=request.getParameter("bapellidoCliente");
-			String nroDocb=request.getParameter("bnroDocmento");
-			if(nombre.length()==0){
-				nombre=null;
-			}
-			if(apellido.length()==0){
-				apellido=null;
-			}
-			if(nroDoc.length()==0){
-				nroDoc=null;
+			
+			int nuevo =	sys.nuevoCliente(nombre, apellido, nroDoc,tipoDoc, telefono, mail, Integer.parseInt(dom));
+			if(nuevo!=0){
+				request.setAttribute("setModal", "mostarCliente");
+				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(nuevo));
+			}else{
+				request.setAttribute("setModal", "msgError");
+				request.setAttribute("msgError", "El cliente no pudo ser Generado");
 			}
 			
-			request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombreb,apellidob,nroDocb));
-			
-			
-		int nuevo =	sys.nuevoCliente(apellido, nombre, nroDoc,tipoDoc, telefono, mail, Integer.parseInt(dom));
-		if(nuevo!=0){
-		request.setAttribute("setModal", "mostarCliente");
-		request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(nuevo));
-		}else{
-		request.setAttribute("setModal", "msgError");
-		request.setAttribute("msgError", "El cliente no pudo ser Generado");
-		
-		}
-		request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
 		
 		
 		}
+		
+		
 		if(accion.equals("editarCliente")){
 			
 			
@@ -137,28 +115,14 @@ public class Cliente extends HttpServlet {
 			String dom = request.getParameter("domicilio");
 			String id = request.getParameter("idCliente");
 			
-			String nombreb=request.getParameter("bnombreCliente");
-			String apellidob=request.getParameter("bapellidoCliente");
-			String nroDocb=request.getParameter("bnroDocmento");
-			if(nombreb.length()==0){
-				nombreb=null;
-			}
-			if(apellidob.length()==0){
-				apellidob=null;
-			}
-			if(nroDocb.length()==0){
-				nroDocb=null;
-			}
-			
-			request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombreb,apellidob,nroDocb));
-			
-			
+					
 			
 			boolean band = false;
-			band=sys.editarCliente(Integer.parseInt(id),apellido, nombre, nroDoc, tipoDoc, telefono, mail, Integer.parseInt(dom));
+			band=sys.editarCliente(Integer.parseInt(id),nombre, apellido, nroDoc, tipoDoc, telefono, mail, Integer.parseInt(dom));
 			if(band){
 				request.setAttribute("setModal", "mostarCliente");
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
+				refrescarLista(request.getSession());
 			}else{
 				request.setAttribute("setModal", "msgError");
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
@@ -174,33 +138,7 @@ public class Cliente extends HttpServlet {
 		if(accion.equals("bajaCliente")){
 			String id = request.getParameter("idCliente");
 			boolean band = false;
-			
-			
-			String nombreb=request.getParameter("bnombreCliente");
-			String apellidob=request.getParameter("bapellidoCliente");
-			String nroDocb=request.getParameter("bnroDocmento");
-			if(nombreb.length()==0){
-				nombreb=null;
-			}
-			if(apellidob.length()==0){
-				apellidob=null;
-			}
-			if(nroDocb.length()==0){
-				nroDocb=null;
-			}
-			
-			request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombreb,apellidob,nroDocb));
-			
-			
-			
-			
-			
-			
 			band=sys.bajaCliente(Integer.parseInt(id));
-			
-			
-			
-			
 			
 			if(band){
 				request.setAttribute("setModal", "mostarCliente");
@@ -210,34 +148,18 @@ public class Cliente extends HttpServlet {
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
 				request.setAttribute("msgError", "El cliente no pudo ser Dado de BAja");
 				
-				}
-				request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+			}
+			
+			request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
+			
 			
 			}
 		if(accion.equals("rehabilitarCliente")){
-			
 			String id = request.getParameter("idCliente");
-			
 			boolean band = false;
 			band=sys.rehabilitarCliente(Integer.parseInt(id));
 			
 			
-			String nombreb=request.getParameter("bnombreCliente");
-			String apellidob=request.getParameter("bapellidoCliente");
-			String nroDocb=request.getParameter("bnroDocmento");
-			if(nombreb.length()==0){
-				nombreb=null;
-			}
-			if(apellidob.length()==0){
-				apellidob=null;
-			}
-			if(nroDocb.length()==0){
-				nroDocb=null;
-			}
-			
-			request.setAttribute("listaCliente", (ArrayList<ViewCliente>)sys.listarClientes(nombreb,apellidob,nroDocb));
-			
-			
 			if(band){
 				request.setAttribute("setModal", "mostarCliente");
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
@@ -246,9 +168,23 @@ public class Cliente extends HttpServlet {
 				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
 				request.setAttribute("msgError", "El cliente no pudo ser Dado de BAja");
 				
-				}
+			}
 				request.getRequestDispatcher("ClientePre.jsp").forward(request,response);	
 			}
+		
+	}
+
+	private void refrescarLista(HttpSession session) {
+		ArrayList<ViewCliente> lista = (ArrayList<ViewCliente>) session.getAttribute("listaCliente");
+		ArrayList<ViewCliente> listaN = new  ArrayList<ViewCliente>();
+		CtrlEnte sys = CtrlEnte.getInstance();
+		if(lista!=null){
+        	for(ViewCliente vc: lista){
+        		
+        		listaN.add(sys.mostrarCliente(vc.getIdEnte()));
+           				}
+        	session.setAttribute("listaCliente", listaN);
+        }
 		
 	}
 

@@ -128,6 +128,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
             			String id = null;
             			String descDom = null;
             			String e = null;
+            		
             			
                      	 if(vcp!=null){
                      		nombre = vcp.getNombre();
@@ -140,6 +141,9 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
                 			descDom = vcp.getDomicilio().mostrate().resumen();
                 			id = vcp.getIdEnteString();
                 			e = vcp.getEstado();
+                			
+                			
+                			
                 			
                      	 }
                      	 
@@ -174,7 +178,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
 									
 									
                                        	<%
-                                       	ArrayList<ViewCliente> lista = (ArrayList<ViewCliente>) request.getAttribute("listaCliente");
+                                       	ArrayList<ViewCliente> lista = (ArrayList<ViewCliente>) session.getAttribute("listaCliente");
                                        if(lista!=null){
                                        	for(ViewCliente vc: lista){
                                        		out.println(vc.vistaTabla());
@@ -278,11 +282,8 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
 											
                                             </div>
 											 <input type="hidden" value=<%=request.getAttribute("setModal")%> id="accion" name="accion" />
-											  <input type="hidden" id="idm" name="idm"/>   
-											  <input type="hidden" id="bnombreCliente" name="bnombreCliente" />
-											  <input  type="hidden" id="bapellidoCliente" name="bapellidoCliente" />
-											  <input type="hidden" id="bnroDocmento" name="bnroDocmento" />
-											  
+											  <input  type="hidden" id="idm" name="idm"/>   
+											 <input type="hidden" value=<%=request.getAttribute("msgError")%> id="msgError" name="msgError" />
 										  <button type="button" class="btn btn-danger" id="btnAceptar" onClick="nuevoCliente()">Aceptar</button>
 										   <button type="button" class="btn btn-danger" id="btnEditar" onClick="setOpcionEditar()">Editar</button>
 										    <button type="button" class="btn btn-danger" id="btnGuardar" onClick="editarCliente()">Guardar</button>
@@ -408,13 +409,13 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Salir</
 		
 	});
 	
-$(document).on("click", "tr.bodyTableCliente" , function(){
+	$(document).on("click", "tr.bodyTableCliente" , function(){
 		
 		var celda = $(this).children("#id").text();
 		
 		idm.value=celda;
 		accion.value="mostrarCliente";
-		alert(idm.value);
+		
 		fCliente.submit();
 		
 	});
@@ -451,7 +452,10 @@ $(document).on("click", "tr.bodyTableCliente" , function(){
 				
 			 	$('#VistaClientes').modal('show');
 		} 
-		
+		if(accion.value=="msgError"){
+			alert(msgError.value);
+			$('#VistaClientes').modal('show');
+		}
 	
 	
 	 });
@@ -475,9 +479,9 @@ $(document).on("click", "tr.bodyTableCliente" , function(){
 		document.getElementById("mail").disabled = false;
 		document.getElementById("estado").disabled = true;
 		document.getElementById("domicilio").disabled = false; 
-		 document.getElementById("btnEditar").style.visibility = "hidden"; 
-			document.getElementById("btnGuardar").style.visibility = "visible";
-			document.getElementById("btnEstado").style.visibility = "hidden";
+		document.getElementById("btnEditar").style.visibility = "hidden"; 
+		document.getElementById("btnGuardar").style.visibility = "visible";
+		document.getElementById("btnEstado").style.visibility = "hidden";
 	   
    }
    
