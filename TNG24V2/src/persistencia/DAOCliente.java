@@ -13,6 +13,7 @@ import core.Cliente;
 import core.Domicilio;
 import core.Provincia;
 import core.TipoDocumento;
+import core.Usuario;
 
 public class DAOCliente {
 	private static DAOCliente	instancia;
@@ -216,6 +217,7 @@ Connection con = PoolConnection.getPoolConnection().getConnection();
 			ResultSet rs = s.executeQuery();
 			 Map<String, TipoDocumento> tipodocumento = DAOTipoDocumento.getInstancia().selectAllWithTipoDocumento();
 			 Map<Integer,Domicilio> domicilios = DAODomicilio.getInstancia().selectAllWithDomicilio();
+			
 			PoolConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
@@ -234,6 +236,7 @@ Connection con = PoolConnection.getPoolConnection().getConnection();
 				char e = estado.charAt(0);
 				Domicilio dom = domicilios.get(domicilio);
 				TipoDocumento td = tipodocumento.get(tipoDoc);
+				
 				list.add(new Cliente(id, nombre,apellido, td,nroDoc, e,telefono, mail,dom));
 			}
 
@@ -244,16 +247,7 @@ Connection con = PoolConnection.getPoolConnection().getConnection();
 		return list;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+			
 	/*
 	public Map<String, Provincia> selectAllWithcodProv()
 	{

@@ -1,5 +1,6 @@
 package tst;
 
+import core.Ente;
 import view.*;
 import ctrl.CtrlDomicilio;
 import ctrl.CtrlEnte;
@@ -11,7 +12,7 @@ public class TSTListas {
 		
 		CtrlDomicilio d = CtrlDomicilio.getInstance();
 		CtrlEnte e = CtrlEnte.getInstance();
-		
+		/*
 		for(ViewProvincia vp: d.listarProvincias()){
 			//	System.out.println(vp.vistaLinea());
 			
@@ -86,7 +87,20 @@ public class TSTListas {
 		System.out.println("----------------------------------------------------------------");
 		System.out.println();
 		
-	}
 	
-
+	*/
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("ROLL DE EMPLEADOS");
+		for(ViewRollEmpleado r: e.listarRoles()){
+			System.out.println(r.toString());
+		}
+		
+		
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("EMPLEADOS");
+		for(ViewEmpleado em: e.listaEmpleados()){
+			System.out.println(em.toString());
+		}
+		
+	}
 }

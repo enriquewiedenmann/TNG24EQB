@@ -8,10 +8,11 @@ public class Ente {
 	private String apellido;
 	private TipoDocumento tipoDoc;
 	private String nroDoc;
+	private Usuario user;
 	private char estado;
 	
 	public Ente(int idEnte, String nombre, String apellido,
-			TipoDocumento tipoDoc, String nroDoc, char estado) {
+			TipoDocumento tipoDoc, String nroDoc, char estado, Usuario user) {
 		
 		this.idEnte = idEnte;
 		this.nombre = nombre;
@@ -19,7 +20,7 @@ public class Ente {
 		this.tipoDoc = tipoDoc;
 		this.nroDoc = nroDoc;
 		this.estado = estado;
-		
+		this.user = user;
 	}
 	
 	public Ente( String nombre, String apellido,
@@ -68,6 +69,14 @@ public class Ente {
 	}
 	public void setEstado(char estado) {
 		this.estado = estado;
+	}
+
+	public Usuario getUser() {
+		return user;
+	}
+
+	public void setUser(Usuario user) {
+		this.user = user;
 	}
 	
 	

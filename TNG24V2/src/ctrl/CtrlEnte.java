@@ -4,7 +4,9 @@ package ctrl;
 import java.util.ArrayList;
 
 import persistencia.DAOCliente;
+import persistencia.DAOEmpleado;
 import persistencia.DAOProvincia;
+import persistencia.DAORollEmpleado;
 import persistencia.DAOTipoDocumento;
 import core.*;
 import view.*;
@@ -16,7 +18,7 @@ public class CtrlEnte {
 	private ArrayList<RollEmpleado> rolles;
 	private ArrayList<TipoDocumento> tipodocumentos;
 	private ArrayList<Ente> entes;
-	private ArrayList<Empleado> empelados;
+	private ArrayList<Empleado> empleados;
 	private ArrayList<Cliente> clientes;
 	
 	
@@ -26,10 +28,10 @@ public class CtrlEnte {
 	
 	private CtrlEnte() {
 		
-		this.rolles = null;
+		this.rolles = cargarRolesEmpleadp();
 		this.tipodocumentos = this.cargarTipoDocumentos() ;
 		this.entes = null;
-		this.empelados = null;
+		this.empleados = cargarEmpleados();
 		this.clientes = this.cargarClientes();
 	}
 
@@ -43,6 +45,20 @@ public class CtrlEnte {
 		return ctrlEnte;
 
 		
+	}
+	
+	
+	private ArrayList<Empleado>  cargarEmpleados()
+	{
+		ArrayList<Empleado> e = DAOEmpleado.getInstancia().select();
+		return e != null ? e : null;
+	}
+	
+	
+	private ArrayList<RollEmpleado>  cargarRolesEmpleadp()
+	{
+		ArrayList<RollEmpleado> re = DAORollEmpleado.getInstancia().selectAll();
+		return re != null ? re : null;
 	}
 	
 	
@@ -61,7 +77,11 @@ public class CtrlEnte {
 	
 	
 	public ArrayList<ViewRollEmpleado> listarRoles() {
-		return null;
+		ArrayList<ViewRollEmpleado>  re = new ArrayList<ViewRollEmpleado>();
+		for (RollEmpleado r: rolles){
+			re.add(r.mostrate());
+		}
+		return re;
 	}
 	
 	public ArrayList<ViewTipoDocumento> listarTipoDocs() {
@@ -73,7 +93,12 @@ public class CtrlEnte {
 	}
 	
 	public ArrayList<ViewEmpleado> listaEmpleados() {
-		return null;
+		ArrayList<ViewEmpleado> lista =new ArrayList<ViewEmpleado>();
+		for(Empleado e:empleados){
+			lista.add(e.mostrate());
+			
+		}
+		return lista;
 	}
 	
 	public ArrayList<ViewCliente> listarClientes(String nombre,String apellido,String nroDoc) {

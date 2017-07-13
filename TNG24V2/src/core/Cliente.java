@@ -31,7 +31,7 @@ public class Cliente extends Ente {
 	public Cliente(int idEnte, String nombre, String apellido,
 			TipoDocumento tipoDoc, String nroDoc, char estado, String telefono,
 			String mail, Domicilio domicilio) {
-		super(idEnte, nombre, apellido, tipoDoc, nroDoc, estado);
+		super(idEnte, nombre, apellido, tipoDoc, nroDoc, estado,null);
 		this.telefono = telefono;
 		this.mail = mail;
 		this.domicilio = domicilio;
