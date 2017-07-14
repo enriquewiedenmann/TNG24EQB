@@ -1,8 +1,5 @@
 package core;
 
-import java.util.List;
-
-import complementos.Contrato;
 import view.ViewProvincia;
 
 public class Provincia {

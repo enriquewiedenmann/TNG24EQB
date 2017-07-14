@@ -1,15 +1,19 @@
 package ctrl;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import complementos.Contrato;
 import persistencia.DAOCiudad;
 import persistencia.DAOCodigoPostal;
 import persistencia.DAODomicilio;
 import persistencia.DAOProvincia;
-import core.*;
-import view.*;
+import view.ViewCiudad;
+import view.ViewCodigoPostal;
+import view.ViewDomicilio;
+import view.ViewProvincia;
+import core.Ciudad;
+import core.CodigoPostal;
+import core.Domicilio;
+import core.Provincia;
 
 public  class CtrlDomicilio {
 	private static CtrlDomicilio ctrlDomicilio;
