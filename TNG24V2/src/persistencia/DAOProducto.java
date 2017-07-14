@@ -68,9 +68,9 @@ public class DAOProducto {
 	}	
 
 
-	public  Map<Integer, Producto> selectAllWhithProduto()
+	public  Map<String, Producto> selectAllWhithProduto()
 	{
-		 Map<Integer, Producto> map = new  HashMap<Integer, Producto>();
+		 Map<String, Producto> map = new  HashMap<String, Producto>();
 		try
 		{
 			Connection con = PoolConnection.getPoolConnection().getConnection();
@@ -98,7 +98,7 @@ public class DAOProducto {
 				char e = estado.charAt(0);
 				
 				Producto p= new Producto(  id,cod,desc,stock,pto,precio,e);
-				map.put(id,p);
+				map.put(cod,p);
 				
 			}
 

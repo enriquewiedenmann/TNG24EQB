@@ -11,6 +11,9 @@ public abstract class CtrlAgenda {
 	private ArrayList<Agenda> agendas;
 	private ArrayList<Presupuesto> presupuestos;
 	private ArrayList<Factura> facturas;
+	
+	
+	
 	public abstract CtrlAgenda getInstance();
 	
 	

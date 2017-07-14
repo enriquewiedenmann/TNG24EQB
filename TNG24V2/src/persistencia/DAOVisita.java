@@ -1,9 +1,11 @@
 package persistencia;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -32,6 +34,41 @@ public class DAOVisita {
 	}
 	
 	
+	
+public int insert(int agenda,Visita v) {
+		
+		Connection con = PoolConnection.getPoolConnection().getConnection();
+		CallableStatement sp;
+		try {
+			sp = con.prepareCall("{CALL TNG24V1.dbo.SP_ALTA_VISITA(?,?,?,?,?,?,?,?,?,?,?)}");
+			 int idente =-1;
+		// cargar parametros al SP
+			sp.registerOutParameter(1,java.sql.Types.INTEGER);
+		//idente = sp.getInt(1);
+			sp.setInt(2, agenda);
+			sp.setInt(3, v.getFactura().getId() );
+			sp.setInt(4, v.getPresupuesto().getId() );
+			sp.setInt(5, v.getCliente().getIdEnte() );
+			sp.setInt(6, v.getDomicilio().getIdDomicilio() );
+			
+			sp.setDate(7, (Date) v.getInicioProgramado());
+			sp.setDate(8, (Date) v.getFinProgramado());
+			sp.setDate(9, (Date) v.getInicioReal());
+			sp.setDate(10, (Date) v.getFinReal());
+			
+			sp.setString(11, v.getMotivo());
+		// ejecutar el SP
+		sp.execute();
+		// confirmar si se ejecuto sin errores
+		idente = sp.getInt(1);  
+		PoolConnection.getPoolConnection().realeaseConnection(con);
+		return idente;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("ERROR ALTA CLIENTE " + e.getMessage());
+		}
+		return -1;
+	}
 
 	public void update( Visita v)
 		{
@@ -84,7 +121,7 @@ public class DAOVisita {
 					.prepareStatement("SELECT *FROM TNG24V1.dbo.V_VISITA where IDAGENDA=?");
 			s.setInt(1,idAgendaS );
 			ResultSet rs = s.executeQuery();
-			Map<Integer,Presupuesto> pre=DAOPresupuesto.getInstancia().selectwhithPresupuesto();
+			Map<Integer,Presupuesto> pre=DAOPresupuesto.getInstancia().selectAllWhithPresupuesto();
 			Map<Integer,Empleado> emp=DAOEmpleado.getInstancia().selectwhithEmpleado();
 			Map<Integer,Cliente> cli=DAOCliente.getInstancia().selectWhithCliente();
 			Map<Integer,Domicilio> dom=DAODomicilio.getInstancia().selectAllWithDomicilio();
