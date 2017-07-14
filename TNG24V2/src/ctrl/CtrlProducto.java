@@ -1,26 +1,59 @@
 package ctrl;
 import java.util.ArrayList;
 
+import persistencia.DAOProducto;
+import persistencia.DAOProvincia;
+import persistencia.DAOVisita;
 import core.*;
 import view.*;
 
 
 
 
-public abstract class CtrlProducto {
-	private CtrlProducto ctrlProduto;
-	private ArrayList<Agenda> productos;
+public  class CtrlProducto {
+	private static CtrlProducto ctrlProduto;
+	private ArrayList<Producto> productos;
 	private ArrayList<Retiro> retiros;
 	private ArrayList<Devolucion> devoluciones;
 	
 	
-	public abstract CtrlProducto getInstance();
 	
+	
+	
+	
+	
+	private  CtrlProducto() {
+		super();
+		this.productos = this.cargarProductos();
+		this.retiros = null;
+		this.devoluciones = null;
+	}
+
+
+
+	public static  CtrlProducto getInstancia()
+	{
+		if (ctrlProduto == null)
+			ctrlProduto = new  CtrlProducto();
+		return ctrlProduto;
+	}
+	
+	
+	private ArrayList<Producto> cargarProductos()
+		{
+			ArrayList<Producto> p = DAOProducto.getInstancia().selectAll();
+			return p != null ? p : null;
+		}
 	
 	
 	
 	public ArrayList<ViewProducto> listarProductos() {
-		return null;
+		ArrayList<ViewProducto> lista = new ArrayList<ViewProducto>();
+		for(Producto p: productos){
+			lista.add(p.mostrate());
+		}
+			
+		return lista;
 	}
 	
 	public ViewProducto mostrarProducto(int id) {

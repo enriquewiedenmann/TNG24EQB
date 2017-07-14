@@ -27,7 +27,8 @@ public class Producto {
 	}
 
 	public ViewProducto mostrate() {
-		return null;
+		ViewProducto vp=new ViewProducto(this.getId(),this.getCodProducto(),this.getDesc(),this.getStock(),this.getPtoPedido(),this.getPrecio(),this.getEstado());
+		return vp;
 	
 	}
 	

@@ -4,6 +4,7 @@ import core.Ente;
 import view.*;
 import ctrl.CtrlDomicilio;
 import ctrl.CtrlEnte;
+import ctrl.CtrlProducto;
 
 public class TSTListas {
 
@@ -88,7 +89,7 @@ public class TSTListas {
 		System.out.println();
 		
 	
-	*/
+	
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("ROLL DE EMPLEADOS");
 		for(ViewRollEmpleado r: e.listarRoles()){
@@ -101,6 +102,15 @@ public class TSTListas {
 		for(ViewEmpleado em: e.listaEmpleados()){
 			System.out.println(em.toString());
 		}
+		*/
+
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("productos");
+		CtrlProducto ctrlp = CtrlProducto.getInstancia();
+		for(ViewProducto p: ctrlp.listarProductos()){
+			System.out.println(p.toString());
+		}
+		
 		
 	}
 }
