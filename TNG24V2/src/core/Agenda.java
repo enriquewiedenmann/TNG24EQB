@@ -11,6 +11,14 @@ public class Agenda {
 	private ArrayList<Visita> visitas;
 	
 	
+
+	public Agenda(int idAgenda, Empleado tecnico, char estado) {
+		this.idAgenda = idAgenda;
+		this.tecnico = tecnico;
+		this.estado = estado;
+		this.visitas = null; //codeo Pendiente
+	}
+
 	public boolean cumplo(int id, Empleado tec, char e) {
 		return false;
 	

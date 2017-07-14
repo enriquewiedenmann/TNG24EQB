@@ -12,6 +12,20 @@ public class Producto {
 	private char estado;
 
 	
+	
+	
+	public Producto(int id, String codProducto, String desc, int stock,
+			int ptoPedido, int precio, char estado) {
+		super();
+		this.id = id;
+		this.codProducto = codProducto;
+		this.desc = desc;
+		this.stock = stock;
+		this.ptoPedido = ptoPedido;
+		this.precio = precio;
+		this.estado = estado;
+	}
+
 	public ViewProducto mostrate() {
 		return null;
 	
