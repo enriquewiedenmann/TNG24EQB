@@ -51,7 +51,10 @@ public class Visita {
 	}
 	
 	public ViewVisita mostrate() {
-		return null;
+		ViewVisita vv= new ViewVisita(this.getId(), this.getFactura(),this.getPresupuesto(),this.getCliente(),this.getDomicilio(),
+				this.getInicioProgramado(),this.getFinProgramado(),this.getInicioReal(),this.getFinReal(),
+				this.getEstado(),this.getMotivo(),this.getTecnico());
+		return vv;
 	
 	}
 	

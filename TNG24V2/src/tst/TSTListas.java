@@ -120,15 +120,29 @@ public class TSTListas {
 			System.out.println("                                        "+vid.toString());
 		}
 		}
+		
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("Agendas y Visitas");
+		CtrlAgenda ca = CtrlAgenda.getInstance();
+		for(ViewAgenda va: ca.listarAgendas()){
+		System.out.println(va.toString());	
+		for(ViewVisita vv: va.getVVV()){
+			System.out.println("                                        "+vv.toString());
+		}
+		}
 		*/
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("Nuevo Presupuesto");
 		CtrlAgenda ca = CtrlAgenda.getInstance();
-		if(ca.nuevoPresupuesto(1)){
+		if(ca.nuevoPresupuesto(385)){
 			System.out.println("it: "+ca.nuevoItemPresupuesto("cam001", 1));
 			System.out.println("it: "+ca.nuevoItemPresupuesto("cam002", 2));
 			System.out.println("it: "+ca.nuevoItemPresupuesto("cam003", 3));
-			ca.bajaItemPresupuesto(2);
+			if(ca.bajaItemPresupuesto(2)){
+				System.out.println("ok baja");
+			}else{
+				System.out.println("VER");
+			}
 			ca.ConfirmarAltaPresupuesto(100, 100);
 			
 			
@@ -136,5 +150,5 @@ public class TSTListas {
 		}
 		
 		
-	}
-}
+	}}
+

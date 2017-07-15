@@ -47,7 +47,14 @@ public class Presupuesto extends Documento {
 	}
 	
 	public int cerrarme(int TMO, int MMO) {
-		return MMO;
+		Date d= new Date();
+		int nro =-1;
+		this.setFechaEmision(d);
+		this.setMontoManoObra(MMO);
+		this.setTiempoManoObra(TMO);
+		
+		System.out.println("no lo codeeeeee,");
+		return nro;
 	
 	}
 	
@@ -83,13 +90,5 @@ public class Presupuesto extends Documento {
 
 
 
-
-	public int persistir() {
-		// TODO Auto-generated method stub
-		System.out.println("no lo codeeeeee,");
-		return 0;
-	}
-	
-	
 	
 }

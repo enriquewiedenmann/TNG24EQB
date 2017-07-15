@@ -2,6 +2,7 @@ package core;
 
 import java.util.ArrayList;
 
+import persistencia.DAOVisita;
 import view.ViewAgenda;
 
 public class Agenda {
@@ -16,7 +17,7 @@ public class Agenda {
 		this.idAgenda = idAgenda;
 		this.tecnico = tecnico;
 		this.estado = estado;
-		this.visitas = null; //codeo Pendiente
+		this.visitas = DAOVisita.getInstancia().selectVisita(idAgenda); //codeo Pendiente
 	}
 
 	public boolean cumplo(int id, Empleado tec, char e) {
@@ -25,7 +26,8 @@ public class Agenda {
 	}
 	
 	public ViewAgenda mostrate() {
-	return null;
+		ViewAgenda va =new ViewAgenda(this.getIdAgenda(),this.getTecnico(),this.getEstado(),this.getVisitas());
+	return va;
 	}
 	
 	public Visita esTuVisita(int idVisita) {
