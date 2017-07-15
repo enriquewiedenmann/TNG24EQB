@@ -1,5 +1,7 @@
 package core;
 
+import org.eclipse.jdt.internal.compiler.ast.ThisReference;
+
 import view.ViewProducto;
 
 public class Producto {
@@ -33,7 +35,18 @@ public class Producto {
 	}
 	
 	public Boolean cumplo(String cod, String desc) {
-		return null;
+		boolean band=true;
+		if(cod!=null){
+			if(!cod.toUpperCase().equals(this.getCodProducto().toUpperCase())){
+				band=false;
+			}
+		}
+		if(desc!=null){
+			if(!desc.toUpperCase().equals(this.getDesc().toUpperCase())){
+				band=false;
+			}
+		}
+		return band;
 	
 	}
 

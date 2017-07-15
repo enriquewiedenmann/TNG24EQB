@@ -28,8 +28,14 @@ public class Agenda {
 	return null;
 	}
 	
-	public boolean esTuVisita(int idVisita) {
-		return false;
+	public Visita esTuVisita(int idVisita) {
+		
+		for(Visita v: visitas){
+			if(v.cumplo(idVisita)){
+				return v;
+			}
+		}
+		return null;
 	}
 	
 	public Visita buscarVisitaPresupuesto(int id) {
@@ -43,4 +49,39 @@ public class Agenda {
 	public void cambiarEstado(char e) {
 	
 	}
+
+	public int getIdAgenda() {
+		return idAgenda;
+	}
+
+	public void setIdAgenda(int idAgenda) {
+		this.idAgenda = idAgenda;
+	}
+
+	public Empleado getTecnico() {
+		return tecnico;
+	}
+
+	public void setTecnico(Empleado tecnico) {
+		this.tecnico = tecnico;
+	}
+
+	public char getEstado() {
+		return estado;
+	}
+
+	public void setEstado(char estado) {
+		this.estado = estado;
+	}
+
+	public ArrayList<Visita> getVisitas() {
+		return visitas;
+	}
+
+	public void setVisitas(ArrayList<Visita> visitas) {
+		this.visitas = visitas;
+	}
+	
+	
+	
 }

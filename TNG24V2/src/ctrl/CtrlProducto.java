@@ -63,4 +63,16 @@ public  class CtrlProducto {
 	public Producto bucarProducto(int id, String cod, String desc) {
 		return null;
 	}
+
+
+
+	public Producto bucarProducto(String cod) {
+		for(Producto p: productos){
+			if(p.cumplo(cod, null)){
+				return p;
+			}
+			
+		}
+		return null;
+	}
 }

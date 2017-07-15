@@ -110,7 +110,7 @@ public class TSTListas {
 		for(ViewProducto p: ctrlp.listarProductos()){
 			System.out.println(p.toString());
 		}
-		*/
+		
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("Presupuestos");
 		CtrlAgenda ca = CtrlAgenda.getInstance();
@@ -120,8 +120,20 @@ public class TSTListas {
 			System.out.println("                                        "+vid.toString());
 		}
 		}
-		
-		
+		*/
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("Nuevo Presupuesto");
+		CtrlAgenda ca = CtrlAgenda.getInstance();
+		if(ca.nuevoPresupuesto(1)){
+			System.out.println("it: "+ca.nuevoItemPresupuesto("cam001", 1));
+			System.out.println("it: "+ca.nuevoItemPresupuesto("cam002", 2));
+			System.out.println("it: "+ca.nuevoItemPresupuesto("cam003", 3));
+			ca.bajaItemPresupuesto(2);
+			ca.ConfirmarAltaPresupuesto(100, 100);
+			
+			
+			
+		}
 		
 		
 	}

@@ -8,9 +8,22 @@ public class ItemDocumento {
 	private Producto producto;
 	private int cantProd;
 	private int montoItem;
+	private static int autoNro;
 	
 	
+	private static int incrementar(){
+		return autoNro+1;
+	}
 	
+	
+	public ItemDocumento(Producto producto, int cantProd,
+			int montoItem) {
+	
+		this.nroItem = this.incrementar();
+		this.producto = producto;
+		this.cantProd = cantProd;
+		this.montoItem = montoItem;
+	}
 	
 	public ItemDocumento(int nroItem, Producto producto, int cantProd,
 			int montoItem) {

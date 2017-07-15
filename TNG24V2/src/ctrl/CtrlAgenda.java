@@ -14,7 +14,7 @@ public class CtrlAgenda {
 	private ArrayList<Agenda> agendas;
 	private ArrayList<Presupuesto> presupuestos;
 	private ArrayList<Factura> facturas;
-	
+	private Presupuesto pa;
 
 	public static CtrlAgenda getInstance() {
 		
@@ -28,7 +28,7 @@ public class CtrlAgenda {
 	
 	
 	public CtrlAgenda() {
-		
+		this.pa=null;
 		this.agendas = cargarAgendas();
 		this.presupuestos = cargarPresupuestos();
 		this.facturas = null;
@@ -140,19 +140,48 @@ public class CtrlAgenda {
 	}
 	
 	public boolean nuevoPresupuesto(int idVisita) {
-		return true;
+		Visita v= null;
+		Agenda ae=null;
+		for(Agenda a:agendas){
+			v=a.esTuVisita(idVisita);
+			ae=a;
+			}
+		if(v!=null){
+			pa = new Presupuesto(v.getCliente(),ae.getTecnico());
+			return true;
+		}
+		return false;
 	}
 	
 	public int nuevoItemPresupuesto(String cod, int cant) {
-		return 0;
+		if(pa!=null){
+		Producto p=null;
+		p= CtrlProducto.getInstancia().bucarProducto(cod);
+		if(p!=null){
+			
+			return pa.nuevoItem(p, cant);
+		}
+		}
+		return -1;
 	}
 	
-	public int ConfirmarAltaPresupuesto(int tiempoManoObra, int tecnico, int montoManoObra) {
-		return 0;
+	public int ConfirmarAltaPresupuesto(int tiempoManoObra, int montoManoObra) {
+		Date dia=new Date();
+		
+		pa.setMontoManoObra(montoManoObra);
+		pa.setTiempoManoObra(tiempoManoObra);
+		pa.setFechaEmision(dia);
+		presupuestos.add(pa);
+	
+		
+		return pa.persistir();
 	}
 	
 	public boolean bajaItemPresupuesto(int nro) {
-		return true;
+		if(pa!=null){
+			return	pa.bajaItem(nro);
+			 		}
+		return false;
 	}
 	
 	public int disponibilidadTecnicos(Date inicioProgramado, Date finProgramado, int idAgenda) {

@@ -14,7 +14,14 @@ public class Documento {
 	private ArrayList<ItemDocumento> items;
 	
 	
-	
+	public Documento(Cliente cliente2) {
+		this.id = 0;
+		this.fechaEmision = null;
+		this.cliente = cliente2;
+		this.tiempoManoObra = 0;
+		this.montoManoObra = 0;
+		this.items = new ArrayList<ItemDocumento>();
+	}
 	
 	
 	public Documento(int id, Date fechaEmision, Cliente cliente,
@@ -29,17 +36,31 @@ public class Documento {
 		this.items = items;
 	}
 
+	
+
 	public ArrayList<ViewItemDocumento> listaritemsDocumento() {
 		return null;
 	
 	}
 	
 	public int nuevoItem(Producto cod, int cant) {
-		return 0;
+		int ret=-1;
+		ItemDocumento id=new ItemDocumento(cod,cant,cod.getPrecio()*cant);
+		ret=id.getNroItem();
+		items.add(id);
+		
+		
+		return ret;
 	
 	}
 	
 	public boolean bajaItem(int nro) {
+		for(ItemDocumento id:items){
+			if(id.getNroItem()==nro){
+				items.remove(id);
+				return true;
+			}
+		}
 		return false;
 	
 	}

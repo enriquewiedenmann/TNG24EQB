@@ -16,9 +16,19 @@ public class Presupuesto extends Documento {
 
 	public Presupuesto(int id, Date fechaEmision, Cliente cliente,
 			int tiempoManoObra, int montoManoObra,
-			ArrayList<ItemDocumento> items, Empleado tecnico) {
+			ArrayList<ItemDocumento> items,Empleado e) {
 		super(id, fechaEmision, cliente, tiempoManoObra, montoManoObra, items);
-		this.tecnico = tecnico;
+		this.tecnico=e;
+	}
+
+
+
+
+
+
+	public Presupuesto(Cliente cliente, Empleado empleado) {
+		super(cliente);
+		this.tecnico = empleado;
 	}
 	
 	
@@ -67,6 +77,17 @@ public class Presupuesto extends Documento {
 
 	public void setTecnico(Empleado tecnico) {
 		this.tecnico = tecnico;
+	}
+
+
+
+
+
+
+	public int persistir() {
+		// TODO Auto-generated method stub
+		System.out.println("no lo codeeeeee,");
+		return 0;
 	}
 	
 	

@@ -173,6 +173,11 @@ public class Visita {
 	public void setTecnico(Empleado tecnico) {
 		this.tecnico = tecnico;
 	}
+
+	public boolean cumplo(int idVisita) {
+		return (this.getId()==idVisita);
+		
+	}
 	
 	
 	
