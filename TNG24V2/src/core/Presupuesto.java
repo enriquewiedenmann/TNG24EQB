@@ -3,6 +3,7 @@ package core;
 import java.util.ArrayList;
 import java.util.Date;
 
+import view.ViewItemDocumento;
 import view.ViewPresupuesto;
 
 public class Presupuesto extends Documento {
@@ -41,7 +42,16 @@ public class Presupuesto extends Documento {
 	}
 	
 	public ViewPresupuesto mostrate() {
-		return null;
+		ArrayList<ViewItemDocumento> li = new ArrayList<ViewItemDocumento> ();
+		for(ItemDocumento idoc:this.getItems()){
+			
+			li.add(idoc.mostrate());
+		}
+	
+		ViewPresupuesto vp = new ViewPresupuesto(this.getId(), this.getFechaEmision(),this.getCliente(),
+				this.getTiempoManoObra(),this.getMontoManoObra(), this.getTecnico(),li);
+		
+		return vp;
 	
 	}
 

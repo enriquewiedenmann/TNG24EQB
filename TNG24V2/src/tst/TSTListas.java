@@ -5,7 +5,7 @@ import view.*;
 import ctrl.CtrlDomicilio;
 import ctrl.CtrlEnte;
 import ctrl.CtrlProducto;
-
+import ctrl.CtrlAgenda;
 public class TSTListas {
 
 	public static void main(String[] args) {
@@ -102,7 +102,7 @@ public class TSTListas {
 		for(ViewEmpleado em: e.listaEmpleados()){
 			System.out.println(em.toString());
 		}
-		*/
+		
 
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("productos");
@@ -110,6 +110,18 @@ public class TSTListas {
 		for(ViewProducto p: ctrlp.listarProductos()){
 			System.out.println(p.toString());
 		}
+		*/
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("Presupuestos");
+		CtrlAgenda ca = CtrlAgenda.getInstance();
+		for(ViewPresupuesto p: ca.listarPresupuestos(0, null, 0, 0, 0)){
+		System.out.println(p.toString());	
+		for(ViewItemDocumento vid: p.getVli()){
+			System.out.println("                                        "+vid.toString());
+		}
+		}
+		
+		
 		
 		
 	}

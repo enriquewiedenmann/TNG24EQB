@@ -49,7 +49,7 @@ public class DAOAgenda {
 			{
 				
 				int id = rs.getInt("IDAGENDA");
-				int idEmpleado = rs.getInt("IDEMPLEADO");
+				int idEmpleado = rs.getInt("idtecnico");
 				String estado =  rs.getString("ESTADO");
 				char e = estado.charAt(0);
 			Empleado empS=emp.get(idEmpleado);

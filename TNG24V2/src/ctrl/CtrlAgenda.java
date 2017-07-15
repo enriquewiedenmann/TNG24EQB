@@ -3,20 +3,57 @@ package ctrl;
 import java.util.Date;
 import java.util.ArrayList;
 
+import persistencia.DAOAgenda;
+import persistencia.DAOPresupuesto;
+import persistencia.DAOProducto;
 import core.*;
 import view.*;
 
-public abstract class CtrlAgenda {
-	private CtrlAgenda ctrlAgenda;
+public class CtrlAgenda {
+	private static CtrlAgenda ctrlAgenda;
 	private ArrayList<Agenda> agendas;
 	private ArrayList<Presupuesto> presupuestos;
 	private ArrayList<Factura> facturas;
 	
+
+	public static CtrlAgenda getInstance() {
+		
+		if (ctrlAgenda == null)
+			ctrlAgenda = new CtrlAgenda();
+		return ctrlAgenda;
+
+		
+	}
 	
 	
-	public abstract CtrlAgenda getInstance();
 	
-	
+	public CtrlAgenda() {
+		
+		this.agendas = cargarAgendas();
+		this.presupuestos = cargarPresupuestos();
+		this.facturas = null;
+	}
+
+
+
+	private ArrayList<Presupuesto> cargarPresupuestos() {
+		{
+			ArrayList<Presupuesto> p = DAOPresupuesto.getInstancia().selectAllPresupuesto();
+			return p != null ? p : null;
+		}
+	}
+
+
+
+	private ArrayList<Agenda> cargarAgendas() {
+		{
+			ArrayList<Agenda> a = DAOAgenda.getInstancia().selectAll();
+			return a != null ? a : null;
+		}
+	}
+
+
+
 	
 	public ArrayList<ViewAgenda> listarAgendas() {
 		return null;
@@ -29,7 +66,14 @@ public abstract class CtrlAgenda {
 	}
 	
 	public ArrayList<ViewPresupuesto> listarPresupuestos(int id, Date fecha, int docCliente, int nomCliente, int apellido) {
-		return null;
+		ArrayList<ViewPresupuesto> vp = new ArrayList<ViewPresupuesto>();
+		for(Presupuesto p:presupuestos){
+			vp.add(p.mostrate());
+			}
+			
+		
+		
+		return vp;
 	
 	}
 	

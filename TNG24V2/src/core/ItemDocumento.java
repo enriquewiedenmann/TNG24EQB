@@ -27,7 +27,8 @@ public class ItemDocumento {
 	}
 	
 	public ViewItemDocumento mostrate() {
-		return null;
+		ViewItemDocumento vit = new ViewItemDocumento(this.getNroItem(),this.getProducto(),this.getCantProd(),this.getMontoItem());
+		return vit;
 	
 	}
 
