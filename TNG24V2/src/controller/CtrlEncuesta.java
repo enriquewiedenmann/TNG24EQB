@@ -1,11 +1,9 @@
-package ctrl;
-
+package controller;
 
 import java.util.ArrayList;
 
-import core.*;
-import view.*;
-
+import core.Encuesta;
+import core.Pregunta;
 
 public class CtrlEncuesta {
 	private ArrayList<Encuesta> encuestas;

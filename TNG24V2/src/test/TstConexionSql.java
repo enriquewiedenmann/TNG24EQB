@@ -1,18 +1,18 @@
-package tst;
+package test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import persistencia.PoolConnection;
+import persistencia.DBConnection;
 
 public class TstConexionSql {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("TstConexionSql");
-		Connection con = PoolConnection.getPoolConnection().getConnection();
+		Connection con = DBConnection.getPoolConnection().getConnection();
 		PreparedStatement s;
 		try {
 			s = con
@@ -30,7 +30,7 @@ public class TstConexionSql {
 		}
 
 		
-		PoolConnection.getPoolConnection().realeaseConnection(con);
+		DBConnection.getPoolConnection().realeaseConnection(con);
 	}
 
 }

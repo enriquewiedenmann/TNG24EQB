@@ -47,13 +47,13 @@ public class DAOCiudad {
 		ArrayList<Ciudad> list = new ArrayList<Ciudad>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("select * from TNG24V1.dbo.TG_CIUDAD");
 
 			ResultSet rs = s.executeQuery();
 			 Map<String, Provincia> provincias = DAOProvincia.getInstancia().selectAllWithcodProv();
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{
@@ -79,13 +79,13 @@ public class DAOCiudad {
 		Map<String, Ciudad> map = new HashMap<String,Ciudad>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("select * from TNG24V1.dbo.TG_CIUDAD");
 
 			ResultSet rs = s.executeQuery();
 			 Map<String, Provincia> provincias = DAOProvincia.getInstancia().selectAllWithcodProv();
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 			
 			while (rs.next())
 			{

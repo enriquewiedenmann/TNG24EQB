@@ -35,7 +35,7 @@ public class DAOEmpleado {
 		ArrayList<Empleado> list = new ArrayList<Empleado>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("SELECT en.IDENTE,en.NOMBRE,en.APELLIDO,en.CODTIPODOCUMENTO,en.NRODOCUMENTO,en.ESTADO,cl.TELEFONO,cl.MAIL,cl.ESTADO, cl.CODROLLEMPPLEADO FROM TNG24V1.dbo.CT_EMPLEADO cl join TNG24V1.dbo.TG_ENTE en on en.IDENTE = cl.idempleado");
 						
@@ -44,7 +44,7 @@ public class DAOEmpleado {
 			 Map<String, TipoDocumento> tipodocumento = DAOTipoDocumento.getInstancia().selectAllWithTipoDocumento();
 			Map<String,RollEmpleado> rollEmpleado = DAORollEmpleado.getInstancia().selectAllWithRoll();
 			Map<Integer,Usuario> user=DAOUsuarios.getInstancia().selectAllWithUsuario();
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{
@@ -83,7 +83,7 @@ public class DAOEmpleado {
 		Map<Integer,Empleado>  map = new HashMap<Integer,Empleado>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("SELECT en.IDENTE,en.NOMBRE,en.APELLIDO,en.CODTIPODOCUMENTO,en.NRODOCUMENTO,en.ESTADO,cl.TELEFONO,cl.MAIL,cl.ESTADO, cl.CODROLLEMPPLEADO FROM TNG24V1.dbo.CT_EMPLEADO cl join TNG24V1.dbo.TG_ENTE en on en.IDENTE = cl.idempleado");
 						
@@ -92,7 +92,7 @@ public class DAOEmpleado {
 			 Map<String, TipoDocumento> tipodocumento = DAOTipoDocumento.getInstancia().selectAllWithTipoDocumento();
 			Map<String,RollEmpleado> rollEmpleado = DAORollEmpleado.getInstancia().selectAllWithRoll();
 			Map<Integer,Usuario> user=DAOUsuarios.getInstancia().selectAllWithUsuario();
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{

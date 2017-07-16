@@ -33,7 +33,7 @@ public class DAOCliente {
 	
 	public int insert(String nombre,String apellido, String tipoDoc, String doc, String tel, String mail, int dom) {
 		
-		Connection con = PoolConnection.getPoolConnection().getConnection();
+		Connection con = DBConnection.getPoolConnection().getConnection();
 		CallableStatement sp;
 		try {
 			sp = con.prepareCall("{CALL TNG24V1.dbo.SP_ALTACLIENTE(?,?,?,?,?,?,?,?)}");
@@ -52,7 +52,7 @@ public class DAOCliente {
 		sp.execute();
 		// confirmar si se ejecuto sin errores
 		idente = sp.getInt(1);  
-		PoolConnection.getPoolConnection().realeaseConnection(con);
+		DBConnection.getPoolConnection().realeaseConnection(con);
 		return idente;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -63,7 +63,7 @@ public class DAOCliente {
 
 	public void update(Cliente c) {
 		
-		Connection con = PoolConnection.getPoolConnection().getConnection();
+		Connection con = DBConnection.getPoolConnection().getConnection();
 		
 		PreparedStatement s;
 		try
@@ -100,7 +100,7 @@ public class DAOCliente {
 			s.setString(5, "M");
 			s.setInt(6, c.getIdEnte());			
 			s.execute();
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 			
 		} catch (Exception e)
 		{
@@ -112,7 +112,7 @@ public class DAOCliente {
 	
 public void updateEnte(Cliente c) {
 		
-		Connection con = PoolConnection.getPoolConnection().getConnection();
+		Connection con = DBConnection.getPoolConnection().getConnection();
 		
 		PreparedStatement s;
 		try
@@ -135,7 +135,7 @@ public void updateEnte(Cliente c) {
 			s.setString(5, "M");
 			s.setInt(6, c.getIdEnte());			
 			s.execute();
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 		
 		} catch (Exception e)
 		{
@@ -148,7 +148,7 @@ public void updateEnte(Cliente c) {
 		
 		
 		
-Connection con = PoolConnection.getPoolConnection().getConnection();
+Connection con = DBConnection.getPoolConnection().getConnection();
 		
 		PreparedStatement s;
 		try
@@ -165,7 +165,7 @@ Connection con = PoolConnection.getPoolConnection().getConnection();
 		
 			s.setInt(1, c.getIdEnte());			
 			s.execute();
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 		
 		} catch (Exception e)
 		{
@@ -178,7 +178,7 @@ Connection con = PoolConnection.getPoolConnection().getConnection();
 		
 		
 		
-		Connection con = PoolConnection.getPoolConnection().getConnection();
+		Connection con = DBConnection.getPoolConnection().getConnection();
 				
 				PreparedStatement s;
 				try
@@ -195,7 +195,7 @@ Connection con = PoolConnection.getPoolConnection().getConnection();
 				
 					s.setInt(1, c.getIdEnte());			
 					s.execute();
-					PoolConnection.getPoolConnection().realeaseConnection(con);
+					DBConnection.getPoolConnection().realeaseConnection(con);
 				
 				} catch (Exception e)
 				{
@@ -209,7 +209,7 @@ Connection con = PoolConnection.getPoolConnection().getConnection();
 		ArrayList<Cliente> list = new ArrayList<Cliente>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("SELECT en.IDENTE,en.NOMBRE,en.APELLIDO,en.CODTIPODOCUMENTO,en.NRODOCUMENTO,en.ESTADO,cl.TELEFONO,cl.MAIL,cl.IDDOMICILIO,cl.ESTADO FROM TNG24V1.dbo.CT_CLIENTE cl join TNG24V1.dbo.TG_ENTE en on en.IDENTE = cl.IDCLIENTE");
 						
@@ -218,7 +218,7 @@ Connection con = PoolConnection.getPoolConnection().getConnection();
 			 Map<String, TipoDocumento> tipodocumento = DAOTipoDocumento.getInstancia().selectAllWithTipoDocumento();
 			 Map<Integer,Domicilio> domicilios = DAODomicilio.getInstancia().selectAllWithDomicilio();
 			
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{
@@ -252,7 +252,7 @@ Connection con = PoolConnection.getPoolConnection().getConnection();
 		Map<Integer,Cliente> map = new HashMap<Integer,Cliente>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("SELECT en.IDENTE,en.NOMBRE,en.APELLIDO,en.CODTIPODOCUMENTO,en.NRODOCUMENTO,en.ESTADO,cl.TELEFONO,cl.MAIL,cl.IDDOMICILIO,cl.ESTADO FROM TNG24V1.dbo.CT_CLIENTE cl join TNG24V1.dbo.TG_ENTE en on en.IDENTE = cl.IDCLIENTE");
 						
@@ -261,7 +261,7 @@ Connection con = PoolConnection.getPoolConnection().getConnection();
 			 Map<String, TipoDocumento> tipodocumento = DAOTipoDocumento.getInstancia().selectAllWithTipoDocumento();
 			 Map<Integer,Domicilio> domicilios = DAODomicilio.getInstancia().selectAllWithDomicilio();
 			
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{

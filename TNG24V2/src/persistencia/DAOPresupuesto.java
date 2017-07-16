@@ -40,7 +40,7 @@ public class DAOPresupuesto {
 		ArrayList<Presupuesto> lista = new ArrayList<Presupuesto>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("SELECT *FROM TNG24V1.dbo.CT_PRESUPUESTO");
 
@@ -48,7 +48,7 @@ public class DAOPresupuesto {
 			 Map<Integer, Cliente> cliente = DAOCliente.getInstancia().selectWhithCliente();
 			 Map<Integer, Empleado> empleado = DAOEmpleado.getInstancia().selectwhithEmpleado();
 			
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{
@@ -83,7 +83,7 @@ public class DAOPresupuesto {
 	{
 		 Map<Integer, Presupuesto> map = new  HashMap<Integer, Presupuesto>();
 		try
-		{Connection con = PoolConnection.getPoolConnection().getConnection();
+		{Connection con = DBConnection.getPoolConnection().getConnection();
 		PreparedStatement s = con
 				.prepareStatement("SELECT *FROM TNG24V1.dbo.CT_PRESUPUESTO");
 
@@ -91,7 +91,7 @@ public class DAOPresupuesto {
 		 Map<Integer, Cliente> cliente = DAOCliente.getInstancia().selectWhithCliente();
 		 Map<Integer, Empleado> empleado = DAOEmpleado.getInstancia().selectwhithEmpleado();
 		
-		PoolConnection.getPoolConnection().realeaseConnection(con);
+		DBConnection.getPoolConnection().realeaseConnection(con);
 
 		while (rs.next())
 		{
@@ -129,7 +129,7 @@ public class DAOPresupuesto {
 		java.util.Date utilStartDate = p.getFechaEmision();
 		java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
 		
-		Connection con = PoolConnection.getPoolConnection().getConnection();
+		Connection con = DBConnection.getPoolConnection().getConnection();
 		CallableStatement sp;
 		try {
 			sp = con.prepareCall("{CALL TNG24V1.dbo.SP_ALTA_PRESUPEUSTO(?,?,?,?,?,?)}");
@@ -147,7 +147,7 @@ public class DAOPresupuesto {
 		sp.execute();
 		// confirmar si se ejecuto sin errores
 		idpresupuesto = sp.getInt(1);  
-		PoolConnection.getPoolConnection().realeaseConnection(con);
+		DBConnection.getPoolConnection().realeaseConnection(con);
 		for(ItemDocumento it:p.getItems()){
 			this.insertItemPresupuesto(idpresupuesto,it);
 		}
@@ -178,14 +178,14 @@ public class DAOPresupuesto {
 		ArrayList<ItemDocumento> lista = new ArrayList<ItemDocumento>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("SELECT *FROM TNG24V1.dbo.CT_ITEMPRESUPUESTO where idpresupuesto=?");
 			s.setInt(1, idpresupuesto);
 			Map<String,Producto> prod = DAOProducto.getInstancia().selectAllWhithProduto();
 			ResultSet rs = s.executeQuery();
 			Map<String,Producto> MP = DAOProducto.getInstancia().selectAllWhithProduto();
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{
@@ -217,13 +217,13 @@ public class DAOPresupuesto {
 		 Map<Integer, ItemDocumento> map = new  HashMap<Integer, ItemDocumento>();
 		 try
 			{
-				Connection con = PoolConnection.getPoolConnection().getConnection();
+				Connection con = DBConnection.getPoolConnection().getConnection();
 				PreparedStatement s = con
 						.prepareStatement("SELECT *FROM TNG24V1.dbo.CT_ITEMPRESUPUESTO");
 				Map<String,Producto> prod = DAOProducto.getInstancia().selectAllWhithProduto();
 				ResultSet rs = s.executeQuery();
 				Map<String,Producto> MP = DAOProducto.getInstancia().selectAllWhithProduto();
-				PoolConnection.getPoolConnection().realeaseConnection(con);
+				DBConnection.getPoolConnection().realeaseConnection(con);
 
 				while (rs.next())
 				{
@@ -257,7 +257,7 @@ public class DAOPresupuesto {
 	
 		
 		
-		Connection con = PoolConnection.getPoolConnection().getConnection();
+		Connection con = DBConnection.getPoolConnection().getConnection();
 		CallableStatement sp;
 		try {
 			sp = con.prepareCall("{CALL TNG24V1.dbo.SP_ALTA_ITEMPRESUPUESTO(?,?,?,?,?,?)}");
@@ -275,7 +275,7 @@ public class DAOPresupuesto {
 		sp.execute();
 		// confirmar si se ejecuto sin errores
 		idItempresupuesto = sp.getInt(1);  
-		PoolConnection.getPoolConnection().realeaseConnection(con);
+		DBConnection.getPoolConnection().realeaseConnection(con);
 		return idItempresupuesto;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

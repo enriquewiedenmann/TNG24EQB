@@ -37,7 +37,7 @@ public class DAOVisita {
 	
 public int insert(int agenda,Visita v) {
 		
-		Connection con = PoolConnection.getPoolConnection().getConnection();
+		Connection con = DBConnection.getPoolConnection().getConnection();
 		CallableStatement sp;
 		try {
 			sp = con.prepareCall("{CALL TNG24V1.dbo.SP_ALTA_VISITA(?,?,?,?,?,?,?,?,?,?,?)}");
@@ -61,7 +61,7 @@ public int insert(int agenda,Visita v) {
 		sp.execute();
 		// confirmar si se ejecuto sin errores
 		idente = sp.getInt(1);  
-		PoolConnection.getPoolConnection().realeaseConnection(con);
+		DBConnection.getPoolConnection().realeaseConnection(con);
 		return idente;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -75,7 +75,7 @@ public int insert(int agenda,Visita v) {
 			try
 			{
 			
-				Connection con = PoolConnection.getPoolConnection().getConnection();
+				Connection con = DBConnection.getPoolConnection().getConnection();
 				PreparedStatement s = con.prepareStatement
 				("Update CT_VISITA"
 						+ "IDFACTURA,"
@@ -100,7 +100,7 @@ public int insert(int agenda,Visita v) {
 				s.setString(9, "M");
 				s.setInt(10, v.getId());
 				s.execute();
-				PoolConnection.getPoolConnection().realeaseConnection(con);
+				DBConnection.getPoolConnection().realeaseConnection(con);
 
 			} catch (Exception e)
 			{
@@ -116,7 +116,7 @@ public int insert(int agenda,Visita v) {
 		ArrayList<Visita> list= new ArrayList<Visita>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("SELECT *FROM TNG24V1.dbo.V_VISITA where IDAGENDA=?");
 			s.setInt(1,idAgendaS );
@@ -125,7 +125,7 @@ public int insert(int agenda,Visita v) {
 			Map<Integer,Empleado> emp=DAOEmpleado.getInstancia().selectwhithEmpleado();
 			Map<Integer,Cliente> cli=DAOCliente.getInstancia().selectWhithCliente();
 			Map<Integer,Domicilio> dom=DAODomicilio.getInstancia().selectAllWithDomicilio();
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{
@@ -171,7 +171,7 @@ public void rehabilitar (Visita v) {
 		
 		
 		
-		Connection con = PoolConnection.getPoolConnection().getConnection();
+		Connection con = DBConnection.getPoolConnection().getConnection();
 				
 				PreparedStatement s;
 				try
@@ -188,7 +188,7 @@ public void rehabilitar (Visita v) {
 				
 					s.setInt(1, v.getId());			
 					s.execute();
-					PoolConnection.getPoolConnection().realeaseConnection(con);
+					DBConnection.getPoolConnection().realeaseConnection(con);
 				
 				} catch (Exception e)
 				{
@@ -201,7 +201,7 @@ public void baja(Visita v) {
 	
 	
 	
-	Connection con = PoolConnection.getPoolConnection().getConnection();
+	Connection con = DBConnection.getPoolConnection().getConnection();
 			
 			PreparedStatement s;
 			try
@@ -218,7 +218,7 @@ public void baja(Visita v) {
 			
 				s.setInt(1, v.getId());			
 				s.execute();
-				PoolConnection.getPoolConnection().realeaseConnection(con);
+				DBConnection.getPoolConnection().realeaseConnection(con);
 			
 			} catch (Exception e)
 			{

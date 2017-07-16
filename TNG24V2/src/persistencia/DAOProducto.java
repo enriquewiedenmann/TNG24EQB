@@ -31,13 +31,13 @@ public class DAOProducto {
 		ArrayList<Producto> lista = new ArrayList<Producto>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("SELECT *FROM TNG24V1.dbo.ST_PRODUCTO");
 
 			ResultSet rs = s.executeQuery();
 			
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{
@@ -73,13 +73,13 @@ public class DAOProducto {
 		 Map<String, Producto> map = new  HashMap<String, Producto>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("SELECT *FROM TNG24V1.dbo.ST_PRODUCTO");
 
 			ResultSet rs = s.executeQuery();
 			
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{

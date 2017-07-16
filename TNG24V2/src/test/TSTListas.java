@@ -1,11 +1,11 @@
-package tst;
+package test;
 
+import controller.CtrlAgenda;
+import controller.CtrlDomicilio;
+import controller.CtrlEnte;
+import controller.CtrlProducto;
 import core.Ente;
 import view.*;
-import ctrl.CtrlDomicilio;
-import ctrl.CtrlEnte;
-import ctrl.CtrlProducto;
-import ctrl.CtrlAgenda;
 public class TSTListas {
 
 	public static void main(String[] args) {

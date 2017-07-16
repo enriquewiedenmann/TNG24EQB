@@ -3,7 +3,7 @@
 
     %>
 <%@ page 
-	import = "ctrl.CtrlEnte" 
+	import = "controller.CtrlEnte" 
 	import = "ctrl.CtrlDomicilio" 
 	import ="view.*"	
 	import = "java.util.*"

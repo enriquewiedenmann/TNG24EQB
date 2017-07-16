@@ -37,7 +37,7 @@ public class DAODomicilio {
 		ArrayList<Domicilio> list = new ArrayList<Domicilio>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("select * from TNG24V1.dbo.TG_DOMICILIO");
 
@@ -45,7 +45,7 @@ public class DAODomicilio {
 			 Map<String, Provincia> provincias = DAOProvincia.getInstancia().selectAllWithcodProv();
 			 Map<String,Ciudad> ciudades = DAOCiudad.getInstancia().selectAllWithCodCiudad();
 			 Map<String, CodigoPostal> codigosPostales = DAOCodigoPostal.getInstancia().selectAllWithCodigoPostal();
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{
@@ -83,7 +83,7 @@ public class DAODomicilio {
 		Map<Integer, Domicilio> map = new HashMap<Integer,Domicilio>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("select * from TNG24V1.dbo.TG_DOMICILIO");
 
@@ -91,7 +91,7 @@ public class DAODomicilio {
 			 Map<String, Provincia> provincias = DAOProvincia.getInstancia().selectAllWithcodProv();
 			 Map<String,Ciudad> ciudades = DAOCiudad.getInstancia().selectAllWithCodCiudad();
 			 Map<String, CodigoPostal> codigosPostales = DAOCodigoPostal.getInstancia().selectAllWithCodigoPostal();
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{

@@ -32,13 +32,13 @@ public class DAORollEmpleado {
 		ArrayList<RollEmpleado> lista = new ArrayList<RollEmpleado>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("select * from TNG24V1.dbo.TG_ROLLEMPPLEADO");
 
 			ResultSet rs = s.executeQuery();
 			
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{
@@ -67,13 +67,13 @@ public class DAORollEmpleado {
 		Map<String, RollEmpleado> map = new HashMap<String,RollEmpleado>();
 		try
 		{
-			Connection con = PoolConnection.getPoolConnection().getConnection();
+			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
 					.prepareStatement("select * from TNG24V1.dbo.TG_ROLLEMPPLEADO");
 
 			ResultSet rs = s.executeQuery();
 			
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			DBConnection.getPoolConnection().realeaseConnection(con);
 
 			while (rs.next())
 			{
