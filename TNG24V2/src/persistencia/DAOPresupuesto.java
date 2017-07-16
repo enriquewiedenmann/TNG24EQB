@@ -126,8 +126,9 @@ public class DAOPresupuesto {
 	
 	
 	public int insertPresupuesto(Presupuesto p){
+		java.util.Date utilStartDate = p.getFechaEmision();
+		java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
 		
-
 		Connection con = PoolConnection.getPoolConnection().getConnection();
 		CallableStatement sp;
 		try {
@@ -135,7 +136,7 @@ public class DAOPresupuesto {
 			 int idpresupuesto =-1;
 	
 			sp.registerOutParameter(1,java.sql.Types.INTEGER);
-			sp.setDate(2, (java.sql.Date) p.getFechaEmision() );
+			sp.setDate(2, sqlStartDate);
 			sp.setInt(3, p.getCliente().getEstado() );
 			sp.setInt(4,p.getTecnico().getIdEnte());
 			sp.setInt(5, p.getTiempoManoObra());
@@ -147,6 +148,10 @@ public class DAOPresupuesto {
 		// confirmar si se ejecuto sin errores
 		idpresupuesto = sp.getInt(1);  
 		PoolConnection.getPoolConnection().realeaseConnection(con);
+		for(ItemDocumento it:p.getItems()){
+			this.insertItemPresupuesto(idpresupuesto,it);
+		}
+		
 		return idpresupuesto;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -247,7 +252,7 @@ public class DAOPresupuesto {
 	}	
 	
 	
-	public int insertItemPresupuesto(int presupuesto,ItemDocumento item){
+	private int insertItemPresupuesto(int presupuesto,ItemDocumento item){
 		
 	
 		
@@ -255,7 +260,7 @@ public class DAOPresupuesto {
 		Connection con = PoolConnection.getPoolConnection().getConnection();
 		CallableStatement sp;
 		try {
-			sp = con.prepareCall("{CALL TNG24V1.dbo. SP_ALTA_ITEMPRESUPUESTO(?,?,?,?,?,?)}");
+			sp = con.prepareCall("{CALL TNG24V1.dbo.SP_ALTA_ITEMPRESUPUESTO(?,?,?,?,?,?)}");
 			 int idItempresupuesto =-1;
 	
 			sp.registerOutParameter(1,java.sql.Types.INTEGER);

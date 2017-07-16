@@ -110,7 +110,7 @@ public class TSTListas {
 		for(ViewProducto p: ctrlp.listarProductos()){
 			System.out.println(p.toString());
 		}
-		
+	
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("Presupuestos");
 		CtrlAgenda ca = CtrlAgenda.getInstance();
@@ -120,6 +120,7 @@ public class TSTListas {
 			System.out.println("                                        "+vid.toString());
 		}
 		}
+			*/
 		
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("Agendas y Visitas");
@@ -130,11 +131,11 @@ public class TSTListas {
 			System.out.println("                                        "+vv.toString());
 		}
 		}
-		*/
+		
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("Nuevo Presupuesto");
-		CtrlAgenda ca = CtrlAgenda.getInstance();
-		if(ca.nuevoPresupuesto(385)){
+		//CtrlAgenda ca = CtrlAgenda.getInstance();
+		if(ca.nuevoPresupuesto(389)){
 			System.out.println("it: "+ca.nuevoItemPresupuesto("cam001", 1));
 			System.out.println("it: "+ca.nuevoItemPresupuesto("cam002", 2));
 			System.out.println("it: "+ca.nuevoItemPresupuesto("cam003", 3));
@@ -143,12 +144,22 @@ public class TSTListas {
 			}else{
 				System.out.println("VER");
 			}
+			System.out.println("it: "+ca.nuevoItemPresupuesto("cam002", 2));
+			System.out.println("it: "+ca.nuevoItemPresupuesto("cam002", 2));
 			ca.ConfirmarAltaPresupuesto(100, 100);
 			
 			
 			
 		}
 		
-		
+	/*	System.out.println("----------------------------------------------------------------");
+		System.out.println("Presupuestos");
+		//CtrlAgenda ca = CtrlAgenda.getInstance();
+		for(ViewPresupuesto p: ca.listarPresupuestos(0, null, 0, 0, 0)){
+		System.out.println(p.toString());	
+		for(ViewItemDocumento vid: p.getVli()){
+			System.out.println("                                        "+vid.toString());
+		}
+		}*/
 	}}
 

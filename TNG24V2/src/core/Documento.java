@@ -58,9 +58,12 @@ public class Documento {
 		for(ItemDocumento id:items){
 			if(id.getNroItem()==nro){
 				items.remove(id);
+				
 				return true;
 			}
 		}
+		
+		
 		return false;
 	
 	}

@@ -49,6 +49,8 @@ public class ItemDocumento {
 		return nroItem;
 	}
 
+	
+
 	public void setNroItem(int nroItem) {
 		this.nroItem = nroItem;
 	}
@@ -76,7 +78,9 @@ public class ItemDocumento {
 	public void setMontoItem(int montoItem) {
 		this.montoItem = montoItem;
 	}
-	
-	
+
+
+
+		
 	
 }

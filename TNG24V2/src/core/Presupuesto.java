@@ -3,6 +3,7 @@ package core;
 import java.util.ArrayList;
 import java.util.Date;
 
+import persistencia.DAOPresupuesto;
 import view.ViewItemDocumento;
 import view.ViewPresupuesto;
 
@@ -53,7 +54,7 @@ public class Presupuesto extends Documento {
 		this.setMontoManoObra(MMO);
 		this.setTiempoManoObra(TMO);
 		
-		System.out.println("no lo codeeeeee,");
+		nro=DAOPresupuesto.getInstancia().insertPresupuesto(this);
 		return nro;
 	
 	}
