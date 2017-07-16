@@ -4,7 +4,7 @@
     %>
 <%@ page 
 	import = "controller.CtrlEnte" 
-	import = "ctrl.CtrlDomicilio" 
+	import = "controller.CtrlDomicilio" 
 	import ="view.*"	
 	import = "java.util.*"
 		%>    
