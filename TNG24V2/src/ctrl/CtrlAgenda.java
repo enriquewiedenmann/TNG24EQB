@@ -3,20 +3,65 @@ package ctrl;
 import java.util.Date;
 import java.util.ArrayList;
 
+import persistencia.DAOAgenda;
+import persistencia.DAOPresupuesto;
+import persistencia.DAOProducto;
 import core.*;
 import view.*;
 
-public abstract class CtrlAgenda {
-	private CtrlAgenda ctrlAgenda;
+public class CtrlAgenda {
+	private static CtrlAgenda ctrlAgenda;
 	private ArrayList<Agenda> agendas;
 	private ArrayList<Presupuesto> presupuestos;
 	private ArrayList<Factura> facturas;
-	public abstract CtrlAgenda getInstance();
+	private Presupuesto pa;
+	private Visita va;
+
+	public static CtrlAgenda getInstance() {
+		
+		if (ctrlAgenda == null)
+			ctrlAgenda = new CtrlAgenda();
+		return ctrlAgenda;
+
+		
+	}
 	
 	
+	
+	public CtrlAgenda() {
+		this.pa=null;
+		this.agendas = cargarAgendas();
+		this.presupuestos = cargarPresupuestos();
+		this.facturas = null;
+	}
+
+
+
+	private ArrayList<Presupuesto> cargarPresupuestos() {
+		{
+			ArrayList<Presupuesto> p = DAOPresupuesto.getInstancia().selectAllPresupuesto();
+			return p != null ? p : null;
+		}
+	}
+
+
+
+	private ArrayList<Agenda> cargarAgendas() {
+		{
+			ArrayList<Agenda> a = DAOAgenda.getInstancia().selectAll();
+			return a != null ? a : null;
+		}
+	}
+
+
+
 	
 	public ArrayList<ViewAgenda> listarAgendas() {
-		return null;
+		ArrayList<ViewAgenda> va=new ArrayList<ViewAgenda>();
+		for(Agenda a:agendas){
+			va.add(a.mostrate());
+		}
+		return va;
 	
 	}
 	
@@ -26,7 +71,14 @@ public abstract class CtrlAgenda {
 	}
 	
 	public ArrayList<ViewPresupuesto> listarPresupuestos(int id, Date fecha, int docCliente, int nomCliente, int apellido) {
-		return null;
+		ArrayList<ViewPresupuesto> vp = new ArrayList<ViewPresupuesto>();
+		for(Presupuesto p:presupuestos){
+			vp.add(p.mostrate());
+			}
+			
+		
+		
+		return vp;
 	
 	}
 	
@@ -93,19 +145,55 @@ public abstract class CtrlAgenda {
 	}
 	
 	public boolean nuevoPresupuesto(int idVisita) {
-		return true;
+		
+		Agenda ae=null;
+		for(Agenda a:agendas){
+			va=a.esTuVisita(idVisita);
+			ae=a;
+			}
+		if(va!=null){
+			pa = new Presupuesto(va.getCliente(),ae.getTecnico());
+			return true;
+		}
+		return false;
 	}
 	
 	public int nuevoItemPresupuesto(String cod, int cant) {
-		return 0;
+		if(pa!=null){
+		Producto p=null;
+		p= CtrlProducto.getInstancia().bucarProducto(cod);
+		if(p!=null){
+			
+			return pa.nuevoItem(p, cant);
+		}
+		}
+		return -1;
 	}
 	
-	public int ConfirmarAltaPresupuesto(int tiempoManoObra, int tecnico, int montoManoObra) {
-		return 0;
+	public void cancelarPresupuesto(){
+		pa=null;
+		va=null;
+		
+	}
+	
+	public int ConfirmarAltaPresupuesto(int tiempoManoObra, int montoManoObra) {
+
+		int nro=-1;
+		nro = pa.cerrarme(tiempoManoObra, montoManoObra);
+		presupuestos.add(pa);
+		va.setPresupuesto(pa);
+		pa=null;
+		va=null;
+		
+		return nro;
 	}
 	
 	public boolean bajaItemPresupuesto(int nro) {
-		return true;
+		if(pa!=null){
+			return	pa.bajaItem(nro);
+			 		}
+		
+		return false;
 	}
 	
 	public int disponibilidadTecnicos(Date inicioProgramado, Date finProgramado, int idAgenda) {

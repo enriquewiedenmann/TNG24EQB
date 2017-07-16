@@ -248,38 +248,47 @@ Connection con = PoolConnection.getPoolConnection().getConnection();
 	}
 	
 			
-	/*
-	public Map<String, Provincia> selectAllWithcodProv()
-	{
-		Map<String, Provincia> map = new HashMap<String,Provincia>();
+	public Map<Integer,Cliente> selectWhithCliente() {
+		Map<Integer,Cliente> map = new HashMap<Integer,Cliente>();
 		try
 		{
 			Connection con = PoolConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
-					.prepareStatement("select * from TNG24V1.dbo.TG_PROVINCIA");
+					.prepareStatement("SELECT en.IDENTE,en.NOMBRE,en.APELLIDO,en.CODTIPODOCUMENTO,en.NRODOCUMENTO,en.ESTADO,cl.TELEFONO,cl.MAIL,cl.IDDOMICILIO,cl.ESTADO FROM TNG24V1.dbo.CT_CLIENTE cl join TNG24V1.dbo.TG_ENTE en on en.IDENTE = cl.IDCLIENTE");
+						
 
 			ResultSet rs = s.executeQuery();
-			PoolConnection.getPoolConnection().realeaseConnection(con);
+			 Map<String, TipoDocumento> tipodocumento = DAOTipoDocumento.getInstancia().selectAllWithTipoDocumento();
+			 Map<Integer,Domicilio> domicilios = DAODomicilio.getInstancia().selectAllWithDomicilio();
 			
+			PoolConnection.getPoolConnection().realeaseConnection(con);
+
 			while (rs.next())
 			{
 				
-					int id = rs.getInt("idprovincia");
-					String cod = rs.getString("codprovincia");
-					String desc = rs.getString("descprovincia");
-					String estado =  rs.getString("estado");
-					char e = estado.charAt(0);
+				int id = rs.getInt("idente");
 				
-				Provincia c = new Provincia(id,cod,desc,e);
+				String nombre = rs.getString("nombre");
+				String apellido = rs.getString("apellido");
+				String tipoDoc= rs.getString("codtipodocumento");
+				String nroDoc= rs.getString("nrodocumento");
+				String estado= rs.getString("estado");
+				String telefono= rs.getString("telefono");
+				String mail= rs.getString("mail");
+				int domicilio= rs.getInt("iddomicilio");
+				char e = estado.charAt(0);
+				Domicilio dom = domicilios.get(domicilio);
+				TipoDocumento td = tipodocumento.get(tipoDoc);
 				
-				map.put(cod,c);
+				Cliente nc =new Cliente(id, nombre,apellido, td,nroDoc, e,telefono, mail,dom);
+				map.put(id, nc);
 			}
 
 		} catch (Exception e)
 		{
-			System.out.println("ERROR MAP TG_PROVINCIA" + e.getMessage());
+			System.out.println("ERROR SELECT ALL CLIENTE" + e.getMessage());
 		}
 		return map;
-	}*/
+	}
 	
 }

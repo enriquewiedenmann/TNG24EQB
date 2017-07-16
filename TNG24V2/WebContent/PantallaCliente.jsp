@@ -648,12 +648,13 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
 		document.getElementById("mail").disabled = false;
 		document.getElementById("estado").disabled = true;				   
 		document.getElementById("domicilio").disabled = false;
-		document.getElementById("btnBuscarDomicilio").disabled = true;
+		document.getElementById("btnBuscarDomicilio").disabled = false;
 		document.getElementById("tdom").setAttribute("style","display: none");
 		document.getElementById("btnAceptar").style.visibility = "visible"; 
 		document.getElementById("btnEditar").style.visibility = "hidden"; 
 		document.getElementById("btnGuardar").style.visibility = "hidden";
 		document.getElementById("btnEstado").style.visibility = "hidden";
+		
 		
 		
 		
