@@ -20,6 +20,7 @@
   <script src="js/modernizr.js" type="text/javascript"></script>
   <link href="https://daks2k3a4ib2z.cloudfront.net/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
   <link href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png" rel="apple-touch-icon">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 </head>
 <body>
 <%ViewPresupuesto vp = (ViewPresupuesto)request.getAttribute("ViewPresupuesto") ;

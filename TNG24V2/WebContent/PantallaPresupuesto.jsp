@@ -24,6 +24,7 @@
    
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <link rel="stylesheet" href="assets/css/jquery-ui.css" />
    
 
 </script>
@@ -192,7 +193,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
                                             </div>
                                          <div class="form-group">
                                             <label>Fecha Emision:</label>
-												
+											<input type="text" id="datepicker"  class="form-control" />	
                                             </div>
                                              
 											 <div class="form-group">
@@ -234,7 +235,17 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
   
-    <script src="assets/js/jquery-1.10.2.js"></script>
+      <script src="assets/js/jquery-1.10.2.js"></script>
+<script src="assets/js/jquery-ui.js"></script>
+<script src="assets/js/jquery.ui.datepicker-es.js"></script>
+    <script>
+$(function () {
+$.datepicker.setDefaults($.datepicker.regional["es"]);
+$("#datepicker").datepicker({
+firstDay: 1
+});
+});
+</script>
       <!-- BOOTSTRAP SCRIPTS -->
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- METISMENU SCRIPTS -->
