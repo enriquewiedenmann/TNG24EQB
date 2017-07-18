@@ -35,6 +35,14 @@ public class ViewPresupuesto {
 				+ ", montoManoObra=" + montoManoObra + ", tecnico=" + tecnico.getApellido()
 				+", "+tecnico.getNombre()+"]";
 	}
+	
+	public String vistaTabla() {
+		return null;
+	}
+	
+	
+	
+	
 	public int getId() {
 		return id;
 	}

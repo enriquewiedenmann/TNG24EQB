@@ -3,15 +3,27 @@
   <display-name>TNG24V2</display-name>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
+    <welcome-file>PantallaCliente.jsp</welcome-file>
+	<welcome-file>PantallPresupuesto.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
     <display-name>Cliente</display-name>
-    <servlet-name>ClienteServlet</servlet-name>
-    <servlet-class>servlets.Cliente</servlet-class>
+    <servlet-name>ClientesSERVLET</servlet-name>
+    <servlet-class>servlets.ClienteSERVLET</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Cliente</servlet-name>
-    <url-pattern>/Cliente</url-pattern>
+    <servlet-name>ClientesSERVLET</servlet-name>
+    <url-pattern>/ClientesSERVLET</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PresupuestosSERVLET</display-name>
+    <servlet-name>PresupuestosSERVLET</servlet-name>
+    <servlet-class>servlets.PresupuestosSERVLET</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PresupuestosSERVLET</servlet-name>
+    <url-pattern>/PresupuestosSERVLET</url-pattern>
   </servlet-mapping>
 </web-app>
