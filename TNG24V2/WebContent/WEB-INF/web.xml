@@ -4,20 +4,20 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>PantallaCliente.jsp</welcome-file>
-	<welcome-file>PantallPresupuesto.jsp</welcome-file>
+    <welcome-file>PantallPresupuesto.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <description></description>
-    <display-name>Cliente</display-name>
+    <description>ClientesSERVLET</description>
+    <display-name>ClientesSERVLET</display-name>
     <servlet-name>ClientesSERVLET</servlet-name>
-    <servlet-class>servlets.ClienteSERVLET</servlet-class>
+    <servlet-class>servlets.ClientesSERVLET</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ClientesSERVLET</servlet-name>
     <url-pattern>/ClientesSERVLET</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
+    <description>PresupuestosSERVLET</description>
     <display-name>PresupuestosSERVLET</display-name>
     <servlet-name>PresupuestosSERVLET</servlet-name>
     <servlet-class>servlets.PresupuestosSERVLET</servlet-class>

@@ -207,7 +207,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
                                             <h4 id="VistaClientesTitulo" class="modal-title" id="myModalLabel">Modal title Here</h4>
                                         </div>
                                         <div class="modal-body">
-                                        <form form="role" id="fCliente" style="display: block" method="POST" action="Cliente">
+                                        <form form="role" id="fCliente" style="display: block" method="POST" action="ClientesSERVLET">
                                         <div class="form-group">
                                         
                                             <label>Id:</label>
