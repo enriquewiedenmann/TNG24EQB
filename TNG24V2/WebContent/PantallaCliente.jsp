@@ -340,7 +340,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
                                             <h4 class="modal-title" id="myModalLabelB">Buscar</h4>
                                         </div>
                                         <div class="modal-body">
-                                           <form form="role" id="fbuscarCliente" method="POST" action="Cliente">	
+                                           <form form="role" id="fbuscarCliente" method="POST" action="ClientesSERVLET">	
 										   <div class="form-group">
                                         
                                             <label>Nombre:</label>
