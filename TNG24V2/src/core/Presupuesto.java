@@ -3,6 +3,7 @@ package core;
 import java.util.ArrayList;
 import java.util.Date;
 
+import controller.CtrlEnte;
 import persistencia.DAOPresupuesto;
 import view.ViewItemDocumento;
 import view.ViewPresupuesto;
@@ -37,10 +38,7 @@ public class Presupuesto extends Documento {
 	
 	
 
-	public boolean cumplo(int id, Date fec, Cliente cli, int TMO, int MMO, Empleado tec) {
-		return false;
 	
-	}
 	
 	public ViewPresupuesto mostrate(Domicilio dom) {
 		return null;
@@ -85,6 +83,24 @@ public class Presupuesto extends Documento {
 
 	public void setTecnico(Empleado tecnico) {
 		this.tecnico = tecnico;
+	}
+
+
+
+
+	public boolean cumplo( int id) {
+		
+		return this.getId()==id;
+		}
+
+	public boolean cumplo( Date fecha, String docCliente,
+			String nomCliente, String apellido) {
+		boolean band = true;
+		if(fecha!=null){
+			band = fecha.equals(this.getFechaEmision());
+		}
+		band = this.getCliente().cumplo(nomCliente, apellido, docCliente);
+		return band;
 	}
 
 

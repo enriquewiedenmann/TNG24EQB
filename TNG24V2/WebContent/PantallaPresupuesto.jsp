@@ -27,9 +27,7 @@
    <link rel="stylesheet" href="assets/css/jquery-ui.css" />
    
 
-</script>
 
-</script>
 </head>
  <style>
     #mdialTamanio{
@@ -185,7 +183,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
                                             <h4 class="modal-title" id="myModalLabelB">Buscar</h4>
                                         </div>
                                         <div class="modal-body">
-                                           <form form="role" id="fbuscarCliente" method="POST" action="ClientesSERVLET">	
+                                           <form form="role" id="fbuscarPresupuestos" method="POST" action="PresupuestosSERVLET">	
 										   <div class="form-group">
                                         
                                             <label>Presupuesto Numero:</label>
@@ -193,7 +191,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
                                             </div>
                                          <div class="form-group">
                                             <label>Fecha Emision:</label>
-											<input type="text" id="datepicker"  class="form-control" />	
+											<input type="text" id="datepicker" name="fechaEmision"  class="form-control"  />	
                                             </div>
                                              
 											 <div class="form-group">
@@ -210,8 +208,8 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
                                             </div>
 										   
 										   
-											<input type="hidden" id="accion1" name="accion" />  
-                                            <button type="button" class="btn btn-danger" onClick="buscarCliente()">Buscar</button>
+											<input type="hidden" id="accion" name="accion" />  
+                                            <button type="button" class="btn btn-danger" onClick="buscarPresupuesto()">Buscar</button>
 											</form>
                                         </div>
                                     </div>
@@ -223,7 +221,12 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
                         
 
         
+        <div type="hidden" >
+        <form form="role" id="fmostrarPresupuesto" method="POST" action="PresupuestoDetalleSERVLET">
+        <input  type="hidden" id="idm" name="idm"/>
         
+        </form>
+        </div>
 
         
         </div>
@@ -265,10 +268,10 @@ firstDay: 1
 		
 		var celda = $(this).children("#id").text();
 		
-		idm.value=celda;
-		accion.value="mostrarCliente";
 		
-		fCliente.submit();
+		
+		idm.value=celda;
+		fmostrarPresupuesto.submit();
 		
 	});
 
@@ -283,19 +286,28 @@ firstDay: 1
    <script type="text/javascript">
 	
 	  function setModalBuscador(){
-   
-			document.getElementById('bNroPresupuesto').value="";
-			document.getElementById('bFechaEmision').value="";
-			document.getElementById('bApellido').value="";
-			document.getElementById('bNombre').value="";
-			document.getElementById('bDocumento').value="";
+  
+			document.getElementById("bNroPresupuesto").value="";
+			document.getElementById("bFechaEmision").value="";
+			document.getElementById("bApellido").value="";
+			document.getElementById("bNombre").value="";
+			document.getElementById("bDocumento").value="";
+			document.getElementById("bFechaEmision").disabled = true;
 	 
   
    }
   
 	
 	 
-	 
+	  function buscarPresupuesto(){
+		   
+		   document.getElementById("accion").value="buscarPresupuestos";
+
+		   
+		   document.getElementById("fbuscarPresupuestos").submit();
+		   
+		   
+	   }
 	 
    
    </script> 

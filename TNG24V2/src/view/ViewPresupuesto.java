@@ -37,7 +37,11 @@ public class ViewPresupuesto {
 	}
 	
 	public String vistaTabla() {
-		return null;
+		return "<tr class=\"bodytablaPresupuesto\" ><th id=\"id\" >"+this.getId()+"</th><th>"+
+			       this.getFechaEmision()+"</th><th>"+
+			       this.getCliente().getApellido()+", "+this.getCliente().getNombre()+"</th><th>"+
+			       this.getCliente().getNroDoc()+"</th><th>"+
+			        this.getTecnico().getApellido()+", "+this.getTecnico().getNombre()+"</th></tr>";
 	}
 	
 	

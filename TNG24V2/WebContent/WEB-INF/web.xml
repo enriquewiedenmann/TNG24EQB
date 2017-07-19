@@ -26,4 +26,14 @@
     <servlet-name>PresupuestosSERVLET</servlet-name>
     <url-pattern>/PresupuestosSERVLET</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PresupuestoDetalleSERVLET</display-name>
+    <servlet-name>PresupuestoDetalleSERVLET</servlet-name>
+    <servlet-class>servlets.PresupuestoDetalleSERVLET</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PresupuestoDetalleSERVLET</servlet-name>
+    <url-pattern>/PresupuestoDetalleSERVLET</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,11 +1,17 @@
 package servlets;
 
+import java.io.EOFException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import view.ViewCliente;
 import view.ViewPresupuesto;
@@ -38,13 +44,64 @@ public class PresupuestosSERVLET extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CtrlAgenda sys = CtrlAgenda.getInstance();
 		
-		if(request.getParameter("accion").equals("mostarPresupuesto")){
-			int idPresupuesto = Integer.parseInt(request.getParameter("IdPresupuesto"));
+		
+		
+		if(request.getParameter("accion").equals("buscarPresupuestos")){
 			
-			request.setAttribute("viewPresupuesto", (ViewPresupuesto)sys.mostrarPresupuesto(idPresupuesto));
+			
+		
+			if(request.getParameter("bNroPresupuesto").equals("")){
+			
+			
+			Date fechaEmision = convertirFecha(request.getParameter("fechaEmision"));
+			
+			
+			
+			String nombre= request.getParameter("bNombre");
+			String apellido = request.getParameter("bApellido");
+			String documento = request.getParameter("bDocumento");
+			if(nombre.length()==0){
+				nombre=null;
+			}
+			if(apellido.length()==0){
+				apellido=null;
+			}
+			if(documento.length()==0){
+				documento=null;
+			}
+			
+			HttpSession session = request.getSession(true);
+			session.setAttribute("listaPresupuestos", (ArrayList<ViewPresupuesto>)sys.listarPresupuestos(fechaEmision, documento, nombre, apellido));
+		
 			request.getRequestDispatcher("PantallaPresupuesto.jsp").forward(request,response);	
+			}else{
+				
+				try{
+				int id = Integer.parseInt(request.getParameter("bNroPresupuesto"));
+				HttpSession session = request.getSession(true);
+				session.setAttribute("listaPresupuestos",(ArrayList<ViewPresupuesto>)sys.listarPresupuestos(id));
+				request.getRequestDispatcher("PantallaPresupuesto.jsp").forward(request,response);	
+				}catch(Exception e){
+					HttpSession session = request.getSession(true);
+					session.setAttribute("listaPresupuestos",null);
+					request.getRequestDispatcher("PantallaPresupuesto.jsp").forward(request,response);	
+				}
+			}
 			
+			HttpSession session = request.getSession(true);
+			session.setAttribute("listaPresupuestos",null);
+			request.getRequestDispatcher("PantallaPresupuesto.jsp").forward(request,response);	
 		}
+	}
+
+	private Date convertirFecha(String date) {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		try{
+			return df.parse(date);
+		}catch(Exception e){
+			return null;	
+		}
+		
 	}
 
 }

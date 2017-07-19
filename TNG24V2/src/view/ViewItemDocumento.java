@@ -24,6 +24,13 @@ public class ViewItemDocumento {
 				+ producto.getDesc() + ", cantProd=" + cantProd + ", montoItem="
 				+ montoItem + "]";
 	}
+	
+	public String vistaTabla() {
+		return "<tr class=\"bodytablaItemP\" ><th id=\"id\" >"+this.getProducto().getDesc()+"</th><th>"+
+			       this.getProducto().getCodProducto()+"</th><th>"+
+			      this.getCantProd()+"</th><th>"+
+			       this.getMontoItem()+"</th></tr>";
+	}
 	public int getNroItem() {
 		return nroItem;
 	}

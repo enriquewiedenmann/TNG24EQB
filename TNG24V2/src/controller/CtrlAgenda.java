@@ -60,12 +60,28 @@ public class CtrlAgenda {
 		return null;
 
 	}
-
-	public ArrayList<ViewPresupuesto> listarPresupuestos(int id, Date fecha,
-			int docCliente, int nomCliente, int apellido) {
+	public ArrayList<ViewPresupuesto> listarPresupuestos(Date fecha,
+			String docCliente, String nomCliente, String apellido) {
 		ArrayList<ViewPresupuesto> vp = new ArrayList<ViewPresupuesto>();
 		for (Presupuesto p : presupuestos) {
+			
+			if(p.cumplo(fecha, docCliente, nomCliente, apellido)){
 			vp.add(p.mostrate());
+			}
+		}
+
+		return vp;
+	}
+	
+	
+	
+	public ArrayList<ViewPresupuesto> listarPresupuestos(int id) {
+		ArrayList<ViewPresupuesto> vp = new ArrayList<ViewPresupuesto>();
+		for (Presupuesto p : presupuestos) {
+			
+			if(p.cumplo(id)){
+			vp.add(p.mostrate());
+			}
 		}
 
 		return vp;
@@ -111,6 +127,12 @@ public class CtrlAgenda {
 	}
 
 	public ViewPresupuesto mostrarPresupuesto(int id) {
+		for(Presupuesto p : presupuestos){
+			if(p.cumplo(id)){
+				return p.mostrate();
+			}
+		}
+		
 		return null;
 
 	}
