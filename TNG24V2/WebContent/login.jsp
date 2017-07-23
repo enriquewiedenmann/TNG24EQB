@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,14 +30,14 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">TNG24</a>
-					<a class="navbar-brand" href="#">Técnico</a>
+				<a class="navbar-brand" href="#">TNG24</a> <a class="navbar-brand"
+					href="#">Técnico</a>
 			</div>
 			<div
 				style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
 				26 de Mayo de 2017 &nbsp;
-					<!--  <li class="logout"><a id="logout" href="${ctx}/logout">Logout</a>  </li>-->
-					<a href="/logout" class="btn btn-danger square-btn-adjust">Logout</a>
+				<!--  <li class="logout"><a id="logout" href="${ctx}/logout">Logout</a>  </li>-->
+				<a href="/logout" class="btn btn-danger square-btn-adjust">Logout</a>
 			</div>
 		</nav>
 		<nav class="navbar-default navbar-side" role="navigation">
@@ -45,7 +45,7 @@
 				<ul class="nav" id="main-menu">
 					<li class="text-center"><img src="assets/img/find_user.png"
 						class="user-image img-responsive" /></li>
-						<li><a href="clientes"><i class="fa fa-desktop fa-3x"></i>
+					<!--<li><a href="clientes"><i class="fa fa-desktop fa-3x"></i>
 								Clientes</a></li>
 						<li><a href="hojaderuta"> <i
 								class="fa fa-dashboard fa-3x"></i> Hoja de ruta
@@ -61,42 +61,50 @@
 						<li><a href="encuesta"><i class="fa fa-edit fa-3x"></i>Encuestas</a></li>
 						<li><a href="facturas"><i class="fa fa-bar-chart-o fa-3x"></i>
 								Facturas</a></li>
-						<li><a href="stock"><i class="fa fa-table fa-3x"></i>Stock</a></li>
+						<li><a href="stock"><i class="fa fa-table fa-3x"></i>Stock</a></li> -->
 				</ul>
 			</div>
 		</nav>
 		<div id="page-wrapper">
 			<div id="page-inner">
-			<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-			<div class="well">
-				<c:if test="${param.error != null}">
-					<div class="alert alert-danger alert-dismissable">
-						<button type="button" class="close" data-dismiss="alert"
-							aria-hidden="true">&times;</button>
-						<strong> Credenciales Invalidas</strong>
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<div class="well">
+						<%  	if (request != null){ 
+							String error = (String) request.getAttribute("loginError");
+							if( error != null  && error.equals("invalid")){
+							%>
+								<div class="alert alert-danger alert-dismissable">
+										<button type="button" class="close" data-dismiss="alert"
+											aria-hidden="true">&times;</button>
+										<strong> Credenciales Invalidas</strong>
+									</div>
+							<% }
+						}%>
+						
+									 
+						
+								
+							<form method="post" action="LoginServlet" action="login"
+								class="form-signin" autocomplete="off">
+								<div class="form-group">
+									<label for="usuario">Usuario</label> <input type="text"
+										class="form-control" id="usuario" placeholder="Usuario"
+										name="usuario" id="usuario" placeholder="Usuario" required
+										tabindex="1">
+								</div>
+								<div class="form-group">
+									<label for="contraseña">Contraseña</label> <input
+										type="password" class="form-control" id="contraseña"
+										placeholder="Contraseña" name="contraseña"
+										placeholder="Contraseña" required tabindex="2" required>
+								</div>
+								<button type="submit" class="btn btn-large btn-success"
+									name="login" id="login" tabindex="3">Iniciar Sesión</button>
+							</form>
+						</div>
 					</div>
-				</c:if>
-				<form method="post" id="loginForm"
-					action="login" class="form-signin"	autocomplete="off">
-					<div class="form-group">
-						<label for="exampleInputEmail1">Usuario</label> <input type="text"
-							class="form-control" id="usuario" placeholder="Usuario"
-							name="usuario" id="usuario" placeholder="Usuario" required
-							tabindex="1">
-					</div>
-					<div class="form-group">
-						<label for="exampleInputPassword1">Contraseña</label> <input
-							type="password" class="form-control" id="password"
-							placeholder="Contraseña" name="contraseña" id="contraseña"
-							placeholder="Contraseña" required tabindex="2">
-					</div>
-					<button type="submit" class="btn btn-large btn-success"
-						name="login" id="login" tabindex="4">Iniciar Sesión</button>
-				</form>
-			</div>
-		</div>
-	</div>
+				</div>
 			</div>
 		</div>
 	</div>

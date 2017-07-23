@@ -1,7 +1,5 @@
 package core;
 
-import org.eclipse.jdt.internal.compiler.ast.ThisReference;
-
 import view.ViewProducto;
 
 public class Producto {
