@@ -10,17 +10,18 @@ import view.ViewPresupuesto;
 
 public class Presupuesto extends Documento {
 	private Empleado tecnico;
-	
+	private String motivo;
 	
 	
 	
 	
 
-	public Presupuesto(int id, Date fechaEmision, Cliente cliente,
+	public Presupuesto(int id, Date fechaEmision, Cliente cliente,String motivo,
 			int tiempoManoObra, int montoManoObra,
 			ArrayList<ItemDocumento> items,Empleado e) {
 		super(id, fechaEmision, cliente, tiempoManoObra, montoManoObra, items);
 		this.tecnico=e;
+		this.motivo = motivo;
 	}
 
 
@@ -28,9 +29,10 @@ public class Presupuesto extends Documento {
 
 
 
-	public Presupuesto(Cliente cliente, Empleado empleado) {
+	public Presupuesto(Cliente cliente,String motivo, Empleado empleado) {
 		super(cliente);
 		this.tecnico = empleado;
+		this.motivo= motivo;
 	}
 	
 	
@@ -65,7 +67,7 @@ public class Presupuesto extends Documento {
 		}
 	
 		ViewPresupuesto vp = new ViewPresupuesto(this.getId(), this.getFechaEmision(),this.getCliente(),
-				this.getTiempoManoObra(),this.getMontoManoObra(), this.getTecnico(),li);
+				this.getMotivo(),this.getTiempoManoObra(),this.getMontoManoObra(), this.getTecnico(),li);
 		
 		return vp;
 	
@@ -101,6 +103,24 @@ public class Presupuesto extends Documento {
 		}
 		band = this.getCliente().cumplo(nomCliente, apellido, docCliente);
 		return band;
+	}
+
+
+
+
+
+
+	public String getMotivo() {
+		return motivo;
+	}
+
+
+
+
+
+
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
 	}
 
 

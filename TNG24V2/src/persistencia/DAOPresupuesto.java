@@ -60,13 +60,14 @@ public class DAOPresupuesto {
 				int id = rs.getInt("IDPRESUPUESTO");
 				Date fec= rs.getDate("FECHAEMISIONPRESUPUESTO");
 				int idCliente = rs.getInt("IDCLIENTE");
-				int idTecnico= rs.getInt("IDTECNICO");
+				String motivo = rs.getString("MOTIVO");
+				int idTecnico= rs.getInt("IDTECNICO");				
 				int tiempoManoObra=rs.getInt("TIEMPOMANOOBRA");
 				int montoManoObra = rs.getInt("MONTOMANOOBRA");
 				Cliente cli = cliente.get(idCliente);
 				Empleado emp= empleado.get(idTecnico);
 			
-				Presupuesto p= new Presupuesto(id,fec,cli,tiempoManoObra,montoManoObra,this.selectAllItemPresupuesto(id),emp);
+				Presupuesto p= new Presupuesto(id,fec,cli,motivo,tiempoManoObra,montoManoObra,this.selectAllItemPresupuesto(id),emp);
 				lista.add(p);
 				
 			}
@@ -103,13 +104,14 @@ public class DAOPresupuesto {
 			int id = rs.getInt("IDPRESUPUESTO");
 			Date fec= rs.getDate("FECHAEMISIONPRESUPUESTO");
 			int idCliente = rs.getInt("IDCLIENTE");
+			String motivo = rs.getString("MOTIVO");
 			int idTecnico= rs.getInt("IDTECNICO");
 			int tiempoManoObra=rs.getInt("TIEMPOMANOOBRA");
 			int montoManoObra = rs.getInt("MONTOMANOOBRA");
 			Cliente cli = cliente.get(idCliente);
 			Empleado emp= empleado.get(idTecnico);
 		
-			Presupuesto p= new Presupuesto(id,fec,cli,tiempoManoObra,montoManoObra,this.selectAllItemPresupuesto(id),emp);
+			Presupuesto p= new Presupuesto(id,fec,cli,motivo,tiempoManoObra,montoManoObra,this.selectAllItemPresupuesto(id),emp);
 				map.put(id,p);
 				
 			}

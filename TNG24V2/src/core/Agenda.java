@@ -30,17 +30,22 @@ public class Agenda {
 	return va;
 	}
 	
-	public Visita esTuVisita(int idVisita) {
+	public boolean esTuVisita(int idVisita) {
 		
 		for(Visita v: visitas){
 			if(v.cumplo(idVisita)){
-				return v;
+				return true;
 			}
 		}
-		return null;
+		return false;
 	}
 	
 	public Visita buscarVisitaPresupuesto(int id) {
+		for(Visita v: visitas){
+			if(v.cumplo(id)){
+				return v;
+			}
+		}
 		return null;
 	}
 	
