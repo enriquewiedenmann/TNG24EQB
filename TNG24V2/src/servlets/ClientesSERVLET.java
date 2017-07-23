@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.CtrlEnte;
-import view.ViewCliente;
+import view.*;
 
 /**
  * Servlet implementation class Cliente
@@ -84,7 +84,7 @@ public class ClientesSERVLET extends HttpServlet {
 			String mail = request.getParameter("mail");
 			String dom = request.getParameter("domicilio");	
 			
-			
+			try{
 			int nuevo =	sys.nuevoCliente(nombre, apellido, nroDoc,tipoDoc, telefono, mail, Integer.parseInt(dom));
 			if(nuevo!=0){
 				request.setAttribute("setModal", "mostarCliente");
@@ -96,7 +96,10 @@ public class ClientesSERVLET extends HttpServlet {
 			}
 			
 			request.getRequestDispatcher("PantallaCliente.jsp").forward(request,response);	
-		
+			}catch(Exception e){
+				request.setAttribute("setModal", "1");
+				request.getRequestDispatcher("PantallaCliente.jsp").forward(request,response);	
+			}
 		
 		}
 		
@@ -113,9 +116,9 @@ public class ClientesSERVLET extends HttpServlet {
 			String dom = request.getParameter("domicilio");
 			String id = request.getParameter("idCliente");
 			
-					
+			boolean band = false;		
+			try{
 			
-			boolean band = false;
 			band=sys.editarCliente(Integer.parseInt(id),nombre, apellido, nroDoc, tipoDoc, telefono, mail, Integer.parseInt(dom));
 			if(band){
 				request.setAttribute("setModal", "mostarCliente");
@@ -129,7 +132,10 @@ public class ClientesSERVLET extends HttpServlet {
 				
 				}
 				request.getRequestDispatcher("PantallaCliente.jsp").forward(request,response);	
-		
+			}catch(Exception e){
+				request.setAttribute("setModal", "2");
+				request.setAttribute("viewCliente", (ViewCliente)sys.mostrarCliente(Integer.parseInt(id)));
+			}
 		}
 		
 		

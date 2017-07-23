@@ -12,17 +12,19 @@ public class ViewPresupuesto {
 	private int id;
 	private Date fechaEmision;
 	private Cliente cliente;
+	private String motivo;
 	private int tiempoManoObra;
 	private int montoManoObra;
 	private Empleado tecnico;
 	private ArrayList<ViewItemDocumento> vli;
 	
-	public ViewPresupuesto(int id, Date fechaEmision, Cliente cliente,
+	public ViewPresupuesto(int id, Date fechaEmision, Cliente cliente,String motivo,
 			int tiempoManoObra, int montoManoObra, Empleado tecnico, ArrayList<ViewItemDocumento> li) {
 		super();
 		this.id = id;
 		this.fechaEmision = fechaEmision;
 		this.cliente = cliente;
+		this.motivo=motivo;
 		this.tiempoManoObra = tiempoManoObra;
 		this.montoManoObra = montoManoObra;
 		this.tecnico = tecnico;
@@ -33,12 +35,13 @@ public class ViewPresupuesto {
 		return "ViewPresupuesto [id=" + id + ", fechaEmision=" + fechaEmision
 				+ ", cliente=" + cliente.getApellido()+", "+cliente.getNombre() + ", tiempoManoObra=" + tiempoManoObra
 				+ ", montoManoObra=" + montoManoObra + ", tecnico=" + tecnico.getApellido()
-				+", "+tecnico.getNombre()+"]";
+				+", "+tecnico.getNombre()+", motivo: "+this.getMotivo()+"]";
 	}
 	
 	public String vistaTabla() {
 		return "<tr class=\"bodytablaPresupuesto\" ><th id=\"id\" >"+this.getId()+"</th><th>"+
 			       this.getFechaEmision()+"</th><th>"+
+			       this.getMotivo()+"</th><th>"+
 			       this.getCliente().getApellido()+", "+this.getCliente().getNombre()+"</th><th>"+
 			       this.getCliente().getNroDoc()+"</th><th>"+
 			        this.getTecnico().getApellido()+", "+this.getTecnico().getNombre()+"</th></tr>";
@@ -90,6 +93,14 @@ public class ViewPresupuesto {
 
 	public void setVli(ArrayList<ViewItemDocumento> vli) {
 		this.vli = vli;
+	}
+
+	public String getMotivo() {
+		return motivo;
+	}
+
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
 	}
 	
 	

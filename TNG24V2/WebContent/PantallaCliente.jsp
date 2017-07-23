@@ -103,7 +103,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
                         </ul>
                       </li>  
                        <li  >
-                        <a   href="PantallaPresupuesto.jsp"><i class="fa fa-user  fa-3x"></i>Presupuestos</a>
+                        <a   href="PantallaPresupuesto.jsp"><i class="fa fa-edit fa-3x"></i>Presupuestos</a>
                     </li>
                   <li  >
                         <a class="active-menu"  href="PantallaCliente.jsp"><i class="fa fa-user  fa-3x"></i> Clientes</a>

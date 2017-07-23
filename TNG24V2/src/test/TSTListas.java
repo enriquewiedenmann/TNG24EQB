@@ -120,6 +120,8 @@ public class TSTListas {
 			System.out.println("                                        "+vid.toString());
 		}
 		}
+		ca.nuevoPresupuesto(389);
+		ca.ConfirmarAltaPresupuesto(100, 100);
 		/*
 		
 		System.out.println("----------------------------------------------------------------");

@@ -2,8 +2,6 @@
     pageEncoding="ISO-8859-1"
     import ="view.*"
     import = "java.util.*"	
-    import ="controller.*"
-    
     %>
 
 	<!DOCTYPE html>
@@ -32,11 +30,6 @@
 
   <link rel="stylesheet" href="assets/css/jquery-ui.css" />
 </head>
-<style>
-    #mdialTamanio{
-      width: 100% !important;
-    }
-  </style>
 <body onload="setPage()" >
 
 <%ViewPresupuesto vp = (ViewPresupuesto)session.getAttribute("presupuesto") ;
@@ -55,16 +48,8 @@
                     	int tot=0;
                     	
                      	 if(vp!=null){
-                     		if(vp.getId()!=0){
                      		id=Integer.toString(vp.getId());
-                     		}else{
-                     			id="-";
-                     		}
-                     		if(!(vp.getFechaEmision()==null)){
-                     		fechaEmision=vp.getFechaEmision().toString();
-                     		}else{
-                     			fechaEmision="-";
-                     		}
+                     		fechaEmision="lalalal";//vp.getFechaEmision().toString();
                         	cliente=vp.getCliente().getApellido()+", "+vp.getCliente().getNombre();
                         	tiempoManoObra=Integer.toString(vp.getTiempoManoObra())+" minutos";
                         	montoManoObra=Integer.toString(vp.getMontoManoObra());
@@ -101,7 +86,8 @@
     </div>
   </div>
   <div class="presupuesto">
- 
+    <div class="w-form">
+      <form data-name="Email Form" id="email-form" name="email-form">
         <div class="rowdatoscliente w-row">
       
          
@@ -123,20 +109,14 @@
         <br>
         <label class="labeldato" for="Cliente">Detalle de Productos:</label>
        <div class="table-responsive table table-condensed">
-     
-       <button class="btn btn-default btn-sm"  data-toggle="modal"  onClick=""  data-target="#altaItem">
-       
-                            +
-                            </button> 
                                 <table class="table  table-bordered " id="tablaItemsPresupeusto">
                                     <thead>
                                         <tr>
                                         	<th style="display: none;">nro</th>
-                                            <th>Descripcion</th>
+                                            <th  >Descripcion</th>
                                             <th>Codigo</th>
                                             <th>Cantidad</th>
                                             <th>Valor</th>
-                                            
 											
                                         </tr>
                                     </thead>
@@ -156,9 +136,8 @@
 										
                                     </tbody>
                                 </table>
-                               
                             </div>	
-                            <div>
+                            <div >
             
            <div class="rowdatoscliente w-row">    
            <div class="w-col w-col-2 w-col-small-small-stack w-col-tiny-tiny-stack">
@@ -203,142 +182,34 @@
           			 
           			 
       
+      </form>
+      
      
+    </div>
   </div>
   
    <div type="hidden" >
         <form form="role" id="faccionItem" method="POST" action="PresupuestoDetalleSERVLET">
-         <input  type="hidden" id="accion" name="accion"/>
+         <input  type="hidden" id="accionItem" name="accionItem"/>
         <input  type="hidden" id="idip" name="idip"/>
         
         </form>
         </div>
-        <!--  INICIO DEL MODAL -->
-         <div name="modales">
-           <div class="modal fade" id="altaItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"   >
-                                <div class="modal-dialog" id="mdialTamanio">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 id="VistaClientesTitulo" class="modal-title" id="myModalLabel">Alta Item</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                        <div id="fItem" style="display: block">
-                                        <form form="role"  id="nuevoItem" method="POST" action="PresupuestoDetalleSERVLET">
-                                        <div class="form-group">
-                                                                               
-                                            <div>
-                                             <label>Producto:</label>
-                                            <div class="form-group input-group">
-                                            <input  id="codProductoModal" name="codProductoModal" type="text" class="form-control" disabled/>
-                                            <span class="input-group-btn" >
-                                                <button id="btnBuscarProducto" class="btn btn-default" type="button" onclick="verProductos()"><i class="fa fa-search"></i>
-                                                </button>
-                                            </span>
-                                                                                   
-                                        </div>
-                           
-                                       </div>
-                                      
-										  <div class="form-group">
-                                            <label>Cantidad:</label>
-                                            <input  id="cantProductoModal"  name="cantProductoModal" class="form-control" type="number"/>
-											
-                                            </div>
-											 <input type="hidden"  id="accion" name="accion" value="altaItem" />
-											
-											
-										  <button type="button" class="btn btn-danger" id="btnAceptar" onClick="nuevoItem()">Aceptar</button>
-										  
-											</div> 
-             			             </form>
-                                        </div>
-							<div class="panel-body" id="tProd"  style="display: none">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="tablaProductos">
-                                    <thead>
-                                        <tr>
-                                            <th>Codigo:</th>
-                                            <th>Descripcion:</th>
-                                            <th>Precio:</th>
-                                           
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-									
-									<%
-                                       CtrlProducto ctrlp = CtrlProducto.getInstancia();
-										for(ViewProducto p: ctrlp.listarProductos()){
-											out.println(p.vistaTabla());
-											}
-                                                 		 %>         
-									                          
-                                    
-                                    
-                                     
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        
-										
-										
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-							</div>
-							
-							<!--  FIN DEL MODAL -->
-        
-        
  <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>--> 
   <script src="assets/js/webflow.js" type="text/javascript"></script>
 
  <script src="assets/js/jquery-1.10.2.js"></script>
-<!-- INICIA INSERT LOGICA MODAL -->
-
- <script src="assets/js/bootstrap.min.js"></script>
-    <!-- METISMENU SCRIPTS -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
-      
-    <!-- DATA TABLE SCRIPTS     -->
-
-   <script src="assets/js/dataTables/jquery.dataTables.js"></script>
-    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
-	<script>
-
-$(document).ready(function () {$('#tablaProductos').dataTable();});			
-							
-	</script>
-
-
-
-<!-- FIN INSERT LOGICA MODAL -->
 <script type="text/javascript">
 $(document).on("click", "tr.bodytablaItemP" , function(){
 		
 		var celda = $(this).children("#id").text();
-		document.getElementById("codProductoModal").value="";
-		accion.value="bajaItem"
+		accionItem.value="bajaItem"
 		idip.value =celda;
 		faccionItem.submit();
 		
 }
 );
 
-$(document).on("click", "tr.bodyTableProd" , function(){
-	
-	var celda = $(this).children("#id").text();
-	
-	
-	codProductoModal.value=celda;
-	document.getElementById("fItem").setAttribute("style","display: block");
-	document.getElementById("tProd").setAttribute("style","display: none");
-	
-});						
 	
 	</script>
 
@@ -368,7 +239,6 @@ function setPage(){
 		document.getElementById("total").disabled = true;
 		document.getElementById("tecnico").disabled = true;
 		document.getElementById("tiempo").disabled = false;
-		document.getElementById("monto").type="number";
 		
 		
 		
@@ -377,27 +247,8 @@ function setPage(){
 	
 }
 
-function nuevoItem(){
-	document.getElementById("codProductoModal").disabled = false;
-	 document.getElementById("accionItem").value="altaItem";
-	 document.getElementById("nuevoItem").submit();
-	
-}
 
-function setModal() {
-	
-	document.getElementById("codProductoModal").value="";
-	document.getElementById("cantProductoModal").value="";
-	document.getElementById("codProductoModal").disabled = true;
-	
-}
 
-function verProductos(){
-	
-	document.getElementById("fItem").setAttribute("style","display: none");
-	document.getElementById("tProd").setAttribute("style","display: block");
-	
-}	
 
 </script>
 

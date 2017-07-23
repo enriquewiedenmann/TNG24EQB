@@ -22,6 +22,12 @@ public class ViewProducto {
 	}
 	
 	
+	public String vistaTabla(){
+		return  "<tr class=\"bodyTableProd\" ><th id=\"id\" >"+this.getCodProducto()+"</th><th>"+
+        this.getDesc()+"</th><th>"+
+        this.getPrecio()+"</th></tr>";
+	}
+	
 	
 	public int getId() {
 		return id;

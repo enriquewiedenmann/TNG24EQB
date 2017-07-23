@@ -76,21 +76,15 @@ public class PresupuestosSERVLET extends HttpServlet {
 			request.getRequestDispatcher("PantallaPresupuesto.jsp").forward(request,response);	
 			}else{
 				
-				try{
+				
 				int id = Integer.parseInt(request.getParameter("bNroPresupuesto"));
 				HttpSession session = request.getSession(true);
 				session.setAttribute("listaPresupuestos",(ArrayList<ViewPresupuesto>)sys.listarPresupuestos(id));
 				request.getRequestDispatcher("PantallaPresupuesto.jsp").forward(request,response);	
-				}catch(Exception e){
-					HttpSession session = request.getSession(true);
-					session.setAttribute("listaPresupuestos",null);
-					request.getRequestDispatcher("PantallaPresupuesto.jsp").forward(request,response);	
-				}
+				
 			}
 			
-			HttpSession session = request.getSession(true);
-			session.setAttribute("listaPresupuestos",null);
-			request.getRequestDispatcher("PantallaPresupuesto.jsp").forward(request,response);	
+			
 		}
 	}
 

@@ -164,11 +164,14 @@ public class CtrlAgenda {
 
 		Agenda ae = null;
 		for (Agenda a : agendas) {
-			va = a.esTuVisita(idVisita);
-			ae = a;
+		  if(a.esTuVisita(idVisita)){
+				va = a.buscarVisitaPresupuesto(idVisita);
+				ae = a;
+			}
+						
 		}
 		if (va != null) {
-			pa = new Presupuesto(va.getCliente(), ae.getTecnico());
+			pa = new Presupuesto(va.getCliente(),va.getMotivo(), ae.getTecnico());
 			return true;
 		}
 		return false;
@@ -219,5 +222,9 @@ public class CtrlAgenda {
 
 	public boolean modificarVisita(int id, String motivo) {
 		return true;
+	}
+
+	public Presupuesto getPa() {
+		return pa;
 	}
 }

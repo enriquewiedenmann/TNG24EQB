@@ -109,7 +109,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
                         </ul>
                       </li>  
 					   <li  >
-                        <a class="active-menu"  href="PantallaPresupuesto.jsp"><i class="fa fa-user  fa-3x"></i>Presupuestos</a>
+                        <a class="active-menu"  href="PantallaPresupuesto.jsp"><i class="fa fa-edit fa-3x"></i>Presupuestos</a>
                     </li>	
                   <li  >
                         <a   href="PantallaCliente.jsp"><i class="fa fa-user  fa-3x"></i> Clientes</a>
@@ -142,8 +142,9 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
                                 <table class="table table-striped table-bordered table-hover" id="tablaPresupuesto">
                                     <thead>
                                         <tr>
-                                            <th>ID:</th>
+                                            <th>ID</th>
                                             <th>Fecha Emsion</th>
+                                            <th>Descripcion</th>
                                             <th>Apelido y Nombre</th>
                                             <th>Documento</th>
 											<th>Tecnico</th>
@@ -223,6 +224,7 @@ font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="b
         
         <div type="hidden" >
         <form form="role" id="fmostrarPresupuesto" method="POST" action="PresupuestoDetalleSERVLET">
+        <input  type="hidden" id="accion1" name="accion1"/>
         <input  type="hidden" id="idm" name="idm"/>
         
         </form>
@@ -249,6 +251,7 @@ firstDay: 1
 });
 });
 </script>
+
       <!-- BOOTSTRAP SCRIPTS -->
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- METISMENU SCRIPTS -->
@@ -267,9 +270,7 @@ firstDay: 1
 	$(document).on("click", "tr.bodytablaPresupuesto" , function(){
 		
 		var celda = $(this).children("#id").text();
-		
-		
-		
+		accion1.value="mostrarPresupuesto"
 		idm.value=celda;
 		fmostrarPresupuesto.submit();
 		
