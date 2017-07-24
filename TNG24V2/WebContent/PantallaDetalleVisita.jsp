@@ -317,12 +317,24 @@
                             </div>
 							</div>
 							<!--  FIN DEL MODAL -->
-        
+
+
+
         
  <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>--> 
   <script src="assets/js/webflow.js" type="text/javascript"></script>
 
  <script src="assets/js/jquery-1.10.2.js"></script>
+ <script src="assets/js/jquery-ui.js"></script>
+<script src="assets/js/jquery.ui.datepicker-es.js"></script>
+    <script>
+$(function () {
+$.datepicker.setDefaults($.datepicker.regional["es"]);
+$("#fecInicio").datepicker({
+firstDay: 1
+});
+});
+</script>        
 <!-- INICIA INSERT LOGICA MODAL -->
 
  <script src="assets/js/bootstrap.min.js"></script>
