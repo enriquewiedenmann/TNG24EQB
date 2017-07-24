@@ -43,23 +43,6 @@
 				<ul class="nav" id="main-menu">
 					<li class="text-center"><img src="assets/img/find_user.png"
 						class="user-image img-responsive" /></li>
-					<!--<li><a href="clientes"><i class="fa fa-desktop fa-3x"></i>
-								Clientes</a></li>
-						<li><a href="hojaderuta"> <i
-								class="fa fa-dashboard fa-3x"></i> Hoja de ruta
-						</a></li>
-						<li><a href="agenda"> <i class="fa fa-dashboard fa-3x"></i>Agenda
-						</a></li>
-						<li><a href="presupuestos"><i class="fa fa-qrcode fa-3x"></i>
-								Presupuestos</a></li>
-						<li><a href="facturas"><i class="fa fa-qrcode fa-3x"></i>Facturas</a></li>
-						<li><a href="desempeño"><i
-								class="fa fa-bar-chart-o fa-3x"></i>Desempeño Técnicos</a></li>
-						<li><a href="usuarios"><i class="fa fa-desktop fa-3x"></i>Usuarios</a></li>
-						<li><a href="encuesta"><i class="fa fa-edit fa-3x"></i>Encuestas</a></li>
-						<li><a href="facturas"><i class="fa fa-bar-chart-o fa-3x"></i>
-								Facturas</a></li>
-						<li><a href="stock"><i class="fa fa-table fa-3x"></i>Stock</a></li> -->
 				</ul>
 			</div>
 		</nav>
@@ -70,6 +53,7 @@
 						<div class="well">
 						<%  	if (request != null){ 
 							String error = (String) request.getAttribute("loginError");
+							String noSessionMessage = (String) request.getAttribute("noSessionMessage");
 							if( error != null  && error.equals("invalid")){
 							%>
 								<div class="alert alert-danger alert-dismissable">
@@ -78,6 +62,14 @@
 										<strong> Credenciales Invalidas</strong>
 									</div>
 							<% }
+							else if( noSessionMessage != null){
+								%>
+									<div class="alert alert-danger alert-dismissable">
+											<button type="button" class="close" data-dismiss="alert"
+												aria-hidden="true">&times;</button>
+											<strong> Por favor, inicia sesión para continuar</strong>
+										</div>
+								<% }
 						}%>
 						
 									 

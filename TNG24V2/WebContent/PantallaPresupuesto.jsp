@@ -9,6 +9,15 @@
 	import ="view.*"	
 	import = "java.util.*"
 		%>    
+		
+	<%	
+
+HttpSession sessionUsuario = request.getSession(true);
+if(sessionUsuario != null && sessionUsuario.getAttribute("currentUser") == null){
+	request.setAttribute("noSessionMessage", "Por favor, inicie sesión para continuar.");
+	request.getRequestDispatcher("login.jsp").forward(request, response);
+}
+ %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -37,7 +46,7 @@
 <body id="body" >
 
     <div id="wrapper">
-        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-cls-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -49,7 +58,7 @@
             </div>
    <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
   <a href="assets/manuales/manual.pdf" target="_blank" class="btn btn-info square-btn-adjust pull-left" style="margin-right:3px;">?</a>
- 	<form action="LoginServlet" method="POST">
+ 	<form action="LoginServlet" method="POST" class="pull-right">
  		<input type="hidden" value="logout" name="logout"> 
  	<button type="submit" class="btn btn-danger square-btn-adjust">Salir</button>
  	</form> 
@@ -61,13 +70,10 @@
                 <ul class="nav" id="main-menu">
 				<li class="text-center">
                     <img src="assets/img/find_user.png" class="user-image img-responsive"/>
+					<li ><a class="active-menu" href="PantallaPresupuesto.jsp">
+						<i class="fa fa-edit fa-3x"></i>Presupuestos</a>
 					</li>
-			
-                        <a class="active-menu"  href="PantallaPresupuesto.jsp"><i class="fa fa-edit fa-3x"></i>Presupuestos</a>
-                    </li>	
-                  <li  >
-                        <a   href="PantallaCliente.jsp"><i class="fa fa-user  fa-3x"></i> Clientes</a>
-                    </li>	
+                   <li><a href="PantallaCliente.jsp"><i class="fa fa-user  fa-3x"></i> Clientes</a></li>	
                 </ul>
                
             </div>
@@ -235,10 +241,6 @@ firstDay: 1
 	
 	
 		</script>
-   
-   <!-- CUSTOM SCRIPTS -->
-    <script src="assets/js/custom.js"></script>
-    
    <script type="text/javascript">
 	
 	  function setModalBuscador(){

@@ -28,10 +28,21 @@ public class LoginServlet extends HttpServlet {
 				String usuario = request.getParameter("usuario");
 				String contraseña = request.getParameter("contraseña");
 
-				if (DAOUsuarios.getInstancia().login(usuario, contraseña)) {
+				String rol = DAOUsuarios.getInstancia().login(usuario, contraseña);
+				if (rol != null) {
 					HttpSession session = request.getSession(true);
 					session.setAttribute("currentUser", usuario);
-					request.getRequestDispatcher("PantallaCliente.jsp").forward(request, response);
+					session.setAttribute("rol", rol);
+					
+					if(rol.equals("TEC")){
+						// TODO TODO REDIRECCIONAR A PANTALLA DEL TECNICO
+						request.getRequestDispatcher("PantallaCliente.jsp").forward(request, response);
+					}
+					else if (rol.equals("CTO")){
+						
+						// TODO REDIRECCIONAR A PANTALLA DE LA COORDINADORA
+						request.getRequestDispatcher("PantallaCliente.jsp").forward(request, response);
+					}
 				}
 				else {
 					request.setAttribute("loginError", "invalid");

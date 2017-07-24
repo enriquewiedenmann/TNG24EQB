@@ -92,16 +92,6 @@
             </div>
             </nav>
             </div>
- 
- 
- 
- 
- 
- 
- 
- 
-
-            
   <div class="nuevopresupuesto seccionhojaderuta">
     <div class="rowhojaderuta w-row">
       <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6">
@@ -112,12 +102,7 @@
       </div>
     </div>
   </div>
-  
- 
         <div class="rowdatoscliente w-row">
-      
-         
-         
           <div class="w-col w-col-1 w-col-small-small-stack w-col-tiny-tiny-stack">
             <label class="labeldato" for="Cliente">Cliente:</label>
           </div>
@@ -135,9 +120,7 @@
         <br>
         <label class="labeldato" for="Cliente">Detalle de Productos:</label>
        <div class="table-responsive table table-condensed">
-     
        <button id="btnNuevoItem" class="btn btn-default btn-sm"  data-toggle="modal"  onClick=""  data-target="#altaItemModal">
-       
                             +
                             </button> 
                                 <table class="table  table-bordered " id="tablaItemsPresupeusto">
