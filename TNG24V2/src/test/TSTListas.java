@@ -110,7 +110,7 @@ public class TSTListas {
 		for(ViewProducto p: ctrlp.listarProductos()){
 			System.out.println(p.toString());
 		}
-	*/
+	
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("Presupuestos");
 		CtrlAgenda ca = CtrlAgenda.getInstance();
@@ -122,7 +122,7 @@ public class TSTListas {
 		}
 		ca.nuevoPresupuesto(389);
 		ca.ConfirmarAltaPresupuesto(100, 100,null);
-		/*
+	*/
 		
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("Agendas y Visitas");
@@ -130,10 +130,10 @@ public class TSTListas {
 		for(ViewAgenda va: ca.listarAgendas()){
 		System.out.println(va.toString());	
 		for(ViewVisita vv: va.getVVV()){
-			System.out.println("                                        "+vv.toString());
+			System.out.println("                                        "+vv.toString()+"     "+vv.getInicioProgramado().toString());
 		}
 		}
-		
+		/*
 		System.out.println("----------------------------------------------------------------");
 		System.out.println("Nuevo Presupuesto");
 		//CtrlAgenda ca = CtrlAgenda.getInstance();

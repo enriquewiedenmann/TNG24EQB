@@ -48,7 +48,12 @@ public class ViewEmpleado {
 	}
 
 
-
+	public String vistaTabla(){
+		return  "<tr class=\"bodyTableTecnico\" ><th id=\"id\" >"+this.getIdEnte()+"</th><th>"+
+		       this.getApellido()+", "+this.getNombre()+"</th><th>"+
+		       this.getNroDoc()+"</th></tr>";
+			
+	}
 
 
 

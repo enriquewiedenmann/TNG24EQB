@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -118,7 +120,7 @@ public int insert(int agenda,Visita v) {
 		{
 			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
-					.prepareStatement("SELECT *FROM TNG24V1.dbo.V_VISITA where IDAGENDA=?");
+					.prepareStatement("SELECT *FROM TNG24V1.dbo.V_VISITA where IDAGENDA=? and ESTADO<>'B'");
 			s.setInt(1,idAgendaS );
 			ResultSet rs = s.executeQuery();
 			Map<Integer,Presupuesto> pre=DAOPresupuesto.getInstancia().selectAllWhithPresupuesto();
@@ -137,10 +139,11 @@ public int insert(int agenda,Visita v) {
 				int idPresupuesto = rs.getInt("IDPRESUPPUESTO");
 				int idCliente = rs.getInt("IDCLIENTE");
 				int idDomicilio = rs.getInt("IDDOMICILIO");
-				Date inicioProgramado =rs.getDate("INICIOPROGRAMADO");
-				Date finProgramado =rs.getDate("FINPROGRAMADO");
-				Date inicioReal =rs.getDate("INICIOREAL");
-				Date finReal =rs.getDate("FINREAL");
+				Timestamp inicioProgramado = rs.getTimestamp("INICIOPROGRAMADO");
+				
+				Timestamp finProgramado =rs.getTimestamp("FINPROGRAMADO");
+				Timestamp inicioReal =rs.getTimestamp("INICIOREAL");
+				Timestamp finReal =rs.getTimestamp("FINREAL");
 				String motivo =rs.getString("MOTIVO");
 				String estado =  rs.getString("ESTADO");
 				char e = estado.charAt(0);

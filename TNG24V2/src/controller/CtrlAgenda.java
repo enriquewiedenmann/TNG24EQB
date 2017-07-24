@@ -228,4 +228,15 @@ public class CtrlAgenda {
 	public Presupuesto getPa() {
 		return pa;
 	}
+
+	public ArrayList<ViewAgenda> listarAgendas(Date fecha) {
+		ArrayList<ViewAgenda> va=new ArrayList<ViewAgenda>();
+		for(Agenda a : agendas){
+		
+				
+				va.add(a.mostrate(fecha));
+			
+		}
+		return va;
+	}
 }

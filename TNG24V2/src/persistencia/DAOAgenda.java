@@ -39,7 +39,7 @@ public class DAOAgenda {
 		{
 			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
-					.prepareStatement("select * from TNG24V1.dbo.CT_AGENDA");
+					.prepareStatement("select * from TNG24V1.dbo.CT_AGENDA where estado<>'B' ");
 
 			ResultSet rs = s.executeQuery();
 			Map<Integer,Empleado> emp=DAOEmpleado.getInstancia().selectwhithEmpleado();

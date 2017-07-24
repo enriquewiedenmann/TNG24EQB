@@ -1,9 +1,13 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Date;
+
+import complementos.FechasAux;
 
 import persistencia.DAOVisita;
 import view.ViewAgenda;
+import view.ViewVisita;
 
 public class Agenda {
 	private int idAgenda;
@@ -26,6 +30,7 @@ public class Agenda {
 	}
 	
 	public ViewAgenda mostrate() {
+		
 		ViewAgenda va =new ViewAgenda(this.getIdAgenda(),this.getTecnico(),this.getEstado(),this.getVisitas());
 	return va;
 	}
@@ -87,6 +92,25 @@ public class Agenda {
 
 	public void setVisitas(ArrayList<Visita> visitas) {
 		this.visitas = visitas;
+	}
+
+	public ViewAgenda mostrate(Date fecha) {
+		
+		ViewAgenda va =new ViewAgenda(this.getIdAgenda(),this.getTecnico(),this.getEstado(),this.getVisitas(fecha));
+		return va;
+	}
+
+	private ArrayList<Visita> getVisitas(Date fecha) {
+		Date manana = FechasAux.getInstance().sumarRestarDiasFecha(fecha, 1);
+		 ArrayList<Visita> vd = new ArrayList<Visita>();
+		 for(Visita v: visitas){
+			
+			 if(v.getInicioProgramado().after(fecha) & v.getInicioProgramado().before(manana)){
+				 vd.add(v);
+			 }
+			 
+		 }
+		return vd;
 	}
 	
 	

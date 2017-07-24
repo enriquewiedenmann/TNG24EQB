@@ -75,6 +75,19 @@ public class CtrlEnte {
 		return ltd;
 	}
 
+	
+	public ArrayList<ViewEmpleado> listaTecnicos(){
+		ArrayList<ViewEmpleado> lista = new ArrayList<ViewEmpleado>();
+		for (Empleado e : empleados) {
+			
+			if(e.getRol().getCodRollEmpleado().equals("TEC")){
+				
+			lista.add(e.mostrate());
+			}
+
+		}
+		return lista;
+	}
 	public ArrayList<ViewEmpleado> listaEmpleados() {
 		ArrayList<ViewEmpleado> lista = new ArrayList<ViewEmpleado>();
 		for (Empleado e : empleados) {

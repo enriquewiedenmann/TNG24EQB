@@ -3,8 +3,6 @@
   <display-name>TNG24V2</display-name>
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
-<!--     <welcome-file>PantallaCliente.jsp</welcome-file> -->
-<!--     <welcome-file>PantallPresupuesto.jsp</welcome-file> -->
   </welcome-file-list>
   <servlet>
     <description>ClientesSERVLET</description>
@@ -36,7 +34,7 @@
     <servlet-name>PresupuestoDetalleSERVLET</servlet-name>
     <url-pattern>/PresupuestoDetalleSERVLET</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <description></description>
     <display-name>Login</display-name>
     <servlet-name>LoginServlet</servlet-name>
@@ -45,5 +43,15 @@
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AgendaCTSERVLET</display-name>
+    <servlet-name>AgendaCTSERVLET</servlet-name>
+    <servlet-class>servlets.AgendaCTSERVLET</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AgendaCTSERVLET</servlet-name>
+    <url-pattern>/AgendaCTSERVLET</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -7,7 +7,7 @@ import core.Domicilio;
 import core.Empleado;
 import core.Factura;
 import core.Presupuesto;
-
+import complementos.FechasAux;
 public class ViewVisita {
 	private int id;
 	private Factura factura;
@@ -178,6 +178,12 @@ public class ViewVisita {
 	}
 	
 	
+	public String getInicioProgramadoHHMM(){
+		return FechasAux.getInstance().toStringHHMM(this.getInicioProgramado());
+	}
+	public String getFinProgramadoHHMM(){
+		return FechasAux.getInstance().toStringHHMM(this.getFinProgramado());
+	}
 
 
 }
