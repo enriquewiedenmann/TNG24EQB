@@ -61,14 +61,15 @@ public class DAOUsuarios {
 		return map;
 	}	
 	
-	public boolean login(String usuario, String contraseña)
+	public String login(String usuario, String contraseña)
 	{
-		boolean logged = false;
+		String logged = null;
 		try
 		{
 			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
-					.prepareStatement("select * from TNG24V1.dbo.TG_USUARIO WHERE USERNAME = ? AND PASS = ?;");
+					.prepareStatement("SELECT e.CODROLLEMPPLEADO FROM TNG24V1.dbo.TG_USUARIO u JOIN TNG24V1.dbo.CT_EMPLEADO e on u.IDUSUARIO = e.IDEMPLEADO " + 
+										"WHERE u.USERNAME = ? AND u.PASS = ?;");
 			
 			s.setString(1, usuario);
 			s.setString(2, contraseña);
@@ -78,20 +79,14 @@ public class DAOUsuarios {
 
 			while (rs.next())
 			{
-				int id = rs.getInt("IDUSUARIO");
-				String cod = rs.getString("USERNAME");
-				String desc = rs.getString("PASS");
-				String estado =  rs.getString("ESTADO");
-				char e = estado.charAt(0);
-				
-				Usuario user = new Usuario(cod,desc, e);
-				
-				return true;
+				String cod= rs.getString("CODROLLEMPPLEADO");
+				logged= cod;
 			}
 
 		} catch (Exception e)
 		{
-			System.out.println("ERROR SELECT ALL USUARIO" + e.getMessage());
+			System.out.println("ERROR SELECT ALL USUARIO " + e.getMessage());
+			e.printStackTrace();
 		}
 		return logged;
 	}
