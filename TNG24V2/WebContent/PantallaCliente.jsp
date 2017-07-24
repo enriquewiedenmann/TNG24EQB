@@ -52,6 +52,21 @@ if(sessionUsuario != null && sessionUsuario.getAttribute("currentUser") == null)
             </div>
  <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;"> 
   <a href="assets/manuales/manual.pdf" target="_blank" class="btn btn-info square-btn-adjust pull-left" style="margin-right:3px;">?</a>
+  <button class="btn btn-info square-btn-adjust pull-left" style="margin-right:3px;">
+	<%
+		HttpSession session1 = request.getSession(true);
+		if(session1.getAttribute("currentUser") != null ){
+			String rol = (String) session1.getAttribute("rol");
+			if(rol.equals("TEC")){
+				%>Técnico: <%=session1.getAttribute("currentUser")%><%
+			}
+			else{
+				%>Coordinador: <%=session1.getAttribute("currentUser")%><%
+			}
+		}
+		
+	%>
+	</button>
  	<form action="LoginServlet" method="POST" class="pull-right">
  		<input type="hidden" value="logout" name="logout"> 
  	<button type="submit" class="btn btn-danger square-btn-adjust">Salir</button>
