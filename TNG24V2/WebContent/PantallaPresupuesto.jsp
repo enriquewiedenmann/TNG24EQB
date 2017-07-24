@@ -47,10 +47,13 @@
                 </button>
                 <a class="navbar-brand" href="index.html">TNG24</a> 
             </div>
-  <div style="color: white;
-padding: 15px 50px 5px 50px;
-float: right;
-font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="btn btn-danger square-btn-adjust">?</a>  <a href="#" class="btn btn-danger square-btn-adjust">Salir</a> </div>
+  <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
+  <a href="assets/manuales/manual.pdf" target="_blank" class="btn btn-info square-btn-adjust pull-left" style="margin-right:3px;">?</a>
+ 	<form action="LoginServlet" method="POST">
+ 		<input type="hidden" value="logout" name="logout"> 
+ 	<button type="submit" class="btn btn-danger square-btn-adjust">Salir</button>
+ 	</form> 
+	 	</div>
         </nav>   
            <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">

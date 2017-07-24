@@ -12,7 +12,7 @@
 <html data-wf-page="58fc37d167a8320d4f298aed" data-wf-site="58fc160f3df4dd7655b11a5a">
 <head>
   <meta charset="utf-8">
-  <title>Presupuesto</title>
+  <title>Presupuesto - TNG24</title>
   <meta content="CrearPresupuesto" property="og:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
