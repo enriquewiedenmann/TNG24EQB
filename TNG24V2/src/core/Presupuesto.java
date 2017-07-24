@@ -47,12 +47,13 @@ public class Presupuesto extends Documento {
 	
 	}
 	
-	public int cerrarme(int TMO, int MMO) {
+	public int cerrarme(int TMO, int MMO,String motivo) {
 		Date d= new Date();
 		int nro =-1;
 		this.setFechaEmision(d);
 		this.setMontoManoObra(MMO);
 		this.setTiempoManoObra(TMO);
+		this.setMotivo(motivo);
 		
 		nro=DAOPresupuesto.getInstancia().insertPresupuesto(this);
 		return nro;

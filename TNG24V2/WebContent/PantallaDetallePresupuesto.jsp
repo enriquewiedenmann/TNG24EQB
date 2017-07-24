@@ -51,6 +51,8 @@
                     	String tecnico=null;
                     	String estado = null;
                     	estado = (String)request.getAttribute("estado");
+                    	String error ="";
+                    	error= (String)request.getAttribute("error");
                     	ArrayList<ViewItemDocumento> vli=new ArrayList<ViewItemDocumento>();
                     	int tot=0;
                     	
@@ -66,7 +68,7 @@
                      			fechaEmision="-";
                      		}
                         	cliente=vp.getCliente().getApellido()+", "+vp.getCliente().getNombre();
-                        	tiempoManoObra=Integer.toString(vp.getTiempoManoObra())+" minutos";
+                        	tiempoManoObra=Integer.toString(vp.getTiempoManoObra());
                         	montoManoObra=Integer.toString(vp.getMontoManoObra());
                         	tot=Integer.parseInt(montoManoObra);
                         	tecnico=vp.getTecnico().getApellido()+", "+vp.getTecnico().getNombre();
@@ -80,6 +82,7 @@
                      	 %>
                      	 
     <input type="hidden" id="estado" name="estado" value="<%=estado%>" /> 	
+    <input type="hidden" id="error" name="error" value="<%=error%>" /> 	
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -89,6 +92,15 @@
             </div>
             </nav>
             </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
             
   <div class="nuevopresupuesto seccionhojaderuta">
     <div class="rowhojaderuta w-row">
@@ -100,7 +112,7 @@
       </div>
     </div>
   </div>
-  <div class="presupuesto">
+  
  
         <div class="rowdatoscliente w-row">
       
@@ -124,7 +136,7 @@
         <label class="labeldato" for="Cliente">Detalle de Productos:</label>
        <div class="table-responsive table table-condensed">
      
-       <button class="btn btn-default btn-sm"  data-toggle="modal"  onClick=""  data-target="#altaItem">
+       <button id="btnNuevoItem" class="btn btn-default btn-sm"  data-toggle="modal"  onClick=""  data-target="#altaItemModal">
        
                             +
                             </button> 
@@ -194,28 +206,42 @@
           </div>
            <div class="rowdatoscliente w-row">        
            <div class="w-col w-col-2 w-col-small-small-stack w-col-tiny-tiny-stack">
-            <label class="labeldato" for="tiempo">Tiempo Estimado:</label>
+            <label class="labeldato" for="tiempo">Tiempo Estimado (En minutos):</label>
           </div>
           <div class="w-col w-col-5 w-col-small-small-stack w-col-tiny-tiny-stack">
             <input  value="<%=tiempoManoObra%>" class="fieldnombre w-input" data-name="tiempo" id="tiempo" maxlength="256" name="tiempo" type="text">
           </div>
            </div>
-          			 
-          			 
-      
-     
-  </div>
+       </div>
+        <input type="hidden"  id="accion" name="accion"  />
+  <button type="button" class="btn btn-danger" id="btnCerrarPresupuesto" onClick="cerrarPresupuesto()">Aceptar</button>
+  
+ 
+  
+  
+  
+  
+
+  
+  
   
    <div type="hidden" >
         <form form="role" id="faccionItem" method="POST" action="PresupuestoDetalleSERVLET">
-         <input  type="hidden" id="accion" name="accion"/>
+         <input  type="hidden" id="bajaItem" name="bajaItem"/>
         <input  type="hidden" id="idip" name="idip"/>
         
         </form>
+             <form form="role" id="faccionCerrarPresupuesto" method="POST" action="PresupuestoDetalleSERVLET">
+         <input  type="hidden" id="cerrarPresupuesto" name="cerrarPresupuesto"/>
+ 		<input  type="hidden" id="cpmonto" name="cpmonto"/>
+ 		<input  type="hidden" id="cptiempo" name="cptiempo"/>
+		<input  type="hidden" id="cpmotivo" name="cpmotivo"/>
+        </form>
+        
         </div>
         <!--  INICIO DEL MODAL -->
          <div name="modales">
-           <div class="modal fade" id="altaItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"   >
+           <div class="modal fade" id="altaItemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"   >
                                 <div class="modal-dialog" id="mdialTamanio">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -245,7 +271,7 @@
                                             <input  id="cantProductoModal"  name="cantProductoModal" class="form-control" type="number"/>
 											
                                             </div>
-											 <input type="hidden"  id="accion" name="accion" value="altaItem" />
+											 <input type="hidden"  id="altaItem" name="altaItem" />
 											
 											
 										  <button type="button" class="btn btn-danger" id="btnAceptar" onClick="nuevoItem()">Aceptar</button>
@@ -319,11 +345,12 @@ $(document).ready(function () {$('#tablaProductos').dataTable();});
 <!-- FIN INSERT LOGICA MODAL -->
 <script type="text/javascript">
 $(document).on("click", "tr.bodytablaItemP" , function(){
-		
+	
 		var celda = $(this).children("#id").text();
-		document.getElementById("codProductoModal").value="";
-		accion.value="bajaItem"
+		
+		bajaItem.value="bajaItem";
 		idip.value =celda;
+	
 		faccionItem.submit();
 		
 }
@@ -348,7 +375,7 @@ $(document).on("click", "tr.bodyTableProd" , function(){
 function setPage(){
 	
 	var estado = document.getElementById("estado").value;
-	alert(estado);
+	var error = document.getElementById("error").value;
 	
 	if(estado=="mostrar"){
 		document.getElementById("Cliente").disabled = true;
@@ -357,6 +384,10 @@ function setPage(){
 		document.getElementById("total").disabled = true;
 		document.getElementById("tecnico").disabled = true;
 		document.getElementById("tiempo").disabled = true;
+		//document.getElementById("bajaItem").value="";
+		 document.getElementById("accion").value="";
+		 document.getElementById("btnCerrarPresupuesto").style.visibility = "hidden";
+		 document.getElementById("btnNuevoItem").style.visibility = "hidden";
 			
 	}
 	
@@ -369,17 +400,29 @@ function setPage(){
 		document.getElementById("tecnico").disabled = true;
 		document.getElementById("tiempo").disabled = false;
 		document.getElementById("monto").type="number";
-		
-		
+		//document.getElementById("bajaItem").value="";
+		document.getElementById("accion").value="";
+		// document.getElementById("altaItem").value="";
+		 document.getElementById("btnCerrarPresupuesto").style.visibility = "visible";
+		 document.getElementById("btnNuevoItem").style.visibility = "visible";
 		
 	}
 	
+	if(error!=null){
+		alert(error);
+	}
+
 	
 }
 
 function nuevoItem(){
-	document.getElementById("codProductoModal").disabled = false;
-	 document.getElementById("accionItem").value="altaItem";
+	
+alert("nuevoI");
+document.getElementById("codProductoModal").disabled = false;
+
+	 document.getElementById("altaItem").value="altaItem";
+	 document.getElementById("accion").value="";
+	 alert(document.getElementById("altaItem").value);
 	 document.getElementById("nuevoItem").submit();
 	
 }
@@ -398,6 +441,21 @@ function verProductos(){
 	document.getElementById("tProd").setAttribute("style","display: block");
 	
 }	
+
+ function cerrarPresupuesto(){
+	 alert("cerrarP");
+	// document.getElementById("altaItem").value="";
+	 //document.getElementById("bajaItem").value="";
+	 
+	  document.getElementById("cptiempo").value=document.getElementById("tiempo").value;
+	  document.getElementById("cpmonto").value=document.getElementById("monto").value;
+	  document.getElementById("cpmotivo").value=document.getElementById("Motivo").value;
+	 document.getElementById("cerrarPresupuesto").value="cerrarPresupuesto";
+	 document.getElementById("faccionCerrarPresupuesto").submit();
+	 
+	 
+    }
+    
 
 </script>
 

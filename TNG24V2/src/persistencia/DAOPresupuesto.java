@@ -134,16 +134,16 @@ public class DAOPresupuesto {
 		Connection con = DBConnection.getPoolConnection().getConnection();
 		CallableStatement sp;
 		try {
-			sp = con.prepareCall("{CALL TNG24V1.dbo.SP_ALTA_PRESUPEUSTO(?,?,?,?,?,?)}");
+			sp = con.prepareCall("{CALL TNG24V1.dbo.SP_ALTA_PRESUPEUSTO(?,?,?,?,?,?,?)}");
 			 int idpresupuesto =-1;
-	
+			
 			sp.registerOutParameter(1,java.sql.Types.INTEGER);
 			sp.setDate(2, sqlStartDate);
 			sp.setInt(3, p.getCliente().getEstado() );
 			sp.setInt(4,p.getTecnico().getIdEnte());
 			sp.setInt(5, p.getTiempoManoObra());
 			sp.setInt(6, p.getMontoManoObra() );
-			
+			sp.setString(7, p.getMotivo() );
 		
 		// ejecutar el SP
 		sp.execute();

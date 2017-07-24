@@ -14,7 +14,7 @@
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Presupuestos - TNG24</title>
+    <title>TNG24</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
@@ -47,7 +47,7 @@
                 </button>
                 <a class="navbar-brand" href="index.html">TNG24</a> 
             </div>
-  <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
+   <div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
   <a href="assets/manuales/manual.pdf" target="_blank" class="btn btn-info square-btn-adjust pull-left" style="margin-right:3px;">?</a>
  	<form action="LoginServlet" method="POST">
  		<input type="hidden" value="logout" name="logout"> 
@@ -62,7 +62,7 @@
 				<li class="text-center">
                     <img src="assets/img/find_user.png" class="user-image img-responsive"/>
 					</li>
-					   <li>
+			
                         <a class="active-menu"  href="PantallaPresupuesto.jsp"><i class="fa fa-edit fa-3x"></i>Presupuestos</a>
                     </li>	
                   <li  >
@@ -163,7 +163,7 @@
                                             </div>
 										   
 										   
-											<input type="hidden" id="accion" name="accion" />  
+											<input  type="hidden" id="buscar" name="buscar"/>
                                             <button type="button" class="btn btn-danger" onClick="buscarPresupuesto()">Buscar</button>
 											</form>
                                         </div>
@@ -178,7 +178,7 @@
         
         <div type="hidden" >
         <form form="role" id="fmostrarPresupuesto" method="POST" action="PresupuestoDetalleSERVLET">
-        <input  type="hidden" id="accion1" name="accion1"/>
+        <input  type="hidden" id="mostrarPresupuesto" name="mostrarPresupuesto"/>
         <input  type="hidden" id="idm" name="idm"/>
         
         </form>
@@ -224,7 +224,8 @@ firstDay: 1
 	$(document).on("click", "tr.bodytablaPresupuesto" , function(){
 		
 		var celda = $(this).children("#id").text();
-		accion1.value="mostrarPresupuesto"
+		document.getElementById("mostrarPresupuesto").value="mostrarPresupuesto";
+		alert(document.getElementById("mostrarPresupuesto").value);
 		idm.value=celda;
 		fmostrarPresupuesto.submit();
 		
@@ -256,7 +257,7 @@ firstDay: 1
 	 
 	  function buscarPresupuesto(){
 		   
-		   document.getElementById("accion").value="buscarPresupuestos";
+		   document.getElementById("buscar").value="buscarPresupuestos";
 
 		   
 		   document.getElementById("fbuscarPresupuestos").submit();

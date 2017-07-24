@@ -121,7 +121,7 @@ public class TSTListas {
 		}
 		}
 		ca.nuevoPresupuesto(389);
-		ca.ConfirmarAltaPresupuesto(100, 100);
+		ca.ConfirmarAltaPresupuesto(100, 100,null);
 		/*
 		
 		System.out.println("----------------------------------------------------------------");

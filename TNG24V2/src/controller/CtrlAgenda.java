@@ -195,10 +195,11 @@ public class CtrlAgenda {
 
 	}
 
-	public int ConfirmarAltaPresupuesto(int tiempoManoObra, int montoManoObra) {
+	public int ConfirmarAltaPresupuesto(int tiempoManoObra, int montoManoObra,String motivo) {
 
 		int nro = -1;
-		nro = pa.cerrarme(tiempoManoObra, montoManoObra);
+		nro = pa.cerrarme(tiempoManoObra, montoManoObra,motivo);
+		pa.setId(nro);
 		presupuestos.add(pa);
 		va.setPresupuesto(pa);
 		pa = null;

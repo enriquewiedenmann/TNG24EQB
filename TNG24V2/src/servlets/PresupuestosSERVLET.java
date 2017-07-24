@@ -46,7 +46,7 @@ public class PresupuestosSERVLET extends HttpServlet {
 		
 		
 		
-		if(request.getParameter("accion").equals("buscarPresupuestos")){
+		if(request.getParameter("buscar").equals("buscarPresupuestos")){
 			
 			
 		
