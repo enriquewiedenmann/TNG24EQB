@@ -30,14 +30,12 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">TNG24</a> <a class="navbar-brand"
-					href="#">Técnico</a>
+				<a class="navbar-brand" href="#">TNG24</a>
 			</div>
-			<div
-				style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
-				26 de Mayo de 2017 &nbsp;
+			<div style="color: white; padding: 15px 50px 5px 50px; float: right; font-size: 16px;">
+<!-- 				26 de Mayo de 2017 &nbsp; -->
 				<!--  <li class="logout"><a id="logout" href="${ctx}/logout">Logout</a>  </li>-->
-				<a href="/logout" class="btn btn-danger square-btn-adjust">Logout</a>
+<!-- 				<a href="/logout" class="btn btn-danger square-btn-adjust">Cerrar Sesión</a> -->
 			</div>
 		</nav>
 		<nav class="navbar-default navbar-side" role="navigation">
@@ -99,6 +97,7 @@
 										placeholder="Contraseña" name="contraseña"
 										placeholder="Contraseña" required tabindex="2" required>
 								</div>
+								<input type="hidden" name="login" value="login"/>
 								<button type="submit" class="btn btn-large btn-success"
 									name="login" id="login" tabindex="3">Iniciar Sesión</button>
 							</form>

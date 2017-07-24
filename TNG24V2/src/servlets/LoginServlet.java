@@ -22,33 +22,40 @@ public class LoginServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, java.io.IOException {
+		
+		if(request.getParameter("login") != null &&request.getParameter("login").equals("login")){
+			try {
+				String usuario = request.getParameter("usuario");
+				String contraseña = request.getParameter("contraseña");
 
-		try {
-			String usuario = request.getParameter("usuario");
-			String contraseña = request.getParameter("contraseña");
-
-			if (DAOUsuarios.getInstancia().login(usuario, contraseña)) {
-				HttpSession session = request.getSession(true);
-				session.setAttribute("currentUser", usuario);
-				request.getRequestDispatcher("PantallaCliente.jsp").forward(request, response);
+				if (DAOUsuarios.getInstancia().login(usuario, contraseña)) {
+					HttpSession session = request.getSession(true);
+					session.setAttribute("currentUser", usuario);
+					request.getRequestDispatcher("PantallaCliente.jsp").forward(request, response);
+				}
+				else {
+					request.setAttribute("loginError", "invalid");
+					request.getRequestDispatcher("login.jsp").forward(request, response);
+				}
 			}
-
-			else {
-				request.setAttribute("loginError", "invalid");
-				request.getRequestDispatcher("login.jsp").forward(request, response);
+			catch (Throwable theException) {
+				System.out.println(theException);
 			}
+		}else if (request.getParameter("logout") != null && request.getParameter("logout").equals("logout")){
+			HttpSession session = request.getSession(false);
+			session.setAttribute("currentUser", null);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-
-		catch (Throwable theException) {
-			System.out.println(theException);
-		}
+		
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if (session.getAttribute("currentUser") != null){
-			request.getRequestDispatcher("PantallaCliente.jsp").forward(request, response);
-		}
+			if (session.getAttribute("currentUser") != null){
+				request.getRequestDispatcher("PantallaCliente.jsp").forward(request, response);
+			}
 	}
+	
+	
 }

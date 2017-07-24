@@ -13,7 +13,7 @@
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TNG24</title>
+    <title>Clientes - TNG24</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
@@ -44,7 +44,12 @@
   <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="btn btn-danger square-btn-adjust">?</a>  <a href="#" class="btn btn-danger square-btn-adjust">Salir</a> </div>
+font-size: 16px;"> <a href="assets/manuales/manual.pdf" target="_blank" class="btn btn-danger square-btn-adjust">?</a>
+ 	<form action="LoginServlet" method="POST">
+ 		<input type="hidden" value="logout" name="logout"> 
+ 	<button type="submit" class="btn btn-danger square-btn-adjust">Salir</button>
+ 	</form> 
+	 </div>
         </nav>   
            <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">
