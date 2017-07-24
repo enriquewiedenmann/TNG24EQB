@@ -349,21 +349,36 @@ $(document).on("click", "tr.bodyTableCliente" , function(){
 	
 		var celda = $(this).children("#id").text();
 		cliente.value =celda;
-	
+		$('#buscadorID').modal('toggle');
 	
 }
 );
 
-$(document).on("click", "tr.bodyTableProd" , function(){
+$(document).on("click", "tr.bodyTableDom" , function(){
 	
 	var celda = $(this).children("#id").text();
+	domicilio.value =celda;
+	$('#buscadorID').modal('toggle');
+
+}
+);
+$(document).on("click", "tr.bodyTableTecnico" , function(){
 	
+	var celda = $(this).children("#id").text();
+	tecnico.value =celda;
+	$('#buscadorID').modal('toggle');
+
+}
+);
+
+$(document).on("click", "tr.bodytablaPresupuesto" , function(){
 	
-	codProductoModal.value=celda;
-	document.getElementById("fItem").setAttribute("style","display: block");
-	document.getElementById("tProd").setAttribute("style","display: none");
-	
-});						
+	var celda = $(this).children("#id").text();
+	presupuesto.value =celda;
+	$('#buscadorID').modal('toggle');
+
+}
+);
 	
 	</script>
 
