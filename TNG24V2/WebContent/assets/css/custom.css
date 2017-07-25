@@ -378,4 +378,15 @@ line-height: 1.428571429;
    
 }
 
+#cuerpo{
+	padding:7px!important;
+}
+
+
+.navbar{
+	    margin-bottom: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
 

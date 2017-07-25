@@ -284,13 +284,13 @@ Main Components
 
 @media only screen and (min-width: 800px) {
   .cd-schedule .event-name {
-    font-size: 2rem;
+    font-size: 1.1rem;
   }
 }
 
 .cd-schedule .event-date {
   /* they are not included in the the HTML but added using JavScript */
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   opacity: .7;
   line-height: 1.2;
   margin-bottom: .2em;
@@ -604,3 +604,5 @@ Main Components
   opacity: 1;
   visibility: visible;
 }
+
+

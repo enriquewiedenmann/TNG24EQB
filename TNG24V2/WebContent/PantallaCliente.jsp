@@ -22,7 +22,7 @@ if(sessionUsuario != null && sessionUsuario.getAttribute("currentUser") == null)
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TNG24</title>
+    <title>Clientes - TNG24</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
@@ -76,17 +76,15 @@ if(sessionUsuario != null && sessionUsuario.getAttribute("currentUser") == null)
            <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
+             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-					<li class="text-center"><img src="assets/img/find_user.png"
-						class="user-image img-responsive" /></li>
-					<li><a href="PantallaPresupuesto.jsp"><i
-							class="fa fa-edit fa-3x"></i>Presupuestos</a></li>
-					<li><a class="active-menu" href="PantallaCliente.jsp"><i
-							class="fa fa-user  fa-3x"></i> Clientes</a></li>
+					<li class="text-center"><img src="assets/img/find_user.png" class="user-image img-responsive" /></li>
+				 <li><a class="active-menu"  href="PantallaCliente.jsp"><i class="fa fa-user  fa-3x"></i> Clientes</a></li>
+				 <li><a href="hojaDeRuta.jsp"><i class="fa fa-map-marker  fa-3x"></i> Hoja de Ruta</a></li>
+                  <li><a href="PantallaAgendaCT.jsp"><i class="fa fa-table  fa-3x"></i> Agenda</a></li>	
+                 <li><a href="PantallaPresupuesto.jsp"><i class="fa fa-edit fa-3x"></i>Presupuestos</a></li>
 				</ul>
-               
-            </div>
-            
+            </div>	
         </nav>  
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
