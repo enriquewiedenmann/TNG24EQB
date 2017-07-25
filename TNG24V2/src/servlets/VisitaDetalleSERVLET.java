@@ -2,13 +2,16 @@ package servlets;
 
 import java.io.EOFException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import view.ViewAgenda;
 import view.ViewVisita;
 import complementos.FechasAux;
 import controller.CtrlAgenda;
@@ -71,13 +74,87 @@ public class VisitaDetalleSERVLET extends HttpServlet {
 				request.getRequestDispatcher("PantallaDetalleVisita.jsp").forward(request,response);	
 			}else{
 				id= sys.nuevaVisita(motivo,cliente, domicilio, fIni, fFin, tecnico);
+				request.setAttribute("visita", (ViewVisita)sys.mostrarVisita(id));
+				request.getRequestDispatcher("PantallaDetalleVisita.jsp").forward(request,response);	
 				System.out.println("alta:"+id);
 			}
 			
 		
 			
 			break;
+			
+			
+	
+		case "EditarVisita":
+			 
+			if(isNumeric(request.getParameter("idVisita"))){
+				id = Integer.parseInt(request.getParameter("idVisita"));
+			
+			
+			 
+			 
+			 motivo=request.getParameter("fmotivo");
+			 cliente= Integer.parseInt(request.getParameter("fcliente"));
+			 domicilio=Integer.parseInt(request.getParameter("fdomicilio"));
+			 tecnico=Integer.parseInt(request.getParameter("ftecnico"));
+			 fIni=FechasAux.getInstance().toDateDDMMYYY(request.getParameter("ffini"));
+			 hi=request.getParameter("fhini");
+			 dhi=FechasAux.getInstance().toDateHHMM(hi);
+			 hf =request.getParameter("fhfin");
+			 dhf=FechasAux.getInstance().toDateHHMM(hf);
+			fIni= FechasAux.getInstance().sumarRestarHorasFecha(fIni, dhi.getHours());
+			fIni= FechasAux.getInstance().sumarRestarMinutosFecha(fIni, dhi.getMinutes());
+			 fFin=FechasAux.getInstance().toDateDDMMYYY(request.getParameter("ffini"));
+			fFin= FechasAux.getInstance().sumarRestarHorasFecha(fFin, dhf.getHours());
+			fFin= FechasAux.getInstance().sumarRestarMinutosFecha(fFin, dhf.getMinutes());
+			 presupuesto=0;
+			if(isNumeric(request.getParameter("fpresupuesto"))){
+				presupuesto=Integer.parseInt(request.getParameter("fpresupuesto"));
+				sys.modificarVisita(id, motivo);
+				request.setAttribute("visita", (ViewVisita)sys.mostrarVisita(id));
+				
+				request.getRequestDispatcher("PantallaDetalleVisita.jsp").forward(request,response);	
+			}else{
+				id= sys.nuevaVisita(motivo,cliente, domicilio, fIni, fFin, tecnico);
+				request.setAttribute("visita", (ViewVisita)sys.mostrarVisita(id));
+				request.getRequestDispatcher("PantallaDetalleVisita.jsp").forward(request,response);	
+				System.out.println("alta:"+id);
+			}
+			}else{
+				System.out.println("error");
+			}
+			break;
 		
+			
+			
+			
+		case "mostrar":
+			System.out.println("mostrar");
+			if(isNumeric(request.getParameter("idVisita"))){
+				id = Integer.parseInt(request.getParameter("idVisita"));
+				ViewVisita v =sys.mostrarVisita(id);
+				request.setAttribute("visita", (ViewVisita)v);
+				request.getRequestDispatcher("PantallaDetalleVisita.jsp").forward(request,response);	
+			}else{
+				System.out.println("error");
+			}
+			break;
+			
+		case "baja":
+			if(isNumeric(request.getParameter("idVisita"))){
+				id = Integer.parseInt(request.getParameter("idVisita"));
+				Date fecha=FechasAux.getInstance().toDateDDMMYYY(request.getParameter("bmfecbuscada"));
+				sys.bajaVisita(id);
+				
+				HttpSession session = request.getSession(true);
+				session.setAttribute("listaAgTec", (ArrayList<ViewAgenda>)sys.listarAgendas(fecha));
+				session.setAttribute("fecha", request.getParameter("bmfecbuscada"));
+				request.getRequestDispatcher("PantallaAgendaCT.jsp").forward(request,response);
+				
+			}else{
+				System.out.println("error");
+			}
+			break;	
 		
 		}
 		

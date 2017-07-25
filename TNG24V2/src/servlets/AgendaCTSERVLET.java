@@ -54,6 +54,7 @@ public class AgendaCTSERVLET extends HttpServlet {
 				
 				HttpSession session = request.getSession(true);
 				session.setAttribute("listaAgTec", (ArrayList<ViewAgenda>)sys.listarAgendas(fecha));
+				session.setAttribute("fecha", request.getParameter("fecBucada"));
 				request.getRequestDispatcher("PantallaAgendaCT.jsp").forward(request,response);
 			}
 			

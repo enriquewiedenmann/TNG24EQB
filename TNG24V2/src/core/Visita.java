@@ -75,10 +75,10 @@ public class Visita {
 	
 	}
 	
-	public ViewVisita mostrate() {
+	public ViewVisita mostrate(Empleado empleado) {
 		ViewVisita vv= new ViewVisita(this.getId(), this.getFactura(),this.getPresupuesto(),this.getCliente(),this.getDomicilio(),
 				this.getInicioProgramado(),this.getFinProgramado(),this.getInicioReal(),this.getFinReal(),
-				this.getEstado(),this.getMotivo(),this.getTecnico());
+				this.getEstado(),this.getMotivo(),empleado);
 		return vv;
 	
 	}
@@ -204,6 +204,13 @@ public class Visita {
 
 	public boolean cumplo(int idVisita) {
 		return (this.getId()==idVisita);
+		
+	}
+
+
+	public void baja() {
+		this.setEstado('B');
+		DAOVisita.getInstancia().baja(this);
 		
 	}
 	

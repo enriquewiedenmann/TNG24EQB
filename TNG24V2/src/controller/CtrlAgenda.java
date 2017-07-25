@@ -218,7 +218,14 @@ public class CtrlAgenda {
 	}
 
 	public boolean bajaVisita(int id) {
-		return true;
+		for(Agenda a:agendas){
+			if(a.esTuVisita(id)){
+			return	a.bajaVisita(id, null);
+				
+			}
+		}
+		
+		return false;
 	}
 
 	public boolean rehabilitarVisita(int id) {

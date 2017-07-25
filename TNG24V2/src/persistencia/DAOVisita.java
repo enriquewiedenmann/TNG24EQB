@@ -238,7 +238,7 @@ public void baja(Visita v) {
 				
 				s = con.prepareStatement("UPDATE TNG24V1.dbo.CT_VISITA " 
 						+ "set ESTADO = 'B'"
-						+ "where idente =?");
+						+ "where IDVISITA =?");
 				
 				
 			

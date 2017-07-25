@@ -73,9 +73,13 @@
                          	 hfin=vv.getFinProgramadoHHMM();
                          	 if(vv.getFactura()!=null){
                          	 fct=Integer.toString(vv.getFactura().getId());
+                         	 }else{
+                         		 fct="";
                          	 }
                          	 if(vv.getPresupuesto()!=null){
                          	 pre=Integer.toString(vv.getPresupuesto().getId());
+                         	 }else{
+                         		 pre="";
                          	 }
                          	
                 			estado="mostrar";
@@ -139,9 +143,9 @@
          <div class="w-col w-col-11 w-col-small-small-stack w-col-tiny-tiny-stack">
                                              <label id="lc">Cliente: <%=cliente%></label>
                                             <div class="form-group input-group">
-                                            <input value="<%=idCliente%>"  id="cliente" name="cliente" type="text" class="form-control" disabled/>
+                                            <input value=<%=idCliente%>  id="cliente" name="cliente" type="text" class="form-control" disabled/>
                                             <span class="input-group-btn" >
-                                                <button id="btnBuscarCLiente" class="btn btn-default" type="button" onclick="setModal('clientes')" data-toggle="modal"   data-target="#buscadorID"><i class="fa fa-search"></i>
+                                                <button id="btnBuscarCliente" class="btn btn-default" type="button" onclick="setModal('clientes')" data-toggle="modal"   data-target="#buscadorID"><i class="fa fa-search"></i>
                                                 </button>
                                             </span>
                                                               
@@ -152,7 +156,7 @@
          <div class="w-col w-col-11 w-col-small-small-stack w-col-tiny-tiny-stack">
                                              <label id="ld">Domicilio: <%=domicilio%></label>
                                             <div class="form-group input-group">
-                                            <input value="<%=idDomicilio%>" id="domicilio" name="domicilio" type="text" class="form-control" disabled/>
+                                            <input value=<%=idDomicilio%> id="domicilio" name="domicilio" type="text" class="form-control" disabled/>
                                             <span class="input-group-btn" >
                                                  <button id="btnBuscarDomicilio" class="btn btn-default" type="button" onclick="setModal('domicilio')" data-toggle="modal"   data-target="#buscadorID"><i class="fa fa-search"></i>
                                                 </button>
@@ -163,7 +167,7 @@
         <div class="w-col w-col-11 w-col-small-small-stack w-col-tiny-tiny-stack">
                                              <label id="lt" >Tecnico: <%=tecnico%></label>
                                             <div class="form-group input-group">
-                                            <input value="<%=idTecnico%>" id="tecnico" name="tecnico" type="text" class="form-control" disabled/>
+                                            <input value=<%=idTecnico%> id="tecnico" name="tecnico" type="text" class="form-control" disabled/>
                                             <span class="input-group-btn" >
                                                 <button id="btnBuscarTecnico" class="btn btn-default" type="button" onclick="setModal('tecnico')" data-toggle="modal"   data-target="#buscadorID"><i class="fa fa-search"></i>
                                                 </button>
@@ -180,7 +184,7 @@
           <div class="w-col w-col-2 w-col-small-small-stack w-col-tiny-tiny-stack">
           
           
-            <input value="<%=ini%>" class="fieldnombre w-input" data-name="fecInicio" id="fecInicio" maxlength="256" name="fecInicio"  type="text">
+            <input value=<%=ini%> class="fieldnombre w-input" data-name="fecInicio" id="fecInicio" maxlength="256" name="fecInicio"  type="text">
           </div> 
           
                    <div class="w-col w-col-2 w-col-small-small-stack w-col-tiny-tiny-stack">
@@ -189,7 +193,7 @@
           <div class="w-col w-col-2 w-col-small-small-stack w-col-tiny-tiny-stack">
           
           
-            <input  data-format="hh:mm" value="<%=hini%>" class="fieldnombre w-input" data-name="horaInicio" id="horaInicio" maxlength="256" name="horaInicio"  type="text">
+            <input  data-format="hh:mm" value=<%=hini%> class="fieldnombre w-input" data-name="horaInicio" id="horaInicio" maxlength="256" name="horaInicio"  type="text">
           </div>     
           
                    <div class="w-col w-col-2 w-col-small-small-stack w-col-tiny-tiny-stack">
@@ -198,7 +202,7 @@
           <div class="w-col w-col-2 w-col-small-small-stack w-col-tiny-tiny-stack">
           
           
-            <input data-format="hh:mm" value="<%=hfin%>" class="fieldnombre w-input" data-name="horaFin" id="horaFin" maxlength="256" name="horaFin"  type="text">
+            <input data-format="hh:mm" value=<%=hfin%> class="fieldnombre w-input" data-name="horaFin" id="horaFin" maxlength="256" name="horaFin"  type="text">
           </div>  
           </div>
           <div class="w-col w-col-11 w-col-small-small-stack w-col-tiny-tiny-stack"> 
@@ -234,7 +238,7 @@
             <div class="w-col w-col-11 w-col-small-small-stack w-col-tiny-tiny-stack">
                                              <label>Factura:</label>
                                             <div class="form-group input-group">
-                                            <input  value=<%=fct%> id="factura" name="factura" type="text" class="form-control" disabled/>
+                                            <input  value<%=fct%> id="factura" name="factura" type="text" class="form-control" disabled/>
                                             <span class="input-group-btn" >
                                                 <button id="btnBuscarFactura" class="btn btn-default" type="button" onclick="setModal('factura')" ><i class="fa fa-search"></i>
                                                 </button>
@@ -248,7 +252,7 @@
    <div class="w-col w-col-11 w-col-small-small-stack w-col-tiny-tiny-stack">
                                              <label>Presupuesto:</label>
                                             <div class="form-group input-group">
-                                            <input value=<%=pre%>  id="presupuesto" name="presupuesto" type="text" class="form-control" disabled/>
+                                            <input value<%=pre%>  id="presupuesto" name="presupuesto" type="text" class="form-control" disabled/>
                                             <span class="input-group-btn" >
                                                <button id="btnBuscarPresupuesto" class="btn btn-default" type="button" onclick="setModal('presupuesto')" data-toggle="modal"   data-target="#buscadorID"><i class="fa fa-search"></i>
                                                 </button>
@@ -260,6 +264,12 @@
                  <button id="btnNuevaVisita" class="btn btn-danger btn-lg"  onClick="nuevaVisita()">
                             Aceptar
                             </button> 
+                  <button id="btnEditar" class="btn btn-danger btn-lg"  onClick="Editar()">
+                            Editar
+                            </button>            
+                    <button id="btnGuardar" class="btn btn-danger btn-lg"  onClick="Guardar()" >
+                            Guardar
+                            </button>  
                                                                         
                   </div>
         <!--  INICIO DEL MODAL -->
@@ -405,6 +415,7 @@
 							<!--  FIN DEL MODAL -->
 <div style="display: none">							
 <form form="role" id="fvisita" method="POST" action="VisitaDetalleSERVLET">
+<input value=<%=id%> id="fidVisita" name="fidVisita" type=text>
 <input id="fmotivo" name="fmotivo" type=text>
 <input id="fcliente" name="fcliente" type=text>
 <input id="fdomicilio" name="fdomicilio" type=text>
@@ -525,9 +536,74 @@ function setPage(){
 		document.getElementById("horaFin").value="";
 		document.getElementById("factura").value="";
 		document.getElementById("presupuesto").value="";
+		document.getElementById("btnEditar").style.visibility = "hidden"; 
+		document.getElementById("btnGuardar").style.visibility = "hidden"; 
 	}
 	
+	
+if(document.getElementById("estado").value=="mostrar"){
+		
+		document.getElementById("motivo").disabled = true;
+		document.getElementById("btnBuscarCliente").style.visibility = "hidden"; 
+		document.getElementById("btnBuscarDomicilio").style.visibility = "hidden"; 
+		document.getElementById("btnBuscarTecnico").style.visibility = "hidden"; 
+		document.getElementById("btnBuscarFactura").style.visibility = "hidden"; 
+		document.getElementById("btnBuscarPresupuesto").style.visibility = "hidden"; 
+		document.getElementById("btnNuevaVisita").style.visibility = "hidden"; 
+		document.getElementById("btnGuardar").style.visibility = "hidden"; 
+		document.getElementById("fecInicio").disabled = true;
+		document.getElementById("horaInicio").disabled = true;
+		document.getElementById("horaFin").disabled = true;
+		
+		
+	}
+	
+	
+	
+	
+	
 }
+
+
+function Editar(){
+
+	
+	document.getElementById("lc").innerHTML="Cliente:";
+	document.getElementById("ld").innerHTML="Domicilio:";
+	document.getElementById("motivo").disabled = false;
+	document.getElementById("btnBuscarCliente").style.visibility = "visible"; 
+	document.getElementById("btnBuscarDomicilio").style.visibility = "visible"; 
+	document.getElementById("btnBuscarPresupuesto").style.visibility = "visible"; 
+	document.getElementById("btnNuevaVisita").style.visibility = "hidden"; 
+	document.getElementById("btnEditar").style.visibility = "hidden"; 
+	document.getElementById("btnGuardar").style.visibility = "visible"; 
+	document.getElementById("fecInicio").disabled = true;
+	document.getElementById("horaInicio").disabled = true;
+	document.getElementById("horaFin").disabled = true;
+}
+
+
+function Guardar(){
+	
+
+	
+	document.getElementById("fmotivo").value=document.getElementById("motivo").value;
+	document.getElementById("fcliente").value=document.getElementById("cliente").value;
+	document.getElementById("fdomicilio").value=document.getElementById("domicilio").value;
+	document.getElementById("ftecnico").value=document.getElementById("tecnico").value;
+	document.getElementById("ffini").value=document.getElementById("fecInicio").value;
+	document.getElementById("fhini").value=	document.getElementById("horaInicio").value;
+	document.getElementById("fhfin").value=	document.getElementById("horaFin").value;
+	document.getElementById("ffactura").value=	document.getElementById("factura").value;
+	document.getElementById("fpresupuesto").value=document.getElementById("presupuesto").value;	
+	document.getElementById("accion").value="EditarVisita";
+	fvisita.submit();
+	
+	
+	
+}
+
+
 
 function nuevaVisita(){
 	

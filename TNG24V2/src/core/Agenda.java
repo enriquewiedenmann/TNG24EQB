@@ -54,6 +54,13 @@ public class Agenda {
 	}
 	
 	public boolean bajaVisita(int id, String motivo) {
+		for(Visita v: visitas){
+			if(v.cumplo(id)){
+				visitas.remove(v);
+				v.baja();
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -138,7 +145,7 @@ public class Agenda {
 	public ViewVisita mostraVisita(int id) {
 		for(Visita v:visitas){
 			if(v.cumplo(id)){
-				return v.mostrate();
+				return v.mostrate(this.getTecnico());
 			}
 		}
 		return null;

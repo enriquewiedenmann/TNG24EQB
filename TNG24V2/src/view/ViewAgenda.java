@@ -62,7 +62,7 @@ public class ViewAgenda {
 	public ArrayList<ViewVisita> getVVV() {
 		ArrayList<ViewVisita> vvv= new ArrayList<ViewVisita>();
 		for(Visita v:this.getVv()){
-			vvv.add(v.mostrate());
+			vvv.add(v.mostrate(this.getTecnico()));
 		}
 		return vvv;
 	}

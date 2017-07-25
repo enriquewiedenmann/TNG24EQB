@@ -53,6 +53,23 @@ public class ViewVisita {
 	}
 
 */
+	
+	public String getResumen(){
+		return "<br><br><br>"+
+				" <form form=\"role\" id=\"resVisita\"  method=\"POST\" action=\"VisitaDetalleSERVLET\">"+
+				" <div class=\"form-group\">"+                                        
+                 "<label>Id:</label>"+
+                 "<input value="+this.getId()+"id=\"idVisita\"  name=\"idVisita\" class=\"form-control\" disabled/></div>"+
+                 "<br><label>Cliente: </label>"+this.getCliente().getApellido()+", "+this.getCliente().getNombre()+
+                 "<br><label>Domicilio: </label>"+this.getDomicilio().mostrate().resumen()+
+                  "<input type=\"hidden\" id=\"accion\"  name=\"accion\" />"+
+                  "<button type=\"button\" class=\"btn btn-danger\" id=\"btnEstado\" onClick=\"accionVisita('baja')\">Baja</button>"+
+                  "<button type=\"button\" class=\"btn btn-danger\" id=\"btnMostrar\" onClick=\"accionVisita('mostrar')\">Detalle</button>"+
+                  "</form>";
+		
+		
+	}
+	
 	public String toString() {
 		return "ViewVisita [id=" + id + ", motivo=" + motivo + "]";
 	}

@@ -113,16 +113,14 @@ jQuery(document).ready(function($){
 		//update event name and time
 		this.modalHeader.find('.event-name').text(event.find('.event-name').text());
 		this.modalHeader.find('.event-date').text(event.find('.event-date').text());
-		//this.modalBody.find('.event-infob').text(event.find('.event-info').text());
+		//document.getElementById('cuerpo').innerHTML=event.find('.event-info').text();
+		document.getElementById('idVisita').value=event.find('.event-idVisita').text();
+		document.getElementById('modalCliente').value=event.find('.event-cliente').text();
+		document.getElementById('modalDomicilio').value=event.find('.event-domicilio').text();
+		self.element.addClass('content-loaded');
 		this.modal.attr('data-event', event.parent().attr('data-event'));
 
-		//update event content
-		/*this.modalBody.find('.event-infob').text(event.find('.event-info').text());
-		this.modalBody.find('.event-info').load(event.parent().attr('data-content')+'.html .event-info > *', function(data){
-			//once the event content has been loaded
-			self.element.addClass('content-loaded');
-		});*/
-
+		
 		this.element.addClass('modal-is-open');
 
 		setTimeout(function(){

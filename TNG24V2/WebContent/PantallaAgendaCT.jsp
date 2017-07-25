@@ -127,7 +127,8 @@
 							<input type="text" id="datepicker" name="fecBucada"  class="form-control"  />	
 	                     </div>
 	                     <input  type="hidden" id="buscar" name="buscar"/>
-	                     <button type="button" class="btn btn-danger" onClick="buscarVisitas()">Buscar</button>                       
+	                     <button type="button" class="btn btn-danger" onClick="buscarVisitas()">Buscar</button> 
+	                     <button type="button" class="btn btn-danger" onClick="irNuevo()" >Nuevo</button>                        
 	                  </form>   
                      	
                         
@@ -163,7 +164,9 @@
 	<div class="events">
 		<ul>
 		<%ArrayList<ViewAgenda> lista=(ArrayList<ViewAgenda>)session.getAttribute("listaAgTec"); 
+		String fecha=null;
 		 if(lista!=null){
+			fecha = (String)session.getAttribute("fecha");
             	for(ViewAgenda va: lista){
             		out.println("<li class=\"events-group\">");
             		out.println("<div class=\"top-info\"><span>"+va.getTecnico().getApellido()+", "+va.getTecnico().getNombre()+"</span></div><ul>");
@@ -172,7 +175,11 @@
                						vv.getInicioProgramadoHHMM()+"\" data-end=\""+
                						vv.getFinProgramadoHHMM()+"\"data-event=\"event-1\">"+
                						"<a href=\"#0\"><em class=\"event-name\">"+
-               						vv.getMotivo()+"</em></a></li>");
+               						vv.getMotivo()+"</em>"+
+               						"<div style=\"display: none\" class=\"event-idVisita\">"+vv.getId()+"</div>"+
+               						"<div style=\"display: none\" class=\"event-cliente\">"+vv.getCliente().getApellido()+", "+vv.getCliente().getNombre()+"</div>"+
+               						"<div style=\"display: none\" class=\"event-domicilio\">"+vv.getDomicilio().mostrate().resumen()+"</div>"+
+               						"</a></li>");
 
                		}
                		out.println("</ul></li>");
@@ -189,28 +196,37 @@
 				<span class="event-date"></span>
 				<h3 class="event-name"></h3>
 				
-				<a href="#0" class="close">Close</a>
-			</div>
-			
-			<div class="header-bg"></div>
-			
-		</header>
-		<!--
-		<div class="body">
-		<div class="content">
-				<span class="event-date"></span>
-				<h3 class="event-name"></h3>
 				
-				<a href="#0" class="close">Close</a>
-			<div class="event-info">
-			
-			<p>ddjhsdjkhdkjhsdjk</p>
 			</div>
-			
-			<div class="body-bg"></div>
+
+			<div class="header-bg"></div>
 		
+		</header>
+
+		<div class="body">
+		
+			<div id="cuerpo" class="event-info">
+				<br>
+				<form form="role" id="resVisita"  method="POST" action="VisitaDetalleSERVLET">
+				<div class="form-group">                                        
+                 <label>Id:</label>
+                 <input id="idVisita"  name="idVisita" class="form-control" disabled/></div>
+                 <div class="form-group">
+                 <label>Cliente: </label><input id="modalCliente" class="form-control" disabled />
+                 </div>
+                 <div class="form-group">
+                 <label>Domicilio: </label><input id="modalDomicilio" class="form-control" disabled />
+                 </div>
+                 <input type="hidden" id="accion"  name="accion" />
+                 <input value=<%=fecha%> type="hidden" id="bmfecbuscada"  name="bmfecbuscada" />
+                 <button type="button" class="btn btn-danger" id="btnEstado" onClick="accionVisita('baja')">Baja</button>
+                 <button type="button" class="btn btn-danger" id="btnMostrar" onClick="accionVisita('mostrar')">Detalle</button>
+                 </form>
+		
+			</div>
+			<div class="body-bg"></div>
 		</div>
-		-->
+		<a href="#0" class="close">Close</a>
 		
 	</div>
 	
@@ -252,6 +268,23 @@ function buscarVisitas(){
 	 document.getElementById("fbuscarAgendas").submit();
 	
 }
+
+</script>
+<script>
+function accionVisita(accion){
+	
+	document.getElementById("idVisita").disabled = false;
+	document.getElementById("accion").value=accion;
+		resVisita.submit();
+	
+}
+
+function irNuevo(){
+	
+	href="PantallaDetalleVisita.jsp";
+	
+}
+
 
 </script>
 
