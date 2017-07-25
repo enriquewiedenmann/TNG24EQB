@@ -100,32 +100,63 @@ public int insert(int agenda,Visita v) {
 		{
 			try
 			{
-			
+				java.sql.Timestamp f1 = new Timestamp(v.getInicioProgramado().getTime());
+				java.sql.Timestamp f2 = new Timestamp(v.getFinProgramado().getTime());
 				Connection con = DBConnection.getPoolConnection().getConnection();
-				PreparedStatement s = con.prepareStatement
-				("Update CT_VISITA"
-						+ "IDFACTURA,"
-						+ "IDPRESUPPUESTO,"
-						+ "IDCLIENTE,"
-						+ "IDDOMICILIO,"
-						+ "INICIOPROGRAMADO,"
-						+ "FINPROGRAMADO,"
-						+ "INICIOREAL,"
-						+ "ESTADO where IDVISITA=?);");
-
+				CallableStatement sp;
+				sp = con.prepareCall("{CALL TNG24V1.dbo.SP_UPDATE_VISITA(?,?,?,?,?,?,?,?,?,?)}");
+						
+				if(v.getFactura()!=null){
+				sp.setInt(2, v.getFactura().getId());
+				}else{
+					sp.setNull(2, 1);
+				}
+				if(v.getPresupuesto()!=null){
+				sp.setInt(3, v.getPresupuesto().getId());
+				}else{
+				sp.setNull(3, 1);
+				}
+				if(v.getCliente()!=null){
+				sp.setInt(4, v.getCliente().getIdEnte());
+				}else{
+					sp.setNull(4, 1);
+				}
+				if(v.getDomicilio()!=null){
+				sp.setInt(5, v.getDomicilio().getIdDomicilio());
+				}else{
+					sp.setNull(5, 1);
+				}
+				if(v.getInicioProgramado()!=null){
+				sp.setTimestamp(6, f1);
+				}else{
+					sp.setNull(6, 1);
+				}
+				if(v.getFinProgramado()!=null){
+				sp.setTimestamp(7, f2);
+				}else{
+					sp.setNull(7, 1);
+				}
+				if(v.getInicioReal()!=null){
+				sp.setLong(8, v.getInicioReal().getTime());
+				}else{
+					sp.setNull(8, 1);
+				}
+				if(v.getFinReal()!=null){
+				sp.setLong(9, v.getFinReal().getTime());
+				}else{
+					sp.setNull(9, 1);
+				}
+				if(v.getMotivo()!=null){
+					sp.setString(10, v.getMotivo());
+					}else{
+						sp.setNull(10, 1);
+					}
 				
-				s.setInt(1, v.getFactura().getId());
-				s.setInt(2, v.getPresupuesto().getId());
-				s.setInt(3, v.getCliente().getIdEnte());
-				s.setInt(4, v.getDomicilio().getIdDomicilio());
 				
-				s.setLong(5, v.getInicioProgramado().getTime());
-				s.setLong(6, v.getFinProgramado().getTime());
-				s.setLong(7, v.getInicioReal().getTime());
-				s.setLong(8, v.getFinReal().getTime());
-				s.setString(9, "M");
-				s.setInt(10, v.getId());
-				s.execute();
+				
+				sp.setInt(1, v.getId());
+				
+				sp.execute();
 				DBConnection.getPoolConnection().realeaseConnection(con);
 
 			} catch (Exception e)

@@ -213,6 +213,16 @@ public class Visita {
 		DAOVisita.getInstancia().baja(this);
 		
 	}
+
+
+	public void meEdito(String motivo2, Cliente cl, Domicilio dom, Presupuesto p) {
+		this.setMotivo(motivo2);
+		this.setCliente(cl);
+		this.setDomicilio(dom);
+		this.setPresupuesto(p);
+		DAOVisita.getInstancia().update(this);
+		
+	}
 	
 	
 	

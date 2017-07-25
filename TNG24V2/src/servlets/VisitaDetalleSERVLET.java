@@ -87,8 +87,8 @@ public class VisitaDetalleSERVLET extends HttpServlet {
 	
 		case "EditarVisita":
 			 
-			if(isNumeric(request.getParameter("idVisita"))){
-				id = Integer.parseInt(request.getParameter("idVisita"));
+			if(isNumeric(request.getParameter("fidVisita"))){
+				id = Integer.parseInt(request.getParameter("fidVisita"));
 			
 			
 			 
@@ -110,10 +110,12 @@ public class VisitaDetalleSERVLET extends HttpServlet {
 			 presupuesto=0;
 			if(isNumeric(request.getParameter("fpresupuesto"))){
 				presupuesto=Integer.parseInt(request.getParameter("fpresupuesto"));
-				sys.modificarVisita(id, motivo);
+				if(sys.modificarVisita(id, motivo,cliente,domicilio,presupuesto)){
 				request.setAttribute("visita", (ViewVisita)sys.mostrarVisita(id));
-				
-				request.getRequestDispatcher("PantallaDetalleVisita.jsp").forward(request,response);	
+				request.getRequestDispatcher("PantallaDetalleVisita.jsp").forward(request,response);
+				}else{
+					System.out.println("ERROR en editar visita");
+			}
 			}else{
 				id= sys.nuevaVisita(motivo,cliente, domicilio, fIni, fFin, tecnico);
 				request.setAttribute("visita", (ViewVisita)sys.mostrarVisita(id));

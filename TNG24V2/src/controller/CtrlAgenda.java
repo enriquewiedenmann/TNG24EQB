@@ -293,8 +293,34 @@ public class CtrlAgenda {
 		return 0;
 	}
 
-	public boolean modificarVisita(int id, String motivo) {
-		return true;
+	public boolean modificarVisita(int id, String motivo, int cliente, int domicilio, int presupuesto) {
+		Agenda ag=null;
+		
+			for(Agenda a:agendas){
+				if(a.esTuVisita(id)){
+					ag=a;
+				}
+			}
+			if(ag!=null){
+				Cliente cl=CtrlEnte.getInstance().buscarCliente(cliente, null, null, null);
+			if(cl!=null){
+				Domicilio dom=CtrlDomicilio.getInstance().buscarDomicilio(domicilio, null, null, null, null, null, null, null, null, null);
+				if(dom!=null){
+				Presupuesto p= null;
+				p=this.buscarPresupuesto(presupuesto);
+						if(p!=null){
+							return ag.editarVisita(id,motivo,cl,dom,p);
+						}
+				}
+			}
+			
+			
+			
+			}
+		
+		
+		
+		return false;
 	}
 
 	public Presupuesto getPa() {

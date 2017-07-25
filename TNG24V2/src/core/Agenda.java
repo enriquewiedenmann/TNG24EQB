@@ -150,6 +150,17 @@ public class Agenda {
 		}
 		return null;
 	}
+
+	public boolean editarVisita(int id, String motivo, Cliente cl,
+			Domicilio dom, Presupuesto p) {
+		for(Visita v:visitas){
+			if(v.cumplo(id)){
+				v.meEdito(motivo,cl,dom,p);
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 	

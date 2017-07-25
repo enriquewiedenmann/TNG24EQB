@@ -252,7 +252,7 @@
    <div class="w-col w-col-11 w-col-small-small-stack w-col-tiny-tiny-stack">
                                              <label>Presupuesto:</label>
                                             <div class="form-group input-group">
-                                            <input value<%=pre%>  id="presupuesto" name="presupuesto" type="text" class="form-control" disabled/>
+                                            <input value=<%=pre%>  id="presupuesto" name="presupuesto" type="text" class="form-control" disabled/>
                                             <span class="input-group-btn" >
                                                <button id="btnBuscarPresupuesto" class="btn btn-default" type="button" onclick="setModal('presupuesto')" data-toggle="modal"   data-target="#buscadorID"><i class="fa fa-search"></i>
                                                 </button>
@@ -566,7 +566,6 @@ if(document.getElementById("estado").value=="mostrar"){
 
 
 function Editar(){
-
 	
 	document.getElementById("lc").innerHTML="Cliente:";
 	document.getElementById("ld").innerHTML="Domicilio:";
