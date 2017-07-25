@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import persistencia.DAOUsuarios;
+import core.UserSession;
 
 /**
  * Servlet implementation class LoginServlet
@@ -28,17 +29,19 @@ public class LoginServlet extends HttpServlet {
 				String usuario = request.getParameter("usuario");
 				String contraseña = request.getParameter("contraseña");
 
-				String rol = DAOUsuarios.getInstancia().login(usuario, contraseña);
-				if (rol != null) {
+				UserSession userSession = DAOUsuarios.getInstancia().login(usuario, contraseña);
+				if (userSession != null) {
 					HttpSession session = request.getSession(true);
 					session.setAttribute("currentUser", usuario);
-					session.setAttribute("rol", rol);
+					session.setAttribute("rol", userSession.getRole());
+					session.setAttribute("userId", userSession.getId());
+					System.out.println("***************" + userSession.getId());
 					
-					if(rol.equals("TEC")){
+					if(userSession.getRole().equals("TEC")){
 						// TODO TODO REDIRECCIONAR A PANTALLA DEL TECNICO
 						request.getRequestDispatcher("PantallaCliente.jsp").forward(request, response);
 					}
-					else if (rol.equals("CTO")){
+					else if (userSession.getRole().equals("CTO")){
 						
 						// TODO REDIRECCIONAR A PANTALLA DE LA COORDINADORA
 						request.getRequestDispatcher("PantallaCliente.jsp").forward(request, response);

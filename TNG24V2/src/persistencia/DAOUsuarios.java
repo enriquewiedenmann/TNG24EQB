@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import core.TipoDocumento;
+import core.UserSession;
 import core.Usuario;
 
 public class DAOUsuarios {
@@ -61,14 +62,14 @@ public class DAOUsuarios {
 		return map;
 	}	
 	
-	public String login(String usuario, String contraseña)
+	public UserSession login(String usuario, String contraseña)
 	{
-		String logged = null;
+		UserSession user = null;
 		try
 		{
 			Connection con = DBConnection.getPoolConnection().getConnection();
 			PreparedStatement s = con
-					.prepareStatement("SELECT e.CODROLLEMPPLEADO FROM TNG24V1.dbo.TG_USUARIO u JOIN TNG24V1.dbo.CT_EMPLEADO e on u.IDUSUARIO = e.IDEMPLEADO " + 
+					.prepareStatement("SELECT e.CODROLLEMPPLEADO, u.IDUSUARIO FROM TNG24V1.dbo.TG_USUARIO u JOIN TNG24V1.dbo.CT_EMPLEADO e on u.IDUSUARIO = e.IDEMPLEADO " + 
 										"WHERE u.USERNAME = ? AND u.PASS = ?;");
 			
 			s.setString(1, usuario);
@@ -79,16 +80,18 @@ public class DAOUsuarios {
 
 			while (rs.next())
 			{
-				String cod= rs.getString("CODROLLEMPPLEADO");
-				logged= cod;
+				String rol= rs.getString("CODROLLEMPPLEADO");
+				int id = rs.getInt("IDUSUARIO");
+				user = new UserSession();
+				user.setId(id);
+				user.setRole(rol);
 			}
-
 		} catch (Exception e)
 		{
 			System.out.println("ERROR SELECT ALL USUARIO " + e.getMessage());
 			e.printStackTrace();
 		}
-		return logged;
+		return user;
 	}
 	
 	
