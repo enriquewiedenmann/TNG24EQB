@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import complementos.FechasAux;
-
 import persistencia.DAOVisita;
 import view.ViewAgenda;
 import view.ViewVisita;
@@ -111,6 +110,38 @@ public class Agenda {
 			 
 		 }
 		return vd;
+	}
+
+	
+
+	public int nuevaVisita(Presupuesto p, String motivo, Cliente cl,
+			Domicilio dom, Date inicioProgramado, Date finProgramado) {
+		int id=-1;
+		boolean band=true;
+		/*for(Visita ex:visitas){
+			if(inicioProgramado.after(ex.getInicioProgramado()) & inicioProgramado.before(ex.getFinProgramado())){
+				band=false;
+			}
+			if(finProgramado.after(ex.getInicioProgramado()) & finProgramado.before(ex.getFinProgramado())){
+				band=false;
+			}
+		}*/
+		if(band){
+		Visita v= new Visita(p, cl, dom, inicioProgramado, finProgramado, null, null, motivo, this.getTecnico());
+		 id=DAOVisita.getInstancia().insert(this.getIdAgenda(), v);
+		v.setId(id);
+		visitas.add(v);
+		}
+		return id;
+	}
+
+	public ViewVisita mostraVisita(int id) {
+		for(Visita v:visitas){
+			if(v.cumplo(id)){
+				return v.mostrate();
+			}
+		}
+		return null;
 	}
 	
 	

@@ -66,6 +66,26 @@ String diaS= formatoDeFecha.format(dia);
 return diaS;
 }
 
+public Date toDateHHMM(String strFecha){
+	SimpleDateFormat formatoDelTexto  = new SimpleDateFormat("HH:mm");
+   
+   Date fecha = null;
+   try {
+
+       fecha = formatoDelTexto.parse(strFecha);
+
+   } catch (Exception ex) {
+
+       ex.printStackTrace();
+
+   }
+
+   return fecha;
+	
+}
+
+
+
 //Suma los días recibidos a la fecha  
 public Date sumarRestarDiasFecha(Date fecha, int dias){
 
@@ -87,5 +107,14 @@ public Date sumarRestarHorasFecha(Date fecha, int horas){
 
 }
 
+public Date sumarRestarMinutosFecha(Date fecha, int minutos){
+
+	   Calendar calendar = Calendar.getInstance();
+	   calendar.setTime(fecha); // Configuramos la fecha que se recibe
+	   calendar.add(Calendar.MINUTE, minutos);  // numero de horas a añadir, o restar en caso de horas<0
+
+	   return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
+
+	}
 
 }

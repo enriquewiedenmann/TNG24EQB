@@ -2,6 +2,7 @@ package core;
 
 import java.util.Date;
 
+import persistencia.DAOVisita;
 import view.ViewPresupuesto;
 import view.ViewVisita;
 
@@ -43,6 +44,30 @@ public class Visita {
 		this.estado = estado;
 		this.motivo = motivo;
 		this.tecnico = tecnico;
+	}
+	
+	
+	public Visita(Presupuesto presupuesto,
+			Cliente cliente, Domicilio domicilio, Date inicioProgramado,
+			Date finProgramado, Date inicioReal, Date finReal, String motivo, Empleado tecnico) {
+		super();
+		this.id = -1;
+		this.factura = null;
+		this.presupuesto = presupuesto;
+		this.cliente = cliente;
+		this.domicilio = domicilio;
+		this.inicioProgramado = inicioProgramado;
+		this.finProgramado = finProgramado;
+		this.inicioReal = inicioReal;
+		this.finReal = finReal;
+		this.estado = 'A';
+		this.motivo = motivo;
+		this.tecnico = tecnico;
+		
+		
+		
+		
+
 	}
 
 	public boolean cumplo(int id, Factura fac, Presupuesto pres, Cliente cli, Domicilio dom, Date iniProg, Date finProg, Date iniReal, Date finReal, char e) {

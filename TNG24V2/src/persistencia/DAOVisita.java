@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Map;
 
 import core.Cliente;
@@ -38,7 +39,10 @@ public class DAOVisita {
 	
 	
 public int insert(int agenda,Visita v) {
-		
+	
+	java.sql.Timestamp f1 = new Timestamp(v.getInicioProgramado().getTime());
+	java.sql.Timestamp f2 = new Timestamp(v.getFinProgramado().getTime());
+	
 		Connection con = DBConnection.getPoolConnection().getConnection();
 		CallableStatement sp;
 		try {
@@ -48,21 +52,41 @@ public int insert(int agenda,Visita v) {
 			sp.registerOutParameter(1,java.sql.Types.INTEGER);
 		//idente = sp.getInt(1);
 			sp.setInt(2, agenda);
-			sp.setInt(3, v.getFactura().getId() );
+			if(v.getFactura()!=null){
+				sp.setInt(3, v.getFactura().getId() );	
+			}else{
+				
+				sp.setNull(3, 1);
+			}
+			if(v.getPresupuesto()!=null){
 			sp.setInt(4, v.getPresupuesto().getId() );
+			}else{
+				sp.setNull(4, 1);	
+			}
 			sp.setInt(5, v.getCliente().getIdEnte() );
 			sp.setInt(6, v.getDomicilio().getIdDomicilio() );
 			
-			sp.setDate(7, (Date) v.getInicioProgramado());
-			sp.setDate(8, (Date) v.getFinProgramado());
+			sp.setTimestamp(7,  f1);
+			sp.setTimestamp(8, f2);
+			if(v.getInicioReal()!=null){
 			sp.setDate(9, (Date) v.getInicioReal());
+			}else{
+				sp.setNull(9, 1);			}
+			if(v.getFinReal()!=null){
 			sp.setDate(10, (Date) v.getFinReal());
-			
+			}else{
+				sp.setNull(10, 1);
+			}
+			if(v.getMotivo()!=null){
 			sp.setString(11, v.getMotivo());
+			}else{
+				sp.setNull(11, 1);	
+			}
 		// ejecutar el SP
+			
 		sp.execute();
 		// confirmar si se ejecuto sin errores
-		idente = sp.getInt(1);  
+		idente = sp.getInt(1);
 		DBConnection.getPoolConnection().realeaseConnection(con);
 		return idente;
 		} catch (SQLException e) {

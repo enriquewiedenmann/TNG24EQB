@@ -122,6 +122,8 @@ if(sessionUsuario != null && sessionUsuario.getAttribute("currentUser") == null)
                                             <th>Apelido y Nombre</th>
                                             <th>Documento</th>
 											<th>Tecnico</th>
+											
+											
                                         </tr>
                                     </thead>
                                     <tbody>

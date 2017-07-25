@@ -104,8 +104,12 @@ public class CtrlAgenda {
 
 	}
 
-	public Presupuesto buscarPresupuesto(int id, Date fecha, int docCliente,
-			int nomCliente, int apellido) {
+	public Presupuesto buscarPresupuesto(int id) {
+		for(Presupuesto p:presupuestos){
+			if(p.getId()==id){
+				return p;
+			}
+		}
 		return null;
 
 	}
@@ -122,8 +126,12 @@ public class CtrlAgenda {
 	}
 
 	public ViewVisita mostrarVisita(int id) {
+		for(Agenda a:agendas){
+			if(a.esTuVisita(id)){
+				return a.mostraVisita(id);
+			}
+		}
 		return null;
-
 	}
 
 	public ViewPresupuesto mostrarPresupuesto(int id) {
@@ -147,9 +155,66 @@ public class CtrlAgenda {
 
 	}
 
-	public int nuevaVisita(int idCliente, int idDomicilio,
-			Date inicioProgramado, Date finProgramado, int idAgenda) {
-		return 0;
+	public int nuevaVisita(String motivo,int idCliente, int idDomicilio,
+			
+			Date inicioProgramado, Date finProgramado, int tecnico) {
+		int nuevaV=-1;
+		Agenda ag=null;
+		Empleado ente = CtrlEnte.getInstance().buscarEmpelado(tecnico, null, null, null, null,'A');
+		if(ente!=null){
+			for(Agenda a:agendas){
+				if(a.getTecnico().getIdEnte()==ente.getIdEnte()){
+					ag=a;
+				}
+			}
+			if(ag!=null){
+				Cliente cl=CtrlEnte.getInstance().buscarCliente(idCliente, null, null, null);
+			if(cl!=null){
+				Domicilio dom=CtrlDomicilio.getInstance().buscarDomicilio(idDomicilio, null, null, null, null, null, null, null, null, null);
+				if(dom!=null){
+					nuevaV=ag.nuevaVisita(null,motivo,cl,dom,inicioProgramado,finProgramado);
+				}
+			}
+			
+			
+			
+			}
+		}
+		
+		
+		return nuevaV;
+	}
+	
+	public int nuevaVisita(String motivo,int idCliente, int idDomicilio,
+			Date inicioProgramado, Date finProgramado, int tecnico,int presupuesto) {
+		int nuevaV=-1;
+		Agenda ag=null;
+		Empleado ente = CtrlEnte.getInstance().buscarEmpelado(tecnico, null, null, null, null,'A');
+		if(ente!=null){
+			for(Agenda a:agendas){
+				if(a.getTecnico().getIdEnte()==ente.getIdEnte()){
+					ag=a;
+				}
+			}
+			if(ag!=null){
+				Cliente cl=CtrlEnte.getInstance().buscarCliente(idCliente, null, null, null);
+			if(cl!=null){
+				Domicilio dom=CtrlDomicilio.getInstance().buscarDomicilio(idDomicilio, null, null, null, null, null, null, null, null, null);
+				if(dom!=null){
+				Presupuesto p= null;
+				p=this.buscarPresupuesto(presupuesto);
+						if(p!=null){
+							nuevaV=ag.nuevaVisita(p,motivo,cl,dom,inicioProgramado,finProgramado);
+						}
+				}
+			}
+			
+			
+			
+			}
+		}
+		
+		return nuevaV;
 	}
 
 	public boolean bajaVisita(int id) {

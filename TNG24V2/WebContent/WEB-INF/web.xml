@@ -54,4 +54,14 @@
     <servlet-name>AgendaCTSERVLET</servlet-name>
     <url-pattern>/AgendaCTSERVLET</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VisitaDetalleSERVLET</display-name>
+    <servlet-name>VisitaDetalleSERVLET</servlet-name>
+    <servlet-class>servlets.VisitaDetalleSERVLET</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VisitaDetalleSERVLET</servlet-name>
+    <url-pattern>/VisitaDetalleSERVLET</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -146,6 +146,11 @@ public class CtrlEnte {
 
 	public Empleado buscarEmpelado(int id, String apellido, String nombre,
 			String roll, String documento, char e) {
+		for(Empleado em:empleados){
+			if(em.getIdEnte()==id){
+				return em;
+			}
+		}
 		return null;
 	}
 
