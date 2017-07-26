@@ -160,7 +160,8 @@ if(sessionUsuario != null && sessionUsuario.getAttribute("currentUser") == null)
                                             </div>
                                          <div class="form-group">
                                             <label>Fecha Emision:</label>
-											<input type="text" id="datepicker" name="fechaEmision"  class="form-control"  />	
+											<input type="text" id="datepicker" name="fechaEmision"  style="cursor:pointer;"
+											class="form-control"  readonly="readonly" />	
                                             </div>
                                              
 											 <div class="form-group">

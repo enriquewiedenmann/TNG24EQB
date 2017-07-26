@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import complementos.FechasAux;
+
 import view.ViewCliente;
 import view.ViewPresupuesto;
 import controller.CtrlAgenda;
@@ -42,24 +44,25 @@ public class PresupuestosSERVLET extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		
 		CtrlAgenda sys = CtrlAgenda.getInstance();
 		
 		
 		
 		if(request.getParameter("buscar").equals("buscarPresupuestos")){
-			
-			
 		
 			if(request.getParameter("bNroPresupuesto").equals("")){
-			
-			
-			Date fechaEmision = convertirFecha(request.getParameter("fechaEmision"));
-			
-			
+			String fecha = request.getParameter("fechaEmision");
+			Date fechaEmision = null;
+			if (fecha != null && !fecha.equals("")){
+				fechaEmision = FechasAux.getInstance().toDateDDMMYYY(fecha);
+			}
 			
 			String nombre= request.getParameter("bNombre");
 			String apellido = request.getParameter("bApellido");
 			String documento = request.getParameter("bDocumento");
+			
 			if(nombre.length()==0){
 				nombre=null;
 			}
@@ -75,7 +78,6 @@ public class PresupuestosSERVLET extends HttpServlet {
 		
 			request.getRequestDispatcher("PantallaPresupuesto.jsp").forward(request,response);	
 			}else{
-				
 				
 				int id = Integer.parseInt(request.getParameter("bNroPresupuesto"));
 				HttpSession session = request.getSession(true);

@@ -18,11 +18,9 @@ public class CtrlAgenda {
 	private Visita va;
 
 	public static CtrlAgenda getInstance() {
-
 		if (ctrlAgenda == null)
 			ctrlAgenda = new CtrlAgenda();
 		return ctrlAgenda;
-
 	}
 
 	public CtrlAgenda() {
@@ -53,44 +51,36 @@ public class CtrlAgenda {
 			va.add(a.mostrate());
 		}
 		return va;
-
 	}
 
 	public ArrayList<ViewVisita> listarVisitas() {
 		return null;
-
 	}
+
 	public ArrayList<ViewPresupuesto> listarPresupuestos(Date fecha,
 			String docCliente, String nomCliente, String apellido) {
 		ArrayList<ViewPresupuesto> vp = new ArrayList<ViewPresupuesto>();
 		for (Presupuesto p : presupuestos) {
-			
-			if(p.cumplo(fecha, docCliente, nomCliente, apellido)){
-			vp.add(p.mostrate());
+
+			if (p.cumplo(fecha, docCliente, nomCliente, apellido)) {
+				vp.add(p.mostrate());
 			}
 		}
-
 		return vp;
 	}
-	
-	
-	
+
 	public ArrayList<ViewPresupuesto> listarPresupuestos(int id) {
 		ArrayList<ViewPresupuesto> vp = new ArrayList<ViewPresupuesto>();
 		for (Presupuesto p : presupuestos) {
-			
-			if(p.cumplo(id)){
-			vp.add(p.mostrate());
+			if (p.cumplo(id)) {
+				vp.add(p.mostrate());
 			}
 		}
-
 		return vp;
-
 	}
 
 	public ArrayList<ViewItemDocumento> listaritemsDocumento(int id) {
 		return null;
-
 	}
 
 	public Visita buscarVisita(Date fecha, int cliente, int tecnico,
@@ -105,8 +95,8 @@ public class CtrlAgenda {
 	}
 
 	public Presupuesto buscarPresupuesto(int id) {
-		for(Presupuesto p:presupuestos){
-			if(p.getId()==id){
+		for (Presupuesto p : presupuestos) {
+			if (p.getId() == id) {
 				return p;
 			}
 		}
@@ -126,8 +116,8 @@ public class CtrlAgenda {
 	}
 
 	public ViewVisita mostrarVisita(int id) {
-		for(Agenda a:agendas){
-			if(a.esTuVisita(id)){
+		for (Agenda a : agendas) {
+			if (a.esTuVisita(id)) {
 				return a.mostraVisita(id);
 			}
 		}
@@ -135,12 +125,12 @@ public class CtrlAgenda {
 	}
 
 	public ViewPresupuesto mostrarPresupuesto(int id) {
-		for(Presupuesto p : presupuestos){
-			if(p.cumplo(id)){
+		for (Presupuesto p : presupuestos) {
+			if (p.cumplo(id)) {
 				return p.mostrate();
 			}
 		}
-		
+
 		return null;
 
 	}
@@ -155,76 +145,82 @@ public class CtrlAgenda {
 
 	}
 
-	public int nuevaVisita(String motivo,int idCliente, int idDomicilio,
-			
-			Date inicioProgramado, Date finProgramado, int tecnico) {
-		int nuevaV=-1;
-		Agenda ag=null;
-		Empleado ente = CtrlEnte.getInstance().buscarEmpelado(tecnico, null, null, null, null,'A');
-		if(ente!=null){
-			for(Agenda a:agendas){
-				if(a.getTecnico().getIdEnte()==ente.getIdEnte()){
-					ag=a;
+	public int nuevaVisita(String motivo, int idCliente, int idDomicilio,
+
+	Date inicioProgramado, Date finProgramado, int tecnico) {
+		int nuevaV = -1;
+		Agenda ag = null;
+		Empleado ente = CtrlEnte.getInstance().buscarEmpelado(tecnico, null,
+				null, null, null, 'A');
+		if (ente != null) {
+			for (Agenda a : agendas) {
+				if (a.getTecnico().getIdEnte() == ente.getIdEnte()) {
+					ag = a;
 				}
 			}
-			if(ag!=null){
-				Cliente cl=CtrlEnte.getInstance().buscarCliente(idCliente, null, null, null);
-			if(cl!=null){
-				Domicilio dom=CtrlDomicilio.getInstance().buscarDomicilio(idDomicilio, null, null, null, null, null, null, null, null, null);
-				if(dom!=null){
-					nuevaV=ag.nuevaVisita(null,motivo,cl,dom,inicioProgramado,finProgramado);
+			if (ag != null) {
+				Cliente cl = CtrlEnte.getInstance().buscarCliente(idCliente,
+						null, null, null);
+				if (cl != null) {
+					Domicilio dom = CtrlDomicilio.getInstance()
+							.buscarDomicilio(idDomicilio, null, null, null,
+									null, null, null, null, null, null);
+					if (dom != null) {
+						nuevaV = ag.nuevaVisita(null, motivo, cl, dom,
+								inicioProgramado, finProgramado);
+					}
 				}
-			}
-			
-			
-			
+
 			}
 		}
-		
-		
+
 		return nuevaV;
 	}
-	
-	public int nuevaVisita(String motivo,int idCliente, int idDomicilio,
-			Date inicioProgramado, Date finProgramado, int tecnico,int presupuesto) {
-		int nuevaV=-1;
-		Agenda ag=null;
-		Empleado ente = CtrlEnte.getInstance().buscarEmpelado(tecnico, null, null, null, null,'A');
-		if(ente!=null){
-			for(Agenda a:agendas){
-				if(a.getTecnico().getIdEnte()==ente.getIdEnte()){
-					ag=a;
+
+	public int nuevaVisita(String motivo, int idCliente, int idDomicilio,
+			Date inicioProgramado, Date finProgramado, int tecnico,
+			int presupuesto) {
+		int nuevaV = -1;
+		Agenda ag = null;
+		Empleado ente = CtrlEnte.getInstance().buscarEmpelado(tecnico, null,
+				null, null, null, 'A');
+		if (ente != null) {
+			for (Agenda a : agendas) {
+				if (a.getTecnico().getIdEnte() == ente.getIdEnte()) {
+					ag = a;
 				}
 			}
-			if(ag!=null){
-				Cliente cl=CtrlEnte.getInstance().buscarCliente(idCliente, null, null, null);
-			if(cl!=null){
-				Domicilio dom=CtrlDomicilio.getInstance().buscarDomicilio(idDomicilio, null, null, null, null, null, null, null, null, null);
-				if(dom!=null){
-				Presupuesto p= null;
-				p=this.buscarPresupuesto(presupuesto);
-						if(p!=null){
-							nuevaV=ag.nuevaVisita(p,motivo,cl,dom,inicioProgramado,finProgramado);
+			if (ag != null) {
+				Cliente cl = CtrlEnte.getInstance().buscarCliente(idCliente,
+						null, null, null);
+				if (cl != null) {
+					Domicilio dom = CtrlDomicilio.getInstance()
+							.buscarDomicilio(idDomicilio, null, null, null,
+									null, null, null, null, null, null);
+					if (dom != null) {
+						Presupuesto p = null;
+						p = this.buscarPresupuesto(presupuesto);
+						if (p != null) {
+							nuevaV = ag.nuevaVisita(p, motivo, cl, dom,
+									inicioProgramado, finProgramado);
 						}
+					}
 				}
-			}
-			
-			
-			
+
 			}
 		}
-		
+
 		return nuevaV;
 	}
 
 	public boolean bajaVisita(int id) {
-		for(Agenda a:agendas){
-			if(a.esTuVisita(id)){
-			return	a.bajaVisita(id, null);
-				
+		for (Agenda a : agendas) {
+			if (a.esTuVisita(id)) {
+				return a.bajaVisita(id, null);
+
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -236,14 +232,15 @@ public class CtrlAgenda {
 
 		Agenda ae = null;
 		for (Agenda a : agendas) {
-		  if(a.esTuVisita(idVisita)){
+			if (a.esTuVisita(idVisita)) {
 				va = a.buscarVisitaPresupuesto(idVisita);
 				ae = a;
 			}
-						
+
 		}
 		if (va != null) {
-			pa = new Presupuesto(va.getCliente(),va.getMotivo(), ae.getTecnico());
+			pa = new Presupuesto(va.getCliente(), va.getMotivo(),
+					ae.getTecnico());
 			return true;
 		}
 		return false;
@@ -267,10 +264,11 @@ public class CtrlAgenda {
 
 	}
 
-	public int ConfirmarAltaPresupuesto(int tiempoManoObra, int montoManoObra,String motivo) {
+	public int ConfirmarAltaPresupuesto(int tiempoManoObra, int montoManoObra,
+			String motivo) {
 
 		int nro = -1;
-		nro = pa.cerrarme(tiempoManoObra, montoManoObra,motivo);
+		nro = pa.cerrarme(tiempoManoObra, montoManoObra, motivo);
 		pa.setId(nro);
 		presupuestos.add(pa);
 		va.setPresupuesto(pa);
@@ -293,33 +291,33 @@ public class CtrlAgenda {
 		return 0;
 	}
 
-	public boolean modificarVisita(int id, String motivo, int cliente, int domicilio, int presupuesto) {
-		Agenda ag=null;
-		
-			for(Agenda a:agendas){
-				if(a.esTuVisita(id)){
-					ag=a;
+	public boolean modificarVisita(int id, String motivo, int cliente,
+			int domicilio, int presupuesto) {
+		Agenda ag = null;
+
+		for (Agenda a : agendas) {
+			if (a.esTuVisita(id)) {
+				ag = a;
+			}
+		}
+		if (ag != null) {
+			Cliente cl = CtrlEnte.getInstance().buscarCliente(cliente, null,
+					null, null);
+			if (cl != null) {
+				Domicilio dom = CtrlDomicilio.getInstance().buscarDomicilio(
+						domicilio, null, null, null, null, null, null, null,
+						null, null);
+				if (dom != null) {
+					Presupuesto p = null;
+					p = this.buscarPresupuesto(presupuesto);
+					if (p != null) {
+						return ag.editarVisita(id, motivo, cl, dom, p);
+					}
 				}
 			}
-			if(ag!=null){
-				Cliente cl=CtrlEnte.getInstance().buscarCliente(cliente, null, null, null);
-			if(cl!=null){
-				Domicilio dom=CtrlDomicilio.getInstance().buscarDomicilio(domicilio, null, null, null, null, null, null, null, null, null);
-				if(dom!=null){
-				Presupuesto p= null;
-				p=this.buscarPresupuesto(presupuesto);
-						if(p!=null){
-							return ag.editarVisita(id,motivo,cl,dom,p);
-						}
-				}
-			}
-			
-			
-			
-			}
-		
-		
-		
+
+		}
+
 		return false;
 	}
 
@@ -328,12 +326,11 @@ public class CtrlAgenda {
 	}
 
 	public ArrayList<ViewAgenda> listarAgendas(Date fecha) {
-		ArrayList<ViewAgenda> va=new ArrayList<ViewAgenda>();
-		for(Agenda a : agendas){
-		
-				
-				va.add(a.mostrate(fecha));
-			
+		ArrayList<ViewAgenda> va = new ArrayList<ViewAgenda>();
+		for (Agenda a : agendas) {
+
+			va.add(a.mostrate(fecha));
+
 		}
 		return va;
 	}

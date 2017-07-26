@@ -46,35 +46,24 @@ public class Cliente extends Ente {
 
 		boolean band = true;
 		if (nombre != null) {
-
-			if (this.getNombre().toUpperCase().startsWith(nombre.toUpperCase())) {
-				band = true;
-			} else {
+			if (!this.getNombre().toUpperCase().startsWith(nombre.toUpperCase())) {
 				band = false;
-			}
-
+			}	
 		}
+		
 		if (apellido != null) {
-			if (getApellido().toUpperCase().startsWith(apellido.toUpperCase())) {
-				band = true;
-			} else {
+			if (!getApellido().toUpperCase().startsWith(apellido.toUpperCase())) {
 				band = false;
-
 			}
 		}
 
 		if (documento != null) {
-			if (this.getNroDoc().toUpperCase()
-					.startsWith(documento.toUpperCase())) {
-				band = true;
-			} else {
+			if (this.getNroDoc().toUpperCase().startsWith(documento.toUpperCase())) {
 				band = false;
-
 			}
 		}
 
 		return band;
-
 	}
 
 	public ViewCliente mostrate() {

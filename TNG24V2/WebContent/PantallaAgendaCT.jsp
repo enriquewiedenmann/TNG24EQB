@@ -89,12 +89,12 @@ if(sessionUsuario != null && sessionUsuario.getAttribute("currentUser") == null)
         <div id="page-wrapper" >
             <div id="page-inner">
               <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                      <h2>Agenda</h2>
                      <form form="role" id="fbuscarAgendas" method="POST" action="AgendaCTSERVLET">
 	                     <div class="form-group" >
 	                        <label>Dia:</label>
-							<input type="text" id="datepicker" name="fecBucada"  class="form-control"  />	
+							<input type="text" id="datepicker" name="fecBucada"  class="form-control"  readonly="readonly" style="cursor:pointer;"/>	
 	                     </div>
 	                     <input  type="hidden" id="buscar" name="buscar"/>
 	                     <button type="button" class="btn btn-danger" onClick="buscarVisitas()">Buscar</button> 
@@ -249,9 +249,7 @@ function accionVisita(accion){
 }
 
 function irNuevo(){
-	
-	href="PantallaDetalleVisita.jsp";
-	
+	window.location.href="PantallaDetalleVisita.jsp";
 }
 
 

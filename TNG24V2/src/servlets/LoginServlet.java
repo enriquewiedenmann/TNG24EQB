@@ -35,7 +35,6 @@ public class LoginServlet extends HttpServlet {
 					session.setAttribute("currentUser", usuario);
 					session.setAttribute("rol", userSession.getRole());
 					session.setAttribute("userId", userSession.getId());
-					System.out.println("***************" + userSession.getId());
 					
 					if(userSession.getRole().equals("TEC")){
 						// TODO TODO REDIRECCIONAR A PANTALLA DEL TECNICO

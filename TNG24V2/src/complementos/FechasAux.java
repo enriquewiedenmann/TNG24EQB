@@ -15,7 +15,7 @@ import core.Visita;
 
 public class FechasAux {
 	private static FechasAux fechaAux;
-	
+
 	public static FechasAux getInstance() {
 
 		if (fechaAux == null)
@@ -24,96 +24,97 @@ public class FechasAux {
 
 	}
 
-	
-	
-   public FechasAux() {
-		
+	public FechasAux() {
+
 	}
 
+	public Date toDateDDMMYYY(String strFecha) {
+		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
 
+		Date fecha = null;
+		try {
 
-public Date toDateDDMMYYY(String strFecha){
-	SimpleDateFormat formatoDelTexto  = new SimpleDateFormat("dd/MM/yyyy");
-   
-   Date fecha = null;
-   try {
+			fecha = formatoDelTexto.parse(strFecha);
 
-       fecha = formatoDelTexto.parse(strFecha);
+		} catch (Exception ex) {
 
-   } catch (Exception ex) {
+			ex.printStackTrace();
 
-       ex.printStackTrace();
+		}
 
-   }
+		return fecha;
 
-   return fecha;
-	
-}
+	}
 
-public String toStringDDMMYY(Date dia){
+	public String toStringDDMMYY(Date dia) {
 
-SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/YYYY");
-String diaS= formatoDeFecha.format(dia);
+		SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/YYYY");
+		String diaS = formatoDeFecha.format(dia);
 
-return diaS;
-}
+		return diaS;
+	}
 
-public String toStringHHMM(Date dia){
+	public String toStringHHMM(Date dia) {
 
-SimpleDateFormat formatoDeFecha = new SimpleDateFormat("HH:mm");
-String diaS= formatoDeFecha.format(dia);
+		SimpleDateFormat formatoDeFecha = new SimpleDateFormat("HH:mm");
+		String diaS = formatoDeFecha.format(dia);
 
-return diaS;
-}
+		return diaS;
+	}
 
-public Date toDateHHMM(String strFecha){
-	SimpleDateFormat formatoDelTexto  = new SimpleDateFormat("HH:mm");
-   
-   Date fecha = null;
-   try {
+	public Date toDateHHMM(String strFecha) {
+		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("HH:mm");
 
-       fecha = formatoDelTexto.parse(strFecha);
+		Date fecha = null;
+		try {
 
-   } catch (Exception ex) {
+			fecha = formatoDelTexto.parse(strFecha);
 
-       ex.printStackTrace();
+		} catch (Exception ex) {
 
-   }
+			ex.printStackTrace();
 
-   return fecha;
-	
-}
+		}
 
+		return fecha;
 
+	}
 
-//Suma los días recibidos a la fecha  
-public Date sumarRestarDiasFecha(Date fecha, int dias){
+	// Suma los días recibidos a la fecha
+	public Date sumarRestarDiasFecha(Date fecha, int dias) {
 
-   Calendar calendar = Calendar.getInstance();
-   calendar.setTime(fecha); // Configuramos la fecha que se recibe
-   calendar.add(Calendar.DAY_OF_YEAR, dias);  // numero de días a añadir, o restar en caso de días<0
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fecha); // Configuramos la fecha que se recibe
+		calendar.add(Calendar.DAY_OF_YEAR, dias); // numero de días a añadir, o
+													// restar en caso de días<0
 
-   return calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
+		return calendar.getTime(); // Devuelve el objeto Date con los nuevos
+									// días añadidos
 
-}
-//Suma o resta las horas recibidos a la fecha  
-public Date sumarRestarHorasFecha(Date fecha, int horas){
+	}
 
-   Calendar calendar = Calendar.getInstance();
-   calendar.setTime(fecha); // Configuramos la fecha que se recibe
-   calendar.add(Calendar.HOUR, horas);  // numero de horas a añadir, o restar en caso de horas<0
+	// Suma o resta las horas recibidos a la fecha
+	public Date sumarRestarHorasFecha(Date fecha, int horas) {
 
-   return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fecha); // Configuramos la fecha que se recibe
+		calendar.add(Calendar.HOUR, horas); // numero de horas a añadir, o
+											// restar en caso de horas<0
 
-}
+		return calendar.getTime(); // Devuelve el objeto Date con las nuevas
+									// horas añadidas
 
-public Date sumarRestarMinutosFecha(Date fecha, int minutos){
+	}
 
-	   Calendar calendar = Calendar.getInstance();
-	   calendar.setTime(fecha); // Configuramos la fecha que se recibe
-	   calendar.add(Calendar.MINUTE, minutos);  // numero de horas a añadir, o restar en caso de horas<0
+	public Date sumarRestarMinutosFecha(Date fecha, int minutos) {
 
-	   return calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(fecha); // Configuramos la fecha que se recibe
+		calendar.add(Calendar.MINUTE, minutos); // numero de horas a añadir, o
+												// restar en caso de horas<0
+
+		return calendar.getTime(); // Devuelve el objeto Date con las nuevas
+									// horas añadidas
 
 	}
 
