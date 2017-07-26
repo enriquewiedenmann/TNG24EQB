@@ -47,19 +47,19 @@ public class Cliente extends Ente {
 		boolean band = true;
 		if (nombre != null) {
 			if (!this.getNombre().toUpperCase().startsWith(nombre.toUpperCase())) {
-				band = false;
+				band = band && false;
 			}	
 		}
 		
 		if (apellido != null) {
 			if (!getApellido().toUpperCase().startsWith(apellido.toUpperCase())) {
-				band = false;
+				band = band && false;
 			}
 		}
 
 		if (documento != null) {
-			if (this.getNroDoc().toUpperCase().startsWith(documento.toUpperCase())) {
-				band = false;
+			if (!this.getNroDoc().toUpperCase().startsWith(documento.toUpperCase())) {
+				band = band && false;
 			}
 		}
 
