@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page 
-	import = "controller.CtrlEnte" 
-	import = "controller.CtrlDomicilio" 
+	import = "controller.*" 
+	import = "complementos.*" 
 	import ="view.*"	
 	import = "java.util.*"
 		%>   
@@ -31,6 +31,11 @@ if(sessionUsuario != null && sessionUsuario.getAttribute("currentUser") == null)
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
+<style>
+    #mdialTamanio{
+      width: 100% !important;
+    }
+  </style>
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -123,7 +128,7 @@ var geocoder;
                 <div class="row">
                     <div class="col-md-12">
                      <h2>Hoja de ruta </h2>   
-                        <h4>Técnico: Juan García.</h4>
+                     
 						
 						
 						<br>
@@ -137,34 +142,37 @@ var geocoder;
 				
 				
 			<!-- Nuevo elemento -->
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            10:00 - 11:00
-                        </div>
-                        <div class="panel-body">
-                            <p><strong>Presupuestar</strong>
-							</br>
-							</br><u>Nro Cliente:</u> 34
-							</br><u>Contacto:</u> Juan García
-							</br><u>Teléfono:</u> 4585-5548
-							</br><u>Direccion:</u> Suipacha 750 - 4to C  
-							</br><u>Barrio:</u> San Nicolás
-							</br><u>Actividad:</u> Instalación cámaras.
+			<%
+			
+			
+			
+			
+			CtrlAgenda sys= CtrlAgenda.getInstance();
+		Date hoy = FechasAux.getInstance().toDateDDMMYYY("14/07/2017");
+		int i = 40;
+		ViewAgenda a = sys.listarVisitas(hoy, i);
+			
+			for(ViewVisita v:a.getVVV() ){%>
+				 <div class="row">
+	                <div class="col-md-12 col-sm-12">
+	                    <div class="panel panel-info">
+	                        <div class="panel-heading">
+				<%out.println(v.getInicioProgramadoHHMM()+" - "+v.getFinProgramadoHHMM());%></div>
+				 <div class="panel-body">
+				  <p><strong><%out.println(v.getMotivo());%></strong>
+				  </br>
+							</br><u>Nro Cliente:</u><%out.println(v.getCliente().getIdEnte());%>
+							</br><u>Contacto:</u> <%out.println(v.getCliente().getApellido()+", "+v.getCliente().getNombre());%>
+							</br><u>Teléfono:</u> <%out.println(v.getCliente().getTelefono()); %>
+							</br><u>Direccion:</u><%out.println(v.getDomicilio().mostrate().resumen()); %>
+						 <div  id=<%out.println("map"+v.getId());%> style="width: 400px; height: 400px;"></div>
 							
-							
-							<div id="map1" style="width: 280px; height: 280px;"></div>
-
-							<script type="text/javascript">
-								codeAddress("Suipacha 750 Buenos Aires Argentina","1");
-							</script>
-							
-							
-
-							</p>
+							v.getDomicilio().mostrate()
+					
                         </div>
                         <div class="panel-footer">
+                        	
+                             <button onclick=<%out.println("ver("+v.getDomicilio().getCalle()+" "+v.getDomicilio().getNumero()+" "+v.getDomicilio().getDescLocalidad());%>,<%out.println(v.getId()+")");%>>dos</button>
                             <a href="#" class="btn btn-primary">Presupuesto</a> &nbsp;&nbsp;
 							<a href="#" class="btn btn-primary">Factura</a>&nbsp;&nbsp;
 							<a href="#" class="btn btn-primary">Finalizar</a>
@@ -173,82 +181,8 @@ var geocoder;
                     </div>
                 </div>
             </div>
-			<!--Fin elemento --> 
-			
-			
-			
-			<!-- Nuevo elemento -->
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            11:30 - 12:30
-                        </div>
-                        <div class="panel-body">
-							<p><strong>Instalación:</strong> Confirma presupuesto 1745
-							</br>
-							</br><u>Nro Cliente:</u> 45
-							</br><u>Contacto:</u> Mario Perez
-							</br><u>Teléfono:</u> 4585-5548
-							</br><u>Calle:</u> Alvarez Thomas 1270 - 3ro B
-							</br><u>Barrio:</u> Saavedra
-							</br><u>Actividad:</u> Instalación cerraduras huella digital.
-							<div id="map2" style="width: 280px; height: 280px;"></div>
-
-							<script type="text/javascript">
-								codeAddress("Alvarez Thomas 1270 Buenos Aires Argentina","2");
-							</script>							
-							</p>
-                        </div>
-                        <div class="panel-footer">
-                            <a href="#" class="btn btn-primary">Presupuesto</a> &nbsp;&nbsp;
-							<a href="#" class="btn btn-primary">Factura</a>&nbsp;&nbsp;
-							<a href="#" class="btn btn-primary">Finalizar</a>
-							
-                        </div>
-                    </div>
-                </div>
-            </div>
-			<!--Fin elemento --> 
-			
-			
-			
-			
-			<!-- Nuevo elemento -->
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            14:00 - 15:00
-                        </div>
-                        <div class="panel-body">
-						
-						<p><strong>Presupuestar:</strong>
-						</br>
-							</br><u>Nro Cliente:</u> 74
-							</br><u>Contacto:</u> Victor Makarius
-							</br><u>Teléfono:</u> 4585-5548
-							</br><u>Calle:</u> México 2700 
-							</br><u>Barrio:</u> Saavedra
-							</br><u>Actividad:</u> Instalación cámaras de seguridad.
-							<div id="map3" style="width: 280px; height: 280px;"></div>
-
-							<script type="text/javascript">
-								codeAddress("Mexico 2700 Buenos Aires Argentina", "3");
-							</script>
-
-							</p>
-                        </div>
-                        <div class="panel-footer">
-                            <a href="#" class="btn btn-primary">Presupuesto</a> &nbsp;&nbsp;
-							<a href="#" class="btn btn-primary">Factura</a>&nbsp;&nbsp;
-							<a href="#" class="btn btn-primary">Finalizar</a>
-							
-                        </div>
-                    </div>
-                </div>
-            </div>
-			<!--Fin elemento --> 
+		<%} %>
+            
 	
 <!-- FIN DE PAGINA -->
 
@@ -257,6 +191,46 @@ var geocoder;
             </div>
          <!-- /. PAGE WRAPPER  -->
         </div>
+                <!-- /. ROW  -->
+                <div class="row">
+                    <div class="col-md-6">
+                       
+                     <!--  Modals-->
+                   
+                        
+                       
+                            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                              Click  Launch Demo Modal
+                            </button>
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Modal title Here</h4>
+                                        </div>
+                                        <div  class="modal-body">
+                                        
+                                        <div  id="map1" style="width: 400px; height: 400px;"></div>
+                                         
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button  type="button" class="btn btn-primary">Ver</button>
+                                       
+                                        </div>
+                                     </div>
+                                </div>
+                            </div>
+                        
+                 
+                     <!-- End Modals-->        
+      
+ <script type="text/javascript">
+ function ver(dir,id){
+		codeAddress(dir,id);
+	
+		}
+											</script>         
      <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
@@ -269,30 +243,7 @@ var geocoder;
     <script>
         $(document).ready(function () {
             $('#dataTables-example').dataTable({
-                 language: {
-                    "sProcessing":     "Procesando...",
-                    "sLengthMenu":     "Mostrar _MENU_ registros",
-                    "sZeroRecords":    "No se encontraron resultados",
-                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                    "sInfo":           "Mostrando _START_ al _END_ de _TOTAL_ registros",
-                    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                    "sInfoPostFix":    "",
-                    "sSearch":         "Buscar:",
-                    "sUrl":            "",
-                    "sInfoThousands":  ",",
-                    "sLoadingRecords": "Cargando...",
-                    "oPaginate": {
-                        "sFirst":    "Primero",
-                        "sLast":     "Último",
-                        "sNext":     "Siguiente",
-                        "sPrevious": "Anterior"
-                    },
-                    "oAria": {
-                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    }
-                }
+             
             });
         });
     </script>

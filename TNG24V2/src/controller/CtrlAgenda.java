@@ -337,4 +337,20 @@ public class CtrlAgenda {
 		}
 		return va;
 	}
+
+	public ViewAgenda listarVisitas(Date hoy, int i) {
+		
+		Empleado e= null;
+		e=CtrlEnte.getInstance().buscarEmpelado(i, null, null, null, null, 'a');
+		if(e!=null){
+		for(Agenda a: agendas){
+			
+			if(a.cumplo(e)){
+				return a.mostrate(hoy);
+			}
+		}
+		
+	}
+		return null;
+}
 }

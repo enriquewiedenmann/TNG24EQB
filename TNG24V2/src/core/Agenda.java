@@ -23,8 +23,9 @@ public class Agenda {
 		this.visitas = DAOVisita.getInstancia().selectVisita(idAgenda); //codeo Pendiente
 	}
 
-	public boolean cumplo(int id, Empleado tec, char e) {
-		return false;
+	public boolean cumplo(Empleado tec) {
+		
+		return (this.getTecnico().getIdEnte()==tec.getIdEnte());
 	
 	}
 	
